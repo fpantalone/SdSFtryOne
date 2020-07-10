@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tab_active_margin_top">2dp</dimen>
+</resources>

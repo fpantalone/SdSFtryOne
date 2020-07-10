@@ -8,13 +8,13 @@ import io.realm.kotlin.where
 class DbManager {
 
     private var instance: DbManager? = null
-    private var context: Context? = null
+    private lateinit var context: Context
 
     fun sharedInstance(): DbManager? {
         return instance
     }
 
-    fun init(context: Context?) {
+    fun init(context: Context) {
         instance = DbManager()
         instance!!.context = context
         Realm.init(context)

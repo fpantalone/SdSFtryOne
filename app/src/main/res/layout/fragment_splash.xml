@@ -12,9 +12,8 @@
         android:id="@+id/imageView"
         android:layout_width="202dp"
         android:layout_height="338dp"
-
         android:layout_marginTop="50dp"
-        android:contentDescription="@string/logo"
+        android:contentDescription="@null"
         android:src="@drawable/logo_standard"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,6 +31,7 @@
         android:textColor="@android:color/white"
         android:textSize="48sp"
         android:textStyle="bold"
+        android:textAllCaps="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"

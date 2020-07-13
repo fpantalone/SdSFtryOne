@@ -1,6 +1,6 @@
 package be.technifutur.devmob9.sdsftryone.webservice
 
-class champ(
+class Champ (
     var id: Int = 0,
     var name: String = "",
     var numDay: Int = 0,

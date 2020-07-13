@@ -24,7 +24,7 @@ class DbManager {
 
     fun fillDataBase (){
 
-        if (getTableUpdateTimers().isNotEmpty()){
+        if (getTableUpdateTimersData().isNotEmpty()){
             return
         }
 
@@ -57,9 +57,9 @@ class DbManager {
         val realm = Realm.getDefaultInstance()
         return realm.where<MatchData>().findAll()
     }
-    fun getTableUpdateTimers (): List<TableUpdateTimers>{
+    fun getTableUpdateTimersData (): List<TableUpdateTimersData>{
         val realm = Realm.getDefaultInstance()
-        return realm.where<TableUpdateTimers>().findAll()
+        return realm.where<TableUpdateTimersData>().findAll()
     }
 
 }

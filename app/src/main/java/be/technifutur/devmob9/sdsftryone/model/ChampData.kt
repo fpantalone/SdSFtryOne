@@ -5,7 +5,9 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
 open class ChampData constructor(
-    @PrimaryKey var ChampID: Int = 0, var champName: String="", var numDay: Int=0,
-    var season: Int=0, var team: RealmList<String> = RealmList<String>()) : RealmObject() {
-
-}
+    @PrimaryKey var id: Int = 0,
+    var name: String = "",
+    var numDay: Int = 0,
+    var season: Int = 0,
+    var teams: RealmList<ChampTeamData> = RealmList()
+) : RealmObject()

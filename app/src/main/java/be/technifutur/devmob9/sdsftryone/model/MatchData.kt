@@ -2,9 +2,18 @@ package be.technifutur.devmob9.sdsftryone.model
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
+import java.util.*
 
 open class MatchData(
-    @PrimaryKey var id: Long = 0, var day: Int = 0, var champ: Int = 0,
-    var date: String = "", var hour: String = "", var homeTeam: String = "",
-    var guestTeam: String = "",var HomeResult: Int = 0, var gestResult:Int=0,
-    var comment: String="") : RealmObject()
+    @PrimaryKey var id: Int = 0,
+    var day: DayData = DayData(),
+    var date: Date = Date(),
+    var homeTeam: String = "",
+    var awayTeam: String = "",
+    var homeResult: Int = 0,
+    var awayResult: Int = 0,
+    var comment: String = ""
+) : RealmObject()
+
+
+// faire méthode pour séparer l'heure et la date

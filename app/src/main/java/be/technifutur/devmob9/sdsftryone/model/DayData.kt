@@ -1,7 +1,13 @@
 package be.technifutur.devmob9.sdsftryone.model
 
 import io.realm.RealmObject
+import io.realm.annotations.Index
 import io.realm.annotations.PrimaryKey
 
-open class DayData(@PrimaryKey var DayID: Int=0, var ChampID: Int=0, var DayName: String="",
-                   var DayDate: String="", var DayComment: String=""): RealmObject()
+open class DayData(
+    @Index var id: Int = 0,
+    var champ: ChampData = ChampData(),
+    var name: String = "",
+    var date: String = "",
+    var comment: String = ""
+) : RealmObject()

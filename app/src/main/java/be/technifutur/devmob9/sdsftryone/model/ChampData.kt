@@ -9,5 +9,7 @@ open class ChampData constructor(
     var name: String = "",
     var numDay: Int = 0,
     var season: Int = 0,
-    var teams: RealmList<ChampTeamData> = RealmList()
+    var teams: RealmList<ChampTeamData> = RealmList(),
+    var generalForfeitTeams: RealmList<String> = RealmList(),
+    var days: RealmList<DayData> = RealmList()
 ) : RealmObject()

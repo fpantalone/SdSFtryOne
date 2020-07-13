@@ -4,5 +4,7 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import java.util.*
 
-open class TableUpdateTimersData (@PrimaryKey var tableName: String = "",
-                                 var updateTime: Date = Date()) : RealmObject()
+open class TableUpdateTimersData(
+    @PrimaryKey var tableName: String = "",
+    var updateTime: Date = Date()
+) : RealmObject()

@@ -6,7 +6,6 @@ import java.util.*
 
 open class MatchData(
     @PrimaryKey var id: Int = 0,
-    var day: DayData = DayData(),
     var date: Date = Date(),
     var homeTeam: String = "",
     var awayTeam: String = "",

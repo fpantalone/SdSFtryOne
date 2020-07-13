@@ -48,10 +48,6 @@ class DbManager {
         return realm.where<DayData>().findAll()
     }
 
-    fun getGeneralForfeitData (): List<GeneralForfeitData>{
-        val realm = Realm.getDefaultInstance()
-        return realm.where<GeneralForfeitData>().findAll()
-    }
 
     fun getMatchData (): List<MatchData>{
         val realm = Realm.getDefaultInstance()

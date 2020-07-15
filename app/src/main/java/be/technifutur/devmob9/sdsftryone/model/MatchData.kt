@@ -4,7 +4,7 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import java.util.*
 
-open class MatchData(
+open class MatchData (
     @PrimaryKey var id: Int = 0,
     var date: Date = Date(),
     var homeTeam: String = "",
@@ -12,7 +12,8 @@ open class MatchData(
     var homeResult: Int = 0,
     var awayResult: Int = 0,
     var comment: String = ""
-) : RealmObject()
+) : RealmObject() {
 
+   // TODO: faire méthode pour séparer l'heure et la date
 
-// faire méthode pour séparer l'heure et la date
+}

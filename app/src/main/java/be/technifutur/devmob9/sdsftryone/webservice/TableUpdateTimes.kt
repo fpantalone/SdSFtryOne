@@ -8,5 +8,5 @@ class TableUpdateTimes(
     var forfaitgen: String = "",
     var players: String? = null,
     var events: String? = null,
-    var matchPlayers: String? = null
+    var match_players: String? = null
 )

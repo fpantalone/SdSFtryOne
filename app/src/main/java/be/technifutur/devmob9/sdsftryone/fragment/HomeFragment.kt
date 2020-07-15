@@ -12,8 +12,6 @@ import be.technifutur.devmob9.sdsftryone.R
  */
 class HomeFragment : Fragment() {
 
-    val team = arrayOf("équipe A","équipe B", "équipe C","U16","U14","U13","U12","U11")
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

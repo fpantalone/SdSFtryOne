@@ -3,13 +3,17 @@ package be.technifutur.devmob9.sdsftryone.model
 import androidx.annotation.Nullable
 import io.realm.RealmList
 import io.realm.RealmObject
+import io.realm.RealmResults
 import io.realm.annotations.Index
+import io.realm.annotations.LinkingObjects
 import io.realm.annotations.PrimaryKey
 
-open class DayData(
+open class DayData (
     @Index var id: Int = 0,
     var name: String = "",
     var date: String = "",
     var comment: String = "",
-    var matches: RealmList<MatchData> = RealmList()
+    var matches: RealmList<MatchData> = RealmList(),
+    @LinkingObjects ("days")
+    val champ: RealmResults<ChampData>? = null
 ) : RealmObject()

@@ -6,5 +6,6 @@
     <string name="section">Section Féminine</string>
     <string name="imageDescription">Team logo</string>
     <string name="lockerDescription">it\'s a locker</string>
+    <string name="loading_error">Data loading error</string>
 
 </resources>

@@ -6,5 +6,5 @@ import java.util.*
 
 open class TableUpdateTimersData(
     @PrimaryKey var tableName: String = "",
-    var updateTime: Date = Date()
+                var updateTime: Date = Date()
 ) : RealmObject()

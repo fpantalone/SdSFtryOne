@@ -100,7 +100,7 @@ class WebService() {
                             // fonction qui analyse les dates de la DB et celle qu'on a reçu
 
                             val clubUpdateTime =
-                                DbManager.sharedInstance()?.getTableUpdateTime("club")
+                                DbManager.sharedInstance().getTableUpdateTime("club")
 
                             if ((clubUpdateTime ?: "") < it.club) {
                                 webService.readClub(uuid, clubUpdateTime)

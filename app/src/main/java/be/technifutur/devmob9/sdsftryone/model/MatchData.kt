@@ -1,19 +1,21 @@
 package be.technifutur.devmob9.sdsftryone.model
 
 import io.realm.RealmObject
+import io.realm.RealmResults
+import io.realm.annotations.Index
+import io.realm.annotations.LinkingObjects
 import io.realm.annotations.PrimaryKey
 import java.util.*
 
 open class MatchData (
-    @PrimaryKey var id: Int = 0,
-    var date: Date = Date(),
+    @Index var id: Int = 0,
+    var date: Date? = null,
+    var hour: String = "",
     var homeTeam: String = "",
     var awayTeam: String = "",
-    var homeResult: Int = 0,
-    var awayResult: Int = 0,
-    var comment: String = ""
-) : RealmObject() {
-
-   // TODO: faire méthode pour séparer l'heure et la date
-
-}
+    var homeResult: Int? = null,
+    var awayResult: Int? = null,
+    var comment: String = "",
+    @LinkingObjects ("matches")
+    val day: RealmResults<DayData>? = null
+) : RealmObject()

@@ -5,6 +5,8 @@ class Champ (
     var name: String = "",
     var numDay: Int = 0,
     var season: Int = 0,
+    var matchConfig: String = "",
+    var genForfeit: List<String> = listOf(),
     var team: String? = null,
     var teams: List <teamList>? = null,
     var action: Char = 'A'

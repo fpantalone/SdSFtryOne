@@ -7,5 +7,12 @@
     <string name="imageDescription">Team logo</string>
     <string name="lockerDescription">it\'s a locker</string>
     <string name="loading_error">Data loading error</string>
-
+    <string name="team_a_menu_label">Equipe A</string>
+    <string name="team_b_menu_label">Equipe B</string>
+    <string name="team_c_menu_label">Equipe C</string>
+    <string name="team_u16_menu_label">Equipe U16</string>
+    <string name="team_u14_menu_label">Equipe U14</string>
+    <string name="team_u13_menu_label">Equipe U13</string>
+    <string name="team_u12_menu_label">Equipe U12</string>
+    <string name="team_u11_menu_label">Equipe U11</string>
 </resources>

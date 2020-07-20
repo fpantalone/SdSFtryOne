@@ -2,6 +2,7 @@ package be.technifutur.devmob9.sdsftryone.webservice
 
 class Match (
     var id: Int = 0,
+    var name: String ="",
     var day: Int = 0,
     var date: String? = null,
     var hour: String = "",

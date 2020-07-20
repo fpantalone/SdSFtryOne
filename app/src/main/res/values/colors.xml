@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--  TODO changer les couleur par défaut pour Primary PrimaryDark colorAccent -->
-    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimary">#990000</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 

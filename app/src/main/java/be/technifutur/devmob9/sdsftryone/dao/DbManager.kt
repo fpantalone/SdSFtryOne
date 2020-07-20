@@ -8,6 +8,7 @@ import io.realm.Realm
 import io.realm.exceptions.RealmException
 import io.realm.kotlin.where
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 
 class DbManager {
@@ -27,7 +28,7 @@ class DbManager {
     }
 
     private lateinit var context: Context
-    private val dateFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    private val dateFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.FRANCE)
 
 
     // remplir la DB
@@ -130,7 +131,7 @@ class DbManager {
 
     fun addChamp(
         id: Int, name: String, numDay: Int, season: Int, matchConfig: String,
-        teams: List<ChampTeamData>, genForfeit: List<String>
+        genForfeit: List<String>, teams: List<ChampTeamData>
     ): ChampData? {
         val realm = Realm.getDefaultInstance()
         try {

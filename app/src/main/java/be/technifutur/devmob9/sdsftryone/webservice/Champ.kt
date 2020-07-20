@@ -8,10 +8,10 @@ class Champ (
     var matchConfig: String = "",
     var genForfeit: List<String> = listOf(),
     var team: String? = null,
-    var teams: List <teamList>? = null,
+    var teams: List <teamItem>? = null,
     var action: Char = 'A'
 ) {
-    inner class teamList(
+    inner class teamItem(
         var team: String = "",
         var code: String = ""
     ) {

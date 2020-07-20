@@ -5,7 +5,6 @@ class TableUpdateTimes(
     var champ: String = "",
     var day: String = "",
     var match: String = "",
-    var forfaitgen: String = "",
     var player: String? = null,
     var event: String? = null,
     var match_player: String? = null

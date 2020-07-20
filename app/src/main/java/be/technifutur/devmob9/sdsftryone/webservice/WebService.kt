@@ -20,9 +20,9 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
+import java.util.function.Consumer
+import kotlin.collections.ArrayList
 
 class WebService() {
 
@@ -30,8 +30,9 @@ class WebService() {
         private lateinit var context: Context
 
         private lateinit var retrofit: Retrofit
-        private lateinit var webService: WebServiceInterface
-        private lateinit var uuid: String
+        lateinit var interfaceInstance: WebServiceInterface private set
+        lateinit var uuid: String private set
+        val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
         fun init(context: Context) {
             WebService.context = context
@@ -41,7 +42,7 @@ class WebService() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
-            webService = retrofit.create(WebServiceInterface::class.java)
+            interfaceInstance = retrofit.create(WebServiceInterface::class.java)
 
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
             val spUuid = preferences.getString("app_uuid", "")
@@ -85,220 +86,114 @@ class WebService() {
             }
         }
 
+        private var navController: NavController? = null
+
         fun updateDataBase(navController: NavController? = null) {
-
-            if (WebService.isOnline()) {
-
-                // on a du réseau on peut bosser
-
-                webService.readUpdateTime(uuid).enqueue(object : Callback<TableUpdateTimes> {
-                    override fun onFailure(call: Call<TableUpdateTimes>, t: Throwable) {
-                        displayError(navController)
-                    }
-
-                    override fun onResponse(
-                        call: Call<TableUpdateTimes>,
-                        response: Response<TableUpdateTimes>
-                    ) {
-                        response.body()?.let {
-                            // fonction qui analyse les dates de la DB et celle qu'on a reçu
-
-                            val clubUpdateTime =
-                                DbManager.sharedInstance().getTableUpdateTime("club")
-
-                            if ((clubUpdateTime ?: "") < it.club) {
-                                webService.readClub(uuid, clubUpdateTime)
-                                    .enqueue(object : Callback<List<Club>> {
-
-                                        override fun onFailure(
-                                            call: Call<List<Club>>,
-                                            t: Throwable
-                                        ) {
-                                            displayError(navController)
-                                        }
-
-                                        override fun onResponse(
-                                            call: Call<List<Club>>,
-                                            response: Response<List<Club>>
-                                        ) {
-                                            response.body()?.let {
-                                                updateClub(it)
-                                            }
-                                            // le championnat
-
-                                            val champUpdateTime =
-                                                DbManager.sharedInstance()
-                                                    .getTableUpdateTime("champ")
-
-                                            if ((champUpdateTime ?: "") < it.champ) {
-                                                webService.readChamp(uuid, champUpdateTime)
-                                                    .enqueue(object : Callback<List<Champ>> {
-                                                        override fun onFailure(
-                                                            call: Call<List<Champ>>,
-                                                            t: Throwable
-                                                        ) {
-                                                            displayError(navController)
-                                                        }
-
-                                                        override fun onResponse(
-                                                            call: Call<List<Champ>>,
-                                                            response: Response<List<Champ>>
-                                                        ) {
-                                                            response.body()?.let {
-                                                                updateChamp(it)
-                                                            }
-                                                            // Day
-                                                            val dayUpdateTime =
-                                                                DbManager.sharedInstance()
-                                                                    .getTableUpdateTime("day")
-
-                                                            if ((dayUpdateTime ?: "") < it.day) {
-                                                                webService.readDay(
-                                                                    uuid,
-                                                                    dayUpdateTime
-                                                                )
-                                                                    .enqueue(object :
-                                                                        Callback<List<Day>> {
-                                                                        override fun onFailure(
-                                                                            call: Call<List<Day>>,
-                                                                            t: Throwable
-                                                                        ) {
-                                                                            displayError(
-                                                                                navController
-                                                                            )
-                                                                        }
-
-                                                                        override fun onResponse(
-                                                                            call: Call<List<Day>>,
-                                                                            response: Response<List<Day>>
-                                                                        ) {
-                                                                            response.body()?.let {
-                                                                                updateDay(it)
-                                                                            }
-                                                                            // Match
-                                                                            val matchUpdateTime =
-                                                                                DbManager.sharedInstance()
-                                                                                    .getTableUpdateTime(
-                                                                                        "match"
-                                                                                    )
-
-                                                                            if ((matchUpdateTime
-                                                                                    ?: "") < it.match
-                                                                            ) {
-                                                                                webService.readMatch(
-                                                                                    uuid,
-                                                                                    matchUpdateTime
-                                                                                )
-                                                                                    .enqueue(object :
-                                                                                        Callback<List<Match>> {
-                                                                                        override fun onFailure(
-                                                                                            call: Call<List<Match>>,
-                                                                                            t: Throwable
-                                                                                        ) {
-                                                                                            displayError(
-                                                                                                navController
-                                                                                            )
-                                                                                        }
-
-                                                                                        override fun onResponse(
-                                                                                            call: Call<List<Match>>,
-                                                                                            response: Response<List<Match>>
-                                                                                        ) {
-                                                                                            response.body()
-                                                                                                ?.let {
-                                                                                                    updateMatch(
-                                                                                                        it
-                                                                                                    )
-                                                                                                }
-                                                                                        }
-                                                                                    })
-                                                                            }
-                                                                        }
-                                                                    })
-                                                            }
-                                                        }
-                                                    })
-                                            }
-
-                                        }
-                                    })
-                            }
-
+            this.navController = navController
+            // si on a du réseau
+            if (isOnline()) {
+                // liste de DataReader
+                val readers = LinkedList<DataReader>()
+                readers.add(AllTableDataReader())
+                readers.add(object : DataReader {
+                    override fun accept(t: LinkedList<DataReader>) {
+                        DbManager.endUpdate()
+                        WebService.navController?.let {
+                            // passer à l'écran d'accueil
+                            it.navigate(R.id.action_splashFragment_to_homeFragment)
                         }
                     }
                 })
-
-            } else {
+//                readers.add  (DataReader { _: LinkedList<DataReader> ->
+//                    WebService.navController?.let {
+//                        // passer à l'écran d'accueil
+//                        it.navigate(R.id.action_splashFragment_to_homeFragment)
+//                    }
+//                    DbManager.sharedInstance().endUpdate()
+//                    return@DataReader
+//                })
+                DbManager.startUpdate()
+                DataReader.start(readers)
+            }
+            // si on a pas de réseau
+            else {
                 // on a pas de réseau on informe l'utilisateur
                 Toast.makeText(context, "il n'y a pas de réseau", Toast.LENGTH_SHORT).show()
             }
         }
 
-        private fun updateMatch(matchList: List<Match>) {
-            val realm = Realm.getDefaultInstance()
-            realm.beginTransaction()
+        fun failure(t: Throwable) {
+            displayError(navController)
+            Log.d("WEBSERVICE", t.message ?: "")
+        }
 
+        fun updateMatch(matchList: List<Match>) {
             for (match in matchList) {
                 when (match.action) {
                     'A' -> {
-                      //  DbManager.sharedInstance().addMatch(match.id,match.day, match.)
-                    }
-                    'R' -> {
+                        var date: Date? = null
+                        match.date?.let {
+                            date = dateFormatter.parse(it)
+                        }
 
+                        DbManager.addMatch(
+                            match.id, match.day, match.champ, date,
+                            match.hour, match.eq1, match.eq2, match.re1, match.re2,
+                            match.comment ?: "", match.locked
+                        )
                     }
                     'U' -> {
-
+                        val dbMatch = DbManager.findMatch(match.id,match.day,match.champ)
+                        dbMatch?.hour = match.hour
+                        dbMatch?.homeTeam = match.eq1
+                        dbMatch?.awayTeam = match.eq2
+                        dbMatch?.homeResult = match.re1
+                        dbMatch?.awayResult = match.re2
+                        dbMatch?.comment = match.comment ?:""
+                        dbMatch?.locked = match.locked
+                    }
+                    'R' -> {
+                        DbManager.removeMatch(match.id, match.day, match.champ)
                     }
                 }
             }
-
-            realm.commitTransaction()
         }
 
-        private fun updateDay(dayList: List<Day>) {
-
-            val dateFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.FRANCE)
-
-            val realm = Realm.getDefaultInstance()
-            realm.beginTransaction()
+        fun updateDay(dayList: List<Day>) {
 
             for (day in dayList) {
                 when (day.action) {
                     'A' -> {
-
-                        val date = dateFormatter.parse(day.date)
-
-                        DbManager.sharedInstance()
-                            .addDay(day.id, day.champ,day.name ?: "",date ?: Date(),
-                                day.comment ?: "")
+                        dateFormatter.parse(day.date)?.let { date ->
+                            DbManager
+                                .addDay(
+                                    day.id, day.champ, day.name ?: "", date,
+                                    day.comment ?: ""
+                                )
+                        }
                     }
 
                     'U' -> {
-                        val dbDay = DbManager.sharedInstance().findDay(day.id, day.champ)
+                        val dbDay = DbManager.findDay(day.id, day.champ)
                         dbDay?.name = day.name ?: ""
                         dbDay?.date = dateFormatter.parse(day.date) ?: Date()
                         dbDay?.comment = day.comment ?: ""
                     }
                     'R' -> {
-                        DbManager.sharedInstance().removeDay(day.id, day.champ)
+                        DbManager.removeDay(day.id, day.champ)
                     }
                 }
             }
-
-            realm.commitTransaction()
         }
 
-        private fun updateChamp(champList: List<Champ>) {
-            val realm = Realm.getDefaultInstance()
-            realm.beginTransaction()
-
+        fun updateChamp(champList: List<Champ>) {
             for (champ in champList) {
                 when (champ.action) {
                     'A' -> {
                         val teams = ArrayList<ChampTeamData>()
 
                         champ.team?.let {
-                            val champTeam = DbManager.sharedInstance().addChampTeam(it, "#00016")
+                            val champTeam = DbManager.addChampTeam(it, "#00016")
                             if (champTeam != null) {
                                 teams.add(champTeam)
                             }
@@ -307,14 +202,14 @@ class WebService() {
                         champ.teams?.let {
                             for (team in it) {
                                 val champTeam =
-                                    DbManager.sharedInstance().addChampTeam(team.team, team.code)
+                                    DbManager.addChampTeam(team.team, team.code)
                                 if (champTeam != null) {
                                     teams.add(champTeam)
                                 }
                             }
                         }
 
-                        DbManager.sharedInstance().addChamp(
+                        DbManager.addChamp(
                             champ.id, champ.name, champ.numDay,
                             champ.season, champ.matchConfig, champ.genForfeit, teams
                         )
@@ -324,7 +219,7 @@ class WebService() {
                         val teams = ArrayList<ChampTeamData>()
 
                         champ.team?.let {
-                            val champTeam = DbManager.sharedInstance().addChampTeam(it, "#00016")
+                            val champTeam = DbManager.addChampTeam(it, "#00016")
                             if (champTeam != null) {
                                 teams.add(champTeam)
                             }
@@ -333,14 +228,14 @@ class WebService() {
                         champ.teams?.let {
                             for (team in it) {
                                 val champTeam =
-                                    DbManager.sharedInstance().addChampTeam(team.team, team.code)
+                                    DbManager.addChampTeam(team.team, team.code)
                                 if (champTeam != null) {
                                     teams.add(champTeam)
                                 }
                             }
                         }
 
-                        val dbChamp = DbManager.sharedInstance().findChamp(champ.id)
+                        val dbChamp = DbManager.findChamp(champ.id)
 
                         dbChamp?.name = champ.name
                         dbChamp?.numDay = champ.numDay
@@ -349,37 +244,52 @@ class WebService() {
                         dbChamp?.teams?.addAll(teams)
                     }
                     'R' -> {
-                        DbManager.sharedInstance().removeChamp(champ.id)
+                        DbManager.removeChamp(champ.id)
                     }
                 }
 
             }
-            realm.commitTransaction()
         }
 
-        private fun updateClub(clubList: List<Club>) {
-            val realm = Realm.getDefaultInstance()
-            realm.beginTransaction()
-
+        fun updateClub(clubList: List<Club>) {
             for (club in clubList) {
                 when (club.action) {
                     'A' -> {
-                        DbManager.sharedInstance()
-                            .addClub(club.code, club.short, club.full, club.logo)
+                        DbManager.addClub(club.code, club.short, club.full, club.logo)
 
                     }
                     'U' -> {
-                        val dbClub = DbManager.sharedInstance().findClub(club.code)
+                        val dbClub = DbManager.findClub(club.code)
                         dbClub?.shortName = club.short
                         dbClub?.fullName = club.full
                         dbClub?.logo = club.logo
                     }
                     'R' -> {
-                        DbManager.sharedInstance().removeClub(club.code)
+                        DbManager.removeClub(club.code)
                     }
                 }
             }
-            realm.commitTransaction()
+        }
+
+        fun updatePlayer(playerList: List<Player>?) {
+            if (null == playerList) {
+                return
+            }
+            // TODO("Not yet implemented")
+        }
+
+        fun updateEvent(eventList: List<Event>?) {
+            if (null == eventList) {
+                return
+            }
+            // TODO("Not yet implemented")
+        }
+
+        fun updateMatchPlayer(matchPlayerList: List<MatchPlayer>?) {
+            if (null == matchPlayerList) {
+                return
+            }
+            // TODO("Not yet implemented")
         }
     }
 }

@@ -13,8 +13,7 @@ class Champ (
 ) {
     inner class teamItem(
         var team: String = "",
-        var code: String = ""
-    ) {
-
-    }
+        var code: String = "",
+        var firstDay: Int = 1
+    )
 }

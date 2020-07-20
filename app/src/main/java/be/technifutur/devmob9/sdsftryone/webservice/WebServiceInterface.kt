@@ -7,19 +7,22 @@ import retrofit2.http.Query
 
 interface WebServiceInterface {
 
-    @POST("request.php?cmd=tut")
+    @GET("request.php?cmd=get&table=tut")
     fun readUpdateTime(@Query("uuid") uuid: String): Call<TableUpdateTimes>
 
-    @POST("request.php?cmd=club")
+    @GET("request.php?cmd=get&table=club")
     fun readClub(@Query("uuid") uuid: String, @Query("since") since: String?): Call<List<Club>>
 
-    @POST("request.php?cmd=champ")
+    @GET("request.php?cmd=get&table=champ")
     fun readChamp(@Query("uuid") uuid: String, @Query("since") since: String?): Call<List<Champ>>
 
-    @POST("request.php?cmd=day")
+    @GET("request.php?cmd=get&table=day")
     fun readDay(@Query("uuid") uuid: String, @Query("since") since: String?): Call<List<Day>>
 
-    @POST("request.php?cmd=match")
+    @GET("request.php?cmd=get&table=match")
     fun readMatch(@Query("uuid") uuid: String, @Query("since") since: String?): Call<List<Match>>
+
+    @GET("request.php?cmd=get&table=all")
+    fun readAll(@Query("uuid") uuid: String, @Query("since") since: String?): Call<AllTable>
 
 }

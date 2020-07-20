@@ -6,5 +6,6 @@ class Day (
     var name: String? = null,
     var date: String = "",
     var comment: String? = null,
+    var matchConfig: String? = null,
     var action: Char = 'A'
 )

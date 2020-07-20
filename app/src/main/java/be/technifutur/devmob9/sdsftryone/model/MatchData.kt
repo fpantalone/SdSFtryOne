@@ -15,6 +15,7 @@ open class MatchData (
     var homeResult: Int? = null,
     var awayResult: Int? = null,
     var comment: String = "",
+    var locked: String? = null,
     @LinkingObjects ("matches")
     val day: RealmResults<DayData>? = null
 ) : RealmObject()

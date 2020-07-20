@@ -1,9 +1,9 @@
 package be.technifutur.devmob9.sdsftryone.webservice
 
-class Match (
+class Match(
     var id: Int = 0,
-    var name: String ="",
     var day: Int = 0,
+    var champ: Int = 0,
     var date: String? = null,
     var hour: String = "",
     var eq1: String = "",
@@ -11,5 +11,6 @@ class Match (
     var re1: Int? = null,
     var re2: Int? = null,
     var comment: String? = null,
+    var locked: String? = null,
     var action: Char = 'A'
 )

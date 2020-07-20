@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import be.technifutur.devmob9.sdsftryone.R
+import be.technifutur.devmob9.sdsftryone.dao.DbManager
+import be.technifutur.devmob9.sdsftryone.webservice.WebService
+import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * A simple [Fragment] subclass.
@@ -31,8 +34,8 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Handler().postDelayed({
-            findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
-        }, SPLASH_SCREEN_DURATION.toLong())
+        WebService.updateDataBase(findNavController())
+
+        //this.testTextView.text = DbManager.sharedInstance().getAllClubData().size.toString()
     }
 }

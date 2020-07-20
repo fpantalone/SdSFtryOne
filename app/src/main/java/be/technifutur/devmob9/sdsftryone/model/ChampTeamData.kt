@@ -7,6 +7,7 @@ import io.realm.annotations.LinkingObjects
 open class ChampTeamData (
     var team: String = "",
     var code: String = "",
+    var firstDay: Int = 1,
     @LinkingObjects ("teams")
     val champ: RealmResults<ChampData>? = null
 ) : RealmObject()

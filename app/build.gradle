@@ -29,12 +29,12 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "String", "SERVER_URL", '"https://www.stadard-femina.be/app/"'
+            buildConfigField "String", "SERVER_URL", '"https://www.standard-femina.be/app/"'
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "SERVER_URL", '"https://www.stadard-femina.be/app/"'
+            buildConfigField "String", "SERVER_URL", '"https://www.standard-femina.be/app/"'
         }
     }
 

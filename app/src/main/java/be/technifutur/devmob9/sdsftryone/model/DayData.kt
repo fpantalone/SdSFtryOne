@@ -13,6 +13,7 @@ open class DayData (
     var date: Date = Date(),
     var comment: String = "",
     var matches: RealmList<MatchData> = RealmList(),
+    var matchConfig: String? = null,
     @LinkingObjects ("days")
     val champ: RealmResults<ChampData>? = null
 ) : RealmObject()

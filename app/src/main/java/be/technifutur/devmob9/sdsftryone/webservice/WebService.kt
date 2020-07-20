@@ -14,6 +14,7 @@ import be.technifutur.devmob9.sdsftryone.dao.DbManager
 import be.technifutur.devmob9.sdsftryone.fragment.SplashFragment
 import be.technifutur.devmob9.sdsftryone.model.ChampTeamData
 import io.realm.Realm
+import kotlinx.coroutines.NonCancellable.start
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -95,23 +96,14 @@ class WebService() {
                 // liste de DataReader
                 val readers = LinkedList<DataReader>()
                 readers.add(AllTableDataReader())
-                readers.add(object : DataReader {
-                    override fun accept(t: LinkedList<DataReader>) {
-                        DbManager.endUpdate()
-                        WebService.navController?.let {
-                            // passer à l'écran d'accueil
-                            it.navigate(R.id.action_splashFragment_to_homeFragment)
-                        }
+                readers.add  (DataReader { _ ->
+                    WebService.navController?.let {
+                        // passer à l'écran d'accueil
+                        it.navigate(R.id.action_splashFragment_to_homeFragment)
                     }
+                    DbManager.endUpdate()
+                    return@DataReader
                 })
-//                readers.add  (DataReader { _: LinkedList<DataReader> ->
-//                    WebService.navController?.let {
-//                        // passer à l'écran d'accueil
-//                        it.navigate(R.id.action_splashFragment_to_homeFragment)
-//                    }
-//                    DbManager.sharedInstance().endUpdate()
-//                    return@DataReader
-//                })
                 DbManager.startUpdate()
                 DataReader.start(readers)
             }

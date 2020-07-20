@@ -1,5 +1,6 @@
 package be.technifutur.devmob9.sdsftryone.model
 
+import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.RealmResults
 import io.realm.annotations.Index
@@ -16,6 +17,8 @@ open class MatchData (
     var awayResult: Int? = null,
     var comment: String = "",
     var locked: String? = null,
+    var events: RealmList<EventData> = RealmList(),
+    var players: RealmList<MatchPlayerData> = RealmList(),
     @LinkingObjects ("matches")
     val day: RealmResults<DayData>? = null
 ) : RealmObject()

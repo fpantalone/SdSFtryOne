@@ -96,7 +96,7 @@ class WebService() {
                 // liste de DataReader
                 val readers = LinkedList<DataReader>()
                 readers.add(AllTableDataReader())
-                readers.add  (DataReader { _ ->
+                readers.add(DataReader { _ ->
                     WebService.navController?.let {
                         // passer à l'écran d'accueil
                         it.navigate(R.id.action_splashFragment_to_homeFragment)
@@ -135,13 +135,13 @@ class WebService() {
                         )
                     }
                     'U' -> {
-                        val dbMatch = DbManager.findMatch(match.id,match.day,match.champ)
+                        val dbMatch = DbManager.findMatch(match.id, match.day, match.champ)
                         dbMatch?.hour = match.hour
                         dbMatch?.homeTeam = match.eq1
                         dbMatch?.awayTeam = match.eq2
                         dbMatch?.homeResult = match.re1
                         dbMatch?.awayResult = match.re2
-                        dbMatch?.comment = match.comment ?:""
+                        dbMatch?.comment = match.comment ?: ""
                         dbMatch?.locked = match.locked
                     }
                     'R' -> {
@@ -267,21 +267,86 @@ class WebService() {
             if (null == playerList) {
                 return
             }
-            // TODO("Not yet implemented")
+            for (player in playerList) {
+                when (player.action) {
+                    'A' -> {
+                        DbManager.addPlayer(
+                            player.id,
+                            player.firstName,
+                            player.lastName,
+                            player.number,
+                            player.team
+                        )
+                    }
+                    'U' -> {
+                        val dbPlayer = DbManager.findPlayer(player.id)
+                        dbPlayer?.firstName = player.firstName
+                        dbPlayer?.firstName = player.firstName
+                        dbPlayer?.number = player.number
+                        dbPlayer?.team?.addAll(player.team)
+                    }
+                    'R' -> {
+                        DbManager.removePlayer(player.id)
+                    }
+                }
+            }
         }
 
         fun updateEvent(eventList: List<Event>?) {
             if (null == eventList) {
                 return
             }
-            // TODO("Not yet implemented")
+            for (event in eventList) {
+                when (event.action) {
+                    'A' -> {
+                        DbManager.addEvent(event.id, event.match, event.day, event.champ,
+                        event.time, event.team, event.type, event.param)
+                    }
+                    'U' -> {
+                        val dbEvent =
+                            DbManager.findEvent(event.id, event.match, event.day, event.champ)
+                        dbEvent?.time = event.time
+                        dbEvent?.team = event.team
+                        dbEvent?.type = event.type
+                        dbEvent?.param = event.param
+                    }
+                    'R' -> {
+                        DbManager.removeEvent(event.id, event.match, event.day, event.champ)
+                    }
+                }
+            }
         }
 
         fun updateMatchPlayer(matchPlayerList: List<MatchPlayer>?) {
             if (null == matchPlayerList) {
                 return
             }
-            // TODO("Not yet implemented")
+            for (matchPlayer in matchPlayerList) {
+                when (matchPlayer.action) {
+                    'A' -> {
+
+                    }
+                    'U' -> {
+                        // TODO question: est-ce nécessaire
+                        val dbMatchPlayer = DbManager.findMatchPlayer(
+                            matchPlayer.id,
+                            matchPlayer.match,
+                            matchPlayer.day,
+                            matchPlayer.champ
+                        )
+                        //dbMatchPlayer?.player = matchPlayer.player
+
+                    }
+                    'R' -> {
+                        DbManager.removeMatchPlayer(
+                            matchPlayer.id,
+                            matchPlayer.match,
+                            matchPlayer.day,
+                            matchPlayer.champ
+                        )
+                    }
+                }
+            }
         }
     }
 }

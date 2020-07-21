@@ -6,5 +6,5 @@ class Player(
     var lastName: String = "",
     var number: Int = 0,
     var team: List<String> = listOf(),
-    var action: Char? = 'A'
+    var action: Char = 'A'
 )

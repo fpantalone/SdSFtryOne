@@ -1,9 +1,7 @@
 package be.technifutur.devmob9.sdsftryone.webservice
 
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface WebServiceInterface {
 
@@ -25,4 +23,6 @@ interface WebServiceInterface {
     @GET("request.php?cmd=get&table=all")
     fun readAll(@Query("uuid") uuid: String, @Query("since") since: String?): Call<AllTable>
 
+    @POST("request.php?cmd=do")
+    fun sendMatchData(@Body modifications: List<Modification>, @Field ("uuid") uuid: String): Call<Int>
 }

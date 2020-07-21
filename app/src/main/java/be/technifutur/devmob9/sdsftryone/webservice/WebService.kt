@@ -299,8 +299,10 @@ class WebService() {
             for (event in eventList) {
                 when (event.action) {
                     'A' -> {
-                        DbManager.addEvent(event.id, event.match, event.day, event.champ,
-                        event.time, event.team, event.type, event.param)
+                        DbManager.addEvent(
+                            event.id, event.match, event.day, event.champ,
+                            event.time, event.team, event.type, event.param
+                        )
                     }
                     'U' -> {
                         val dbEvent =
@@ -324,18 +326,28 @@ class WebService() {
             for (matchPlayer in matchPlayerList) {
                 when (matchPlayer.action) {
                     'A' -> {
-
+                        DbManager.addMatchPlayer(
+                            matchPlayer.id,
+                            matchPlayer.match,
+                            matchPlayer.day,
+                            matchPlayer.champ,
+                            matchPlayer.player,
+                            matchPlayer.name,
+                            matchPlayer.number,
+                            matchPlayer.status
+                        )
                     }
                     'U' -> {
-                        // TODO question: est-ce nécessaire
                         val dbMatchPlayer = DbManager.findMatchPlayer(
                             matchPlayer.id,
                             matchPlayer.match,
                             matchPlayer.day,
                             matchPlayer.champ
                         )
-                        //dbMatchPlayer?.player = matchPlayer.player
-
+                        // on ne chamge pas le player
+                        dbMatchPlayer?.name = matchPlayer.name
+                        dbMatchPlayer?.number = matchPlayer.number
+                        dbMatchPlayer?.status = matchPlayer.status
                     }
                     'R' -> {
                         DbManager.removeMatchPlayer(

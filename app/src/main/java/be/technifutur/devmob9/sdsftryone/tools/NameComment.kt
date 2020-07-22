@@ -5,6 +5,4 @@ class NameComment (var nbHomeShoot: Int = 0,
                    var matchType: String = "",
                    var frenchComment: String = "",
                    var dutchComment: String = "",
-                   var EngComment: String = "") {
-
-}
+                   var EngComment: String = "")

@@ -7,7 +7,7 @@ import io.realm.annotations.LinkingObjects
 
 open class EventData(
     @Index var id: Int = 0,
-    var time: String = ",",
+    var time: String = "",
     var team: String = "",
     var type: String = "",
     var param: String = "",

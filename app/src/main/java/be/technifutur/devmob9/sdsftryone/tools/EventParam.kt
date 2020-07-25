@@ -1,12 +1,26 @@
 package be.technifutur.devmob9.sdsftryone.tools
 
-class EventParam (var primaryPlayer: Int,
-                  var secondaryPlayer: Int,
-                  var isPenalty: Boolean,
-                  var carteType: CarteType,
-                  var isSuccess: Boolean,
-                  var chronoType: ChronoType
-)
+class EventParam (var primaryPlayer: Int = 0,
+                  var secondaryPlayer: Int = 0,
+                  var isPenalty: Boolean = false,
+                  var carteType: CarteType = CarteType.YELLOW,
+                  var isSuccess: Boolean = false,
+                  var chronoType: ChronoType = ChronoType.BEGIN
+) {
+    companion object {
+
+
+        fun getEventParam (string: String): EventParam? {
+
+        }
+    }
+
+    override fun toString(): String {
+        return super.toString()
+    }
+}
+
+
 
 enum class CarteType {
     YELLOW,
@@ -18,7 +32,8 @@ enum class ChronoType {
     END,
     PAUSE,
     RESUME,
-    STOP
+    STOP,
+    Cancel
 }
 
 // contiendra deux players

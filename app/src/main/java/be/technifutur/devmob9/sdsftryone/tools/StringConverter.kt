@@ -8,9 +8,7 @@ class StringConverter {
     companion object {
         private lateinit var dateFormat: SimpleDateFormat
         private lateinit var dateTimeFormat: SimpleDateFormat
-        private lateinit var nameCommentConverter: NameCommentConverter
         private lateinit var eventParamConverter: EventParamConverter
-        private lateinit var matchConfigConverter: MatchConfigConverter
 
         fun getDateConverter(): SimpleDateFormat {
             if (!(this::dateFormat.isInitialized)) {
@@ -26,25 +24,11 @@ class StringConverter {
             return dateTimeFormat
         }
 
-        fun getNameCommentConverter(): ConverterInterface<NameComment> {
-            if (!(this::nameCommentConverter.isInitialized)) {
-                nameCommentConverter = NameCommentConverter()
-            }
-            return nameCommentConverter
-        }
-
         fun getEventParamConverter(): ConverterInterface<EventParam> {
             if (!(this::eventParamConverter.isInitialized)) {
                 eventParamConverter = EventParamConverter()
             }
             return eventParamConverter
-        }
-
-        fun getMatchConfigConverter(): ConverterInterface<MatchConfig> {
-            if (!(this::matchConfigConverter.isInitialized)) {
-                matchConfigConverter = MatchConfigConverter()
-            }
-            return matchConfigConverter
         }
     }
 

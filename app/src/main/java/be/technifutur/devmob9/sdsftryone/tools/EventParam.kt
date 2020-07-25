@@ -12,6 +12,8 @@ class EventParam (var primaryPlayer: Int = 0,
 
         fun getEventParam (string: String): EventParam? {
 
+            return null
+
         }
     }
 

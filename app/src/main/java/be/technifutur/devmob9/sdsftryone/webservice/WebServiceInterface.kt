@@ -24,5 +24,8 @@ interface WebServiceInterface {
     fun readAll(@Query("uuid") uuid: String, @Query("since") since: String?): Call<AllTable>
 
     @POST("request.php?cmd=do")
-    fun sendMatchData(@Body modifications: List<Modification>, @Field ("uuid") uuid: String): Call<Int>
+    fun sendMatchData(
+        @Body modifications: List<Modification>,
+        @Field("uuid") uuid: String
+    ): Call<Int>
 }

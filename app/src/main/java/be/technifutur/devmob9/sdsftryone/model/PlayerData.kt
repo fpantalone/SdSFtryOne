@@ -10,4 +10,8 @@ open class PlayerData(
     var lastname: String = "",
     var number: Int = 0,
     var team: RealmList<String> = RealmList()
-): RealmObject()
+) : RealmObject() {
+
+    val fullName: String
+    get() = "$firstName $lastname"
+}

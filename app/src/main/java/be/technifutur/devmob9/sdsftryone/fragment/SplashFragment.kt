@@ -1,23 +1,20 @@
 package be.technifutur.devmob9.sdsftryone.fragment
 
 import android.os.Bundle
-import android.os.Handler
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import be.technifutur.devmob9.sdsftryone.R
-import be.technifutur.devmob9.sdsftryone.dao.DbManager
 import be.technifutur.devmob9.sdsftryone.webservice.WebService
-import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * A simple [Fragment] subclass.
  */
 class SplashFragment : Fragment() {
 
-    companion object{
+    companion object {
         const val SPLASH_SCREEN_DURATION: Int = 3000
     }
 

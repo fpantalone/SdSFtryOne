@@ -1,28 +1,27 @@
 package be.technifutur.devmob9.sdsftryone.adapter
 
 import android.view.View
+import be.technifutur.devmob9.sdsftryone.R
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 
-open class HomeItemAdapter : AbstractItem<HomeItemAdapter.HomeViewHolder>() {
+class HomeItemAdapter() : AbstractItem<HomeItemAdapter.HomeViewHolder>() {
     override val layoutRes: Int
-        get() = TODO("Not yet implemented")
+        get() = R.layout.calendar_row
     override val type: Int
-        get() = TODO("Not yet implemented")
-
+        get() = R.id.champTextView
     override fun getViewHolder(v: View): HomeItemAdapter.HomeViewHolder {
-        TODO("Not yet implemented")
+        return HomeViewHolder(v)
     }
 
 
     class HomeViewHolder(view: View) : FastAdapter.ViewHolder<HomeItemAdapter>(view) {
-        override fun bindView(itemAdapter: HomeItemAdapter, payloads: List<Any>) {
+        override fun bindView(item: HomeItemAdapter, payloads: List<Any>) {
             TODO("Not yet implemented")
         }
 
-        override fun unbindView(itemAdapter: HomeItemAdapter) {
+        override fun unbindView(item: HomeItemAdapter) {
             TODO("Not yet implemented")
         }
-
     }
 }

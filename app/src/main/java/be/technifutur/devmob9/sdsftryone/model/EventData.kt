@@ -1,5 +1,6 @@
 package be.technifutur.devmob9.sdsftryone.model
 
+import be.technifutur.devmob9.sdsftryone.tools.TeamSide
 import io.realm.RealmObject
 import io.realm.RealmResults
 import io.realm.annotations.Index
@@ -13,4 +14,15 @@ open class EventData(
     var param: String = "",
     @LinkingObjects("events")
     val match: RealmResults<MatchData>? = null
-) : RealmObject()
+) : RealmObject() {
+
+
+    fun getSide() : TeamSide? {
+        try {
+            return TeamSide.valueOf(team)
+        }
+        catch (e: IllegalArgumentException) {
+            return null
+        }
+    }
+}

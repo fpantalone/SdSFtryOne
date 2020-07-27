@@ -4,25 +4,19 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Handler
-import androidx.preference.PreferenceManager
 import android.util.Log
 import android.widget.Toast
 import androidx.navigation.NavController
+import androidx.preference.PreferenceManager
 import be.technifutur.devmob9.sdsftryone.BuildConfig
 import be.technifutur.devmob9.sdsftryone.R
 import be.technifutur.devmob9.sdsftryone.dao.DbManager
 import be.technifutur.devmob9.sdsftryone.fragment.SplashFragment
 import be.technifutur.devmob9.sdsftryone.model.ChampTeamData
-import io.realm.Realm
-import kotlinx.coroutines.NonCancellable.start
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.function.Consumer
 import kotlin.collections.ArrayList
 
 class WebService() {

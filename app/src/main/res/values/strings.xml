@@ -3,7 +3,7 @@
 
     <string name="splash_standard">Standard</string>
     <string name="de_liege">de Liège</string>
-    <string name="section">Section Féminine</string>
+    <string name="section">Fémina</string>
     <string name="imageDescription">Team logo</string>
     <string name="lockerDescription">it\'s a locker</string>
     <string name="loading_error">Data loading error</string>

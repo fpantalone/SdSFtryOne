@@ -1,6 +1,6 @@
 package be.technifutur.devmob9.sdsftryone.webservice
 
-class Day (
+class Day(
     var id: Int = 0,
     var champ: Int = 0,
     var name: String? = null,

@@ -9,4 +9,5 @@ class MatchPlayer(
     var name: String = "",
     var number: Int = 0,
     var status: Int = 0,
-    override var action: Char = 'A'):ModificationData
+    override var action: Char = 'A'
+) : ModificationData

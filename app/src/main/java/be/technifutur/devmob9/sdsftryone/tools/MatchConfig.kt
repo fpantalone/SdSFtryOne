@@ -5,16 +5,15 @@ class MatchConfig(
     var nbChange: Int = 0,
     var nbPeriod: Int = 0,
     var minPerPeriod: Int = 0,
-    var prologationLength: Int = 0,
+    var minPerPrologation: Int = 0,
     var isEliminatory: Boolean = false
-) {
+): StringDataConverter {
 
-    companion object {
+    companion object:StringDataCreator<MatchConfig> {
         private val regex =
             Regex("\"^([5-9]|1[01])\\+(\\d)D([1-6])×([5-9]|[1-3]\\d|4[0-5])(?:P([5-9]|1[0-5]))?(E)?\$\"")
 
-
-        fun getMatchConfig(string: String): MatchConfig? {
+        override fun createFrom(string: String): MatchConfig? {
             val matchConfig = MatchConfig()
             val result = regex.matchEntire(string) ?: return null
 
@@ -39,9 +38,9 @@ class MatchConfig(
             .append("×")
             .append(minPerPeriod)
 
-        if (0 != prologationLength) {
+        if (0 != minPerPrologation) {
             sb.append("P")
-                .append(prologationLength)
+                .append(minPerPrologation)
         }
 
         if (isEliminatory) {

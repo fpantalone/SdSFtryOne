@@ -4,7 +4,6 @@ import io.realm.RealmObject
 import io.realm.RealmResults
 import io.realm.annotations.Index
 import io.realm.annotations.LinkingObjects
-import io.realm.annotations.PrimaryKey
 
 open class MatchPlayerData(
     @Index
@@ -15,4 +14,21 @@ open class MatchPlayerData(
     var status: Int = 0,
     @LinkingObjects("players")
     val match: RealmResults<MatchData>? = null
-) : RealmObject()
+) : RealmObject() {
+
+    fun isTitular (): Boolean {
+        return 0 != (status and 1)
+    }
+
+    fun isKeeper (): Boolean {
+        return 0 != (status and 2)
+    }
+
+    fun isCaptain (): Boolean {
+        return 0 != (status and 4)
+    }
+
+    fun getPlayerName ():String {
+        return player?.fullName ?: name
+    }
+}

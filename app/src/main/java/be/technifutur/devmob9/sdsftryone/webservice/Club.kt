@@ -6,4 +6,4 @@ class Club(
     var full: String = "",
     var logo: String? = null,
     var action: Char = 'A'
-    )
+)

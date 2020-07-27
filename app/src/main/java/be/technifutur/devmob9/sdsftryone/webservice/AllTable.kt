@@ -2,7 +2,7 @@ package be.technifutur.devmob9.sdsftryone.webservice
 
 import com.google.gson.annotations.SerializedName
 
-class AllTable (
+class AllTable(
     val club: List<Club> = listOf(),
     val champ: List<Champ> = listOf(),
     val day: List<Day> = listOf(),

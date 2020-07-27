@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 
 @FunctionalInterface
 public interface DataReader extends Consumer<LinkedList<DataReader>> {
-    default void callNext (LinkedList<DataReader> nextReaders) {
+    default void callNext(LinkedList<DataReader> nextReaders) {
         DataReader next = nextReaders.poll();
         if (null != next) {
             next.accept(nextReaders);

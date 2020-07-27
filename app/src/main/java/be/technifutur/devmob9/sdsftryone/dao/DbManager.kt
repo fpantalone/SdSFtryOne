@@ -4,11 +4,9 @@ import android.content.Context
 import android.util.Log
 import androidx.preference.PreferenceManager
 import be.technifutur.devmob9.sdsftryone.model.*
-import be.technifutur.devmob9.sdsftryone.webservice.MatchPlayer
 import io.realm.Case
 import io.realm.Realm
 import io.realm.exceptions.RealmException
-import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 import java.text.SimpleDateFormat
 import java.util.*

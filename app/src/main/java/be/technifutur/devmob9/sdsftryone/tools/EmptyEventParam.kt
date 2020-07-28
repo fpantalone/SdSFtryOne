@@ -4,7 +4,10 @@ class EmptyEventParam():StringDataConverter {
 
     companion object: StringDataCreator<EmptyEventParam> {
         override fun createFrom(string: String): EmptyEventParam? {
-            TODO("Not yet implemented")
+           val emptyEventParam = EmptyEventParam()
+
+            // todo a complèter
+            return emptyEventParam
         }
     }
 

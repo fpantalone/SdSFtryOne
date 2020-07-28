@@ -1,6 +1,7 @@
 package be.technifutur.devmob9.sdsftryone.model
 
 import be.technifutur.devmob9.sdsftryone.tools.EventType
+import be.technifutur.devmob9.sdsftryone.tools.LockStatus
 import be.technifutur.devmob9.sdsftryone.tools.MatchComment
 import be.technifutur.devmob9.sdsftryone.tools.TeamSide
 import io.realm.RealmList
@@ -48,18 +49,50 @@ open class MatchData(
     }
 
     fun getComment (): MatchComment {
-        return
+        return MatchComment.createFrom(comment)!!
+    }.
+
+    fun getLockStatus(): LockStatus? {
+        return locked?.let { LockStatus.valueOf(it) }
     }
 
-    fun getEvents (): EventType {
+    fun getEvents (): List<EventType>? {
+        // TODO to be implemented
+
         // return tablea eventData
         // retourne tout les events
         // tri inverse
     }
 
-    fun getMySide (): TeamSide {
+    fun getMySide (): TeamSide? {
+
+        val champ = day?.first()?.champ?.first()
+        val teamList = champ?.teams?.map {
+            it.code
+        }
+        if (teamList != null) {
+            if (teamList.contains(homeTeam)) {
+                return TeamSide.HOME
+            }
+            if (teamList.contains(awayTeam)) {
+                return TeamSide.AWAY
+            }
+        }
+        return null
+    }
+
+    fun getTeam (): ClubData? {
+        // TODO to be implemented
 
     }
-            // compare hometype
 
+    fun getPlayer (): MatchPlayerData? {
+        // TODO to be implemented
+
+    }
+
+    fun getWinner (): TeamSide? {
+        // TODO to be implemented
+
+    }
 }

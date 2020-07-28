@@ -26,16 +26,16 @@ open class ChampData(
 
         val localizedName = LocaliziedName(name)
 
-        when (locale.language) {
+        return when (locale.language) {
 
             "nl" -> {
-                return localizedName.nl
+                localizedName.nl
             }
             "en" -> {
-                return localizedName.fr
+                localizedName.fr
             }
             else -> {
-                return localizedName.fr
+                localizedName.fr
             }
         }
     }

@@ -11,7 +11,7 @@ class MatchConfig(
 
     companion object:StringDataCreator<MatchConfig> {
         private val regex =
-            Regex("\"^([5-9]|1[01])\\+(\\d)D([1-6])×([5-9]|[1-3]\\d|4[0-5])(?:P([5-9]|1[0-5]))?(E)?\$\"")
+            Regex("^([5-9]|1[01])\\+(\\d)D([1-6])×([5-9]|[1-3]\\d|4[0-5])(?:P([5-9]|1[0-5]))?(E)?\$")
 
         override fun createFrom(string: String): MatchConfig? {
             val matchConfig = MatchConfig()

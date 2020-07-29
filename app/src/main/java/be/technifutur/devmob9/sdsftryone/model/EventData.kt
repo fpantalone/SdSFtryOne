@@ -52,13 +52,12 @@ open class EventData(
                 return PenaltyParam.createFrom (param)
             }
             EventType.CHRONO -> {
-                return ChronoParam.createFrom (param)
+                return ChronoEventParam.createFrom (param)
             }
             else -> {
                 return EmptyEventParam.createFrom (param)
             }
         }
-
     }
 
     fun getDisplayTime (): String? {
@@ -83,13 +82,13 @@ open class EventData(
         getParam() ?: return false
         getDisplayTime() ?: return false
 
-        if (side == TeamSide.HOME || type != EventType.CHRONO) {
+        if (side == TeamSide.AWAY || type == EventType.CHRONO) {
             return false
         }
 
         val mySide = match?.first()?.getMySide() ?: return false
 
-        if (side != mySide && type == EventType.SUBSTITUTION || type == EventType.CARD) {
+        if (side != mySide && (type == EventType.SUBSTITUTION || type == EventType.CARD)) {
             return false
         }
         return true
@@ -111,7 +110,12 @@ open class EventData(
         }
 
         fun setType (type: EventType): EventBuilder {
-            event.type = type.jsonType
+            event.type = type.jsonString
+            return this
+        }
+
+        fun setSide (side: TeamSide): EventBuilder {
+            event.team = side.jsonString
             return this
         }
 
@@ -121,7 +125,9 @@ open class EventData(
         }
 
         fun build (): EventData? {
-            event.validate() ?:return null
+            if (!event.validate()) {
+                return null
+            }
             val realm = Realm.getDefaultInstance()
 
             realm.beginTransaction()

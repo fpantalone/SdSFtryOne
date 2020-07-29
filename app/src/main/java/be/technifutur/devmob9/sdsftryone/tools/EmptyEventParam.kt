@@ -1,14 +1,19 @@
 package be.technifutur.devmob9.sdsftryone.tools
 
-class EmptyEventParam():StringDataConverter {
+class EmptyEventParam() : EventParam {
 
-    companion object: StringDataCreator<EmptyEventParam> {
+    companion object : StringDataCreator<EmptyEventParam> {
         override fun createFrom(string: String): EmptyEventParam? {
-           val emptyEventParam = EmptyEventParam()
 
-            // todo a complèter
-            return emptyEventParam
+            if (string.isEmpty()) {
+                return EmptyEventParam()
+            } else {
+                return null
+            }
         }
     }
 
+    override fun toString(): String {
+        return ""
+    }
 }

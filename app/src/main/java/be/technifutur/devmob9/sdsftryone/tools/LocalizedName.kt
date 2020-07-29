@@ -2,7 +2,7 @@ package be.technifutur.devmob9.sdsftryone.tools
 
 import java.lang.StringBuilder
 
-open class LocaliziedName(var fr: String, var nl: String, var en: String) : StringDataConverter {
+open class LocalizedName(var fr: String, var nl: String, var en: String) : StringDataConverter {
 
 //    @Throws (IllegalArgumentException::class)
 //    constructor(string: String) : this("", "", "") {
@@ -17,10 +17,10 @@ open class LocaliziedName(var fr: String, var nl: String, var en: String) : Stri
 //
 //    }
 
-    companion object : StringDataCreator<LocaliziedName> {
+    companion object : StringDataCreator<LocalizedName> {
         val regex = Regex("^(.*?)(?:\\^(.*?)(?:\\^(.*?))?)?\$")
-        override fun createFrom(string: String): LocaliziedName? {
-            val localiziedName = LocaliziedName("","","")
+        override fun createFrom(string: String): LocalizedName? {
+            val localiziedName = LocalizedName("","","")
             localiziedName.parse(string)
             return localiziedName
         }

@@ -3,7 +3,7 @@ package be.technifutur.devmob9.sdsftryone.tools
 class MatchComment(
     fr: String, nl: String, en: String, var homePenalty: Int?,
     var awayPenalty: Int?, var status: MatchStatus
-) : LocaliziedName(fr, nl, en) {
+) : LocalizedName(fr, nl, en) {
 
     companion object : StringDataCreator<MatchComment> {
         override fun createFrom(string: String): MatchComment? {

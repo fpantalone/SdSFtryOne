@@ -1,6 +1,6 @@
 package be.technifutur.devmob9.sdsftryone.model
 
-import be.technifutur.devmob9.sdsftryone.tools.LocaliziedName
+import be.technifutur.devmob9.sdsftryone.tools.LocalizedName
 import be.technifutur.devmob9.sdsftryone.tools.MatchConfig
 import io.realm.RealmList
 import io.realm.RealmObject
@@ -77,7 +77,7 @@ open class DayData(
 
     fun getName(locale: Locale): String {
 
-        val localizedName = LocaliziedName.createFrom(name)
+        val localizedName = LocalizedName.createFrom(name)
 
         if (localizedName != null) {
             return when (locale.language) {

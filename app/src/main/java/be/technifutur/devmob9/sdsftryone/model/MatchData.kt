@@ -5,6 +5,7 @@ import be.technifutur.devmob9.sdsftryone.tools.*
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.RealmResults
+import io.realm.annotations.Ignore
 import io.realm.annotations.Index
 import io.realm.annotations.LinkingObjects
 import java.util.*
@@ -25,7 +26,9 @@ open class MatchData(
     val day: RealmResults<DayData>? = null
 ) : RealmObject() {
 
+    @Ignore
     val unknownPlayerId = 0
+    @Ignore
     val opponentPlayerId = 200
 
     // TODO: voir code swift sur Git
@@ -59,7 +62,7 @@ open class MatchData(
 
     fun getEvents(type: EventType?): List<EventData>? {
 
-        type?.jsonType?.let { jsonType ->
+        type?.jsonString?.let { jsonType ->
             return events.filter { it.type == jsonType }.sortedBy { -it.id }
         }
         return events.sortedBy { -it.id }

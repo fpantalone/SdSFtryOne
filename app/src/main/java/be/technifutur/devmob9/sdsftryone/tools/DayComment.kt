@@ -3,7 +3,7 @@ package be.technifutur.devmob9.sdsftryone.tools
 import java.lang.StringBuilder
 
 class DayComment(fr: String, nl: String, en: String, var isPostpone: Boolean) :
-    LocaliziedName(fr, nl, en) {
+    LocalizedName(fr, nl, en) {
 
     companion object : StringDataCreator<DayComment> {
         override fun createFrom(string: String): DayComment? {

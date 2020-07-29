@@ -2,6 +2,7 @@ package be.technifutur.devmob9.sdsftryone.model
 
 import io.realm.RealmList
 import io.realm.RealmObject
+import io.realm.annotations.Ignore
 import io.realm.annotations.PrimaryKey
 
 open class PlayerData(
@@ -12,6 +13,6 @@ open class PlayerData(
     var team: RealmList<String> = RealmList()
 ) : RealmObject() {
 
-    var fullName: String
-    get() = "$firstName $lastname"
+    val fullName: String
+        get() {return "$firstName $lastname"}
 }

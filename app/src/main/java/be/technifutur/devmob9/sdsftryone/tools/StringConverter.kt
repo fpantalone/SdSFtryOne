@@ -8,7 +8,6 @@ class StringConverter {
     companion object {
         private lateinit var dateFormat: SimpleDateFormat
         private lateinit var dateTimeFormat: SimpleDateFormat
-        private lateinit var eventParamConverter: EventParamConverter
 
         fun getDateConverter(): SimpleDateFormat {
             if (!(this::dateFormat.isInitialized)) {
@@ -23,17 +22,5 @@ class StringConverter {
             }
             return dateTimeFormat
         }
-
-        fun getEventParamConverter(): ConverterInterface<EventParam> {
-            if (!(this::eventParamConverter.isInitialized)) {
-                eventParamConverter = EventParamConverter()
-            }
-            return eventParamConverter
-        }
-    }
-
-    interface ConverterInterface<T> {
-        fun parse(string: String): T
-        fun format(t: T): String
     }
 }

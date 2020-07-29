@@ -1,7 +1,19 @@
 package be.technifutur.devmob9.sdsftryone.tools
 
-enum class LockStatus (jsonString: String) {
+enum class LockStatus (var jsonString: String): StringDataConverter {
     OPEN("no"),
     CLOSED("yes"),
-    OWNED("own")
+    OWNED("own");
+
+    companion object: StringDataCreator<LockStatus> {
+        override fun createFrom(string: String): LockStatus? {
+            return values().first {
+                it.jsonString == string
+            }
+        }
+    }
+
+    override fun toString(): String {
+        return jsonString
+    }
 }

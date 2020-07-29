@@ -1,6 +1,6 @@
 package be.technifutur.devmob9.sdsftryone.model
 
-import be.technifutur.devmob9.sdsftryone.tools.LocaliziedName
+import be.technifutur.devmob9.sdsftryone.tools.LocalizedName
 import be.technifutur.devmob9.sdsftryone.tools.MatchConfig
 import io.realm.RealmList
 import io.realm.RealmObject
@@ -24,19 +24,19 @@ open class ChampData(
 
     fun getName(locale: Locale): String {
 
-        val localizedName = LocaliziedName(name)
+        val localizedName = LocalizedName.createFrom(name)
 
         return when (locale.language) {
 
             "nl" -> {
-                localizedName.nl
+                localizedName?.nl
             }
             "en" -> {
-                localizedName.fr
+                localizedName?.en
             }
             else -> {
-                localizedName.fr
+                localizedName?.fr
             }
-        }
+        } ?: ""
     }
 }

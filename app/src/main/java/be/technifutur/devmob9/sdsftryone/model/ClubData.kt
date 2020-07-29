@@ -34,4 +34,8 @@ open class ClubData(
             return null
         }
     }
+
+    fun delete () {
+        this.deleteFromRealm()
+    }
 }

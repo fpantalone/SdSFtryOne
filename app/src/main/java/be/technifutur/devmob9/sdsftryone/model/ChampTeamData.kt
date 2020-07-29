@@ -10,4 +10,9 @@ open class ChampTeamData(
     var firstDay: Int = 1,
     @LinkingObjects("teams")
     val champ: RealmResults<ChampData>? = null
-) : RealmObject()
+) : RealmObject() {
+
+    fun delete () {
+        this.deleteFromRealm()
+    }
+}

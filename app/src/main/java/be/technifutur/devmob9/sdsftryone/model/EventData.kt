@@ -138,4 +138,8 @@ open class EventData(
             return eventData
         }
     }
+
+    fun delete() {
+        this.deleteFromRealm()
+    }
 }

@@ -31,4 +31,8 @@ open class MatchPlayerData(
     fun getPlayerName ():String {
         return player?.fullName ?: name
     }
+
+    fun delete() {
+        this.deleteFromRealm()
+    }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.preference.PreferenceManager
 import be.technifutur.devmob9.sdsftryone.model.*
+import be.technifutur.devmob9.sdsftryone.webservice.MatchPlayer
 import io.realm.Case
 import io.realm.Realm
 import io.realm.exceptions.RealmException
@@ -277,49 +278,56 @@ class DbManager {
             return matchPlayer
         }
 
-
         fun removeClub(code: String) {
-            val club = findClub(code)
-            club?.deleteFromRealm()
+            findClub(code)?.let { removeClub(it) }
+        }
+
+        fun removeClub(clubData: ClubData) {
+            clubData.delete()
         }
 
         fun removeChamp(id: Int) {
-            val champ = findChamp(id)
-            champ?.teams?.deleteAllFromRealm()
-            for (day in champ?.days ?: listOf<DayData>()) {
-                removeDay(day)
-            }
-            champ?.deleteFromRealm()
+            findChamp(id)?.let { removeChamp(it) }
+        }
+
+        fun removeChamp(champData: ChampData) {
+            champData.delete()
         }
 
         fun removeDay(id: Int, champ: Int) {
-            val day = findDay(id, champ)
-            day?.let { removeDay(it) }
+            findDay(id, champ)?.let { removeDay(it) }
         }
 
         fun removeDay(day: DayData) {
-            day.matches.deleteAllFromRealm()
-            day.deleteFromRealm()
+            day.delete()
         }
 
         fun removeMatch(id: Int, day: Int, champ: Int) {
-            val match = findMatch(id, day, champ)
-            match?.deleteFromRealm()
+            findMatch(id, day, champ)?.let { removeMatch(it) }
+        }
+
+        fun removeMatch(match: MatchData) {
+            match.delete()
         }
 
         fun removePlayer(id: Int) {
-            val player = findPlayer(id)
-            player?.deleteFromRealm()
+           findPlayer(id)?.delete()
         }
 
         fun removeEvent(id: Int, match: Int, day: Int, champ: Int) {
-            val event = findEvent(id, match, day, champ)
-            event?.deleteFromRealm()
+           findEvent(id, match, day, champ)?.let { removeEvent(it) }
+        }
+
+        fun removeEvent(event: EventData) {
+            event.delete()
         }
 
         fun removeMatchPlayer(id: Int, match: Int, day: Int, champ: Int) {
-            val matchPlayer = findMatchPlayer(id, match, day, champ)
-            matchPlayer?.deleteFromRealm()
+            findMatchPlayer(id, match, day, champ)?.let { removeMatchPlayer(it) }
+        }
+
+        fun removeMatchPlayer(matchPlayer: MatchPlayerData) {
+            matchPlayer.delete()
         }
 
         fun getTableUpdateTime(): String? {
@@ -329,19 +337,6 @@ class DbManager {
                 null
             } else {
                 lastDbUpdateTimeStr
-            }
-        }
-
-        fun getTableUpdateTime(tableName: String): String? {
-            val realm = Realm.getDefaultInstance()
-            val date = realm.where(TableUpdateTimersData::class.java)
-                .equalTo("tableName", tableName, Case.INSENSITIVE)
-                .findFirst()
-
-            date?.let {
-                return dateTimeFormatter.format(it.updateTime)
-            } ?: run {
-                return null
             }
         }
 

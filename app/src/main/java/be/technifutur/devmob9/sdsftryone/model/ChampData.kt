@@ -39,4 +39,10 @@ open class ChampData(
             }
         } ?: ""
     }
+
+    fun delete () {
+        teams.forEach { it.delete() }
+        days.forEach { it.delete() }
+        this.delete()
+    }
 }

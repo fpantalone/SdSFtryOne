@@ -100,4 +100,9 @@ open class DayData(
         // TODO: to be implemented
         return false
     }
+
+    fun delete () {
+        matches.forEach { it.delete() }
+        this.delete()
+    }
 }

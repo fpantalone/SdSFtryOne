@@ -175,4 +175,10 @@ open class MatchData(
             }
         }
     }
+
+    fun delete() {
+        events.forEach { it.delete() }
+        players.forEach { it.delete() }
+        this.deleteFromRealm()
+    }
 }

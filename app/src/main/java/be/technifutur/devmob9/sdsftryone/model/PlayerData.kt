@@ -1,9 +1,11 @@
 package be.technifutur.devmob9.sdsftryone.model
 
+import io.realm.Realm
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.Ignore
 import io.realm.annotations.PrimaryKey
+import io.realm.kotlin.delete
 
 open class PlayerData(
     @PrimaryKey var id: Int = 0,
@@ -15,4 +17,8 @@ open class PlayerData(
 
     val fullName: String
         get() {return "$firstName $lastname"}
+
+    fun delete () {
+        this.deleteFromRealm()
+    }
 }

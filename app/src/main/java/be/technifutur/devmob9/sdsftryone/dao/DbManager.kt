@@ -191,8 +191,8 @@ class DbManager {
                 match.hour = hour
                 match.homeTeam = homeTeam
                 match.awayTeam = awayTeam
-                match.homeResult = homeScore
-                match.awayResult = awayScore
+                match.homeScore = homeScore
+                match.awayScore = awayScore
                 match.comment = comment ?: ""
                 match.locked = locked
 

@@ -133,8 +133,8 @@ class WebService() {
                         dbMatch?.hour = match.hour
                         dbMatch?.homeTeam = match.eq1
                         dbMatch?.awayTeam = match.eq2
-                        dbMatch?.homeResult = match.re1
-                        dbMatch?.awayResult = match.re2
+                        dbMatch?.homeScore = match.re1
+                        dbMatch?.awayScore = match.re2
                         dbMatch?.comment = match.comment ?: ""
                         dbMatch?.locked = match.locked
                     }

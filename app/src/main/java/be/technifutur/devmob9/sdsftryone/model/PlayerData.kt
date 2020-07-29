@@ -12,6 +12,6 @@ open class PlayerData(
     var team: RealmList<String> = RealmList()
 ) : RealmObject() {
 
-    val fullName: String
+    var fullName: String
     get() = "$firstName $lastname"
 }

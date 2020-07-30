@@ -126,7 +126,7 @@ class DbManager {
             var champ: ChampData?
 
             try {
-                champ = realm.createObject(ChampData::class.java, id)
+                champ = realm.createObject(ChampData::class.java,id)
             } catch (e: RealmException) {
                 champ = findChamp(id)
             }
@@ -152,7 +152,7 @@ class DbManager {
             var day: DayData?
 
             try {
-                day = realm.createObject(DayData::class.java, id)
+                day = realm.createObject(DayData::class.java)
 
             } catch (e: RealmException) {
                 day = findDay(id, champ)
@@ -180,7 +180,7 @@ class DbManager {
             var match: MatchData?
 
             try {
-                match = realm.createObject(MatchData::class.java, id)
+                match = realm.createObject(MatchData::class.java)
 
             } catch (e: RealmException) {
                 Log.d("DBMANAGER", e.message ?: "addMatch")
@@ -212,7 +212,7 @@ class DbManager {
             var player: PlayerData?
 
             try {
-                player = realm.createObject(PlayerData::class.java, id)
+                player = realm.createObject(PlayerData::class.java,id)
             } catch (e: RealmException) {
                 player = findPlayer(id)
                 Log.d("DBMANAGER", e.message ?: "addPlayer")
@@ -237,7 +237,7 @@ class DbManager {
             var event: EventData?
 
             try {
-                event = realm.createObject(EventData::class.java, id)
+                event = realm.createObject(EventData::class.java)
             } catch (e: RealmException) {
                 event = findEvent(id, match, day, champ)
                 Log.d("DBMANAGER", e.message ?: "addEventt")
@@ -263,7 +263,7 @@ class DbManager {
             var matchPlayer: MatchPlayerData?
 
             try {
-                matchPlayer = realm.createObject(MatchPlayerData::class.java, id)
+                matchPlayer = realm.createObject(MatchPlayerData::class.java)
             } catch (e: RealmException) {
                 matchPlayer = findMatchPlayer(id, match, day, champ)
             }

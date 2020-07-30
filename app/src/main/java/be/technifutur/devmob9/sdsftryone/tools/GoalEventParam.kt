@@ -15,7 +15,7 @@ class GoalEventParam(
 
     companion object : StringDataCreator<GoalEventParam> {
         override fun createFrom(string: String): GoalEventParam? {
-            val regex = Regex("^G([1-9]\\d*)(?:A(\\d+)|(P))?$")
+            val regex = Regex("^G(\\d+)(?:A(\\d+)|(P))?$")
             val result = regex.matchEntire(string) ?: return null
             val scorerId = result.groupValues[1].toInt()
             val assist = result.groupValues[2]

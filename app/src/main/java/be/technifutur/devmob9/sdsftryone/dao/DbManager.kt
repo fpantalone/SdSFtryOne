@@ -17,14 +17,12 @@ class DbManager {
         private lateinit var context: Context
         private lateinit var dateTimeFormatter: SimpleDateFormat
 
-
         fun init(context: Context) {
             instance = DbManager()
             DbManager.context = context
             dateTimeFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
             Realm.init(context)
         }
-
 
         fun findClub(code: String): ClubData? {
             val realm = Realm.getDefaultInstance()
@@ -41,20 +39,11 @@ class DbManager {
         }
 
         fun findDay(id: Int, champ: Int): DayData? {
-            val realm = Realm.getDefaultInstance()
-            return realm.where(DayData::class.java)
-                .equalTo("id", id)
-                .equalTo("champ.id", champ)
-                .findFirst()
+            return findChamp(champ)?.days?.firstOrNull { it.id ==id }
         }
 
         fun findMatch(id: Int, day: Int, champ: Int): MatchData? {
-            val realm = Realm.getDefaultInstance()
-            return realm.where(MatchData::class.java)
-                .equalTo("id", id)
-                .equalTo("day.id", day)
-                .equalTo("day.champ.id", champ)
-                .findFirst()
+            return findDay(day, champ)?.matches?.firstOrNull {it.id == id}
         }
 
         fun findPlayer(id: Int): PlayerData? {
@@ -65,23 +54,14 @@ class DbManager {
         }
 
         fun findEvent(id: Int, match: Int, day: Int, champ: Int): EventData? {
-            val realm = Realm.getDefaultInstance()
-            return realm.where(EventData::class.java)
-                .equalTo("id", id)
-                .equalTo("match", match)
-                .equalTo("day", day)
-                .equalTo("champ", champ)
-                .findFirst()
+           return findMatch(match, day, champ)?.events?.firstOrNull { it.id == id }
+
         }
 
         fun findMatchPlayer(id: Int, match: Int, day: Int, champ: Int): MatchPlayerData? {
-            val realm = Realm.getDefaultInstance()
-            return realm.where(MatchPlayerData::class.java)
-                .equalTo("id", id)
-                .equalTo("match", match)
-                .equalTo("day", day)
-                .equalTo("champ", champ)
-                .findFirst()
+            return findChamp(champ)?.days?.firstOrNull {
+                it.id == day
+            }?.matches?.firstOrNull { it.id == match }?.players?.firstOrNull { it.id == id }
         }
 
         fun addClub(code: String, shortName: String, fullName: String, logo: String?): ClubData? {
@@ -356,7 +336,7 @@ class DbManager {
         }
 
         fun getCalendar(team: String): List<MatchData> {
-            var matches = arrayListOf<MatchData>()
+            val matches = arrayListOf<MatchData>()
 
             getAllChampData().forEach { champ ->
                 val teamInfos = champ.teams.where()

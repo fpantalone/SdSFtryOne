@@ -15,4 +15,6 @@
     <string name="team_u13_menu_label">Equipe U13</string>
     <string name="team_u12_menu_label">Equipe U12</string>
     <string name="team_u11_menu_label">Equipe U11</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

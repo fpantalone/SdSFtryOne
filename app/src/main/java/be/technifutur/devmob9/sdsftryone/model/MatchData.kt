@@ -8,6 +8,7 @@ import io.realm.RealmResults
 import io.realm.annotations.Ignore
 import io.realm.annotations.Index
 import io.realm.annotations.LinkingObjects
+import java.time.LocalDate
 import java.util.*
 
 open class MatchData(
@@ -174,6 +175,24 @@ open class MatchData(
                 return null
             }
         }
+    }
+
+    fun isInWeek (): Boolean {
+
+        val now = GregorianCalendar.getInstance()
+        // on met les heures minutes secondes à zéro
+        now.set (now.get(Calendar.YEAR),now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH))
+        // on prend la date 7 jpurs avant
+        val lastWeek = now.clone() as GregorianCalendar
+        lastWeek.add(Calendar.DAY_OF_MONTH, -7)
+        // on prend la date 6 jours après
+        val nextWeek = now.clone() as GregorianCalendar
+        nextWeek.add(Calendar.DAY_OF_MONTH,6)
+        // on récupère la date du match
+        val matchDay = GregorianCalendar()
+        matchDay.time = getMatchDate()
+        // on regarde si la date est comprise dans l'intervale
+        return matchDay.after(lastWeek) && matchDay.before(nextWeek)
     }
 
     fun delete() {

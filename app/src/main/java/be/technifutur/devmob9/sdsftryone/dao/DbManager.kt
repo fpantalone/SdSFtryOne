@@ -4,8 +4,6 @@ import android.content.Context
 import android.util.Log
 import androidx.preference.PreferenceManager
 import be.technifutur.devmob9.sdsftryone.model.*
-import be.technifutur.devmob9.sdsftryone.webservice.MatchPlayer
-import io.realm.Case
 import io.realm.Realm
 import io.realm.exceptions.RealmException
 import io.realm.kotlin.where
@@ -126,7 +124,7 @@ class DbManager {
             var champ: ChampData?
 
             try {
-                champ = realm.createObject(ChampData::class.java,id)
+                champ = realm.createObject(ChampData::class.java, id)
             } catch (e: RealmException) {
                 champ = findChamp(id)
             }
@@ -212,7 +210,7 @@ class DbManager {
             var player: PlayerData?
 
             try {
-                player = realm.createObject(PlayerData::class.java,id)
+                player = realm.createObject(PlayerData::class.java, id)
             } catch (e: RealmException) {
                 player = findPlayer(id)
                 Log.d("DBMANAGER", e.message ?: "addPlayer")
@@ -311,11 +309,11 @@ class DbManager {
         }
 
         fun removePlayer(id: Int) {
-           findPlayer(id)?.delete()
+            findPlayer(id)?.delete()
         }
 
         fun removeEvent(id: Int, match: Int, day: Int, champ: Int) {
-           findEvent(id, match, day, champ)?.let { removeEvent(it) }
+            findEvent(id, match, day, champ)?.let { removeEvent(it) }
         }
 
         fun removeEvent(event: EventData) {
@@ -352,13 +350,48 @@ class DbManager {
             editor.apply()
         }
 
+        fun getAllChampData(): List<ChampData> {
+            val realm = Realm.getDefaultInstance()
+            return realm.where<ChampData>().findAll()
+        }
+
+        fun getCalendar(team: String): List<MatchData> {
+            var matches = arrayListOf<MatchData>()
+
+            getAllChampData().forEach { champ ->
+                val teamInfos = champ.teams.where()
+                    .equalTo("team", team)
+                    .findFirst()
+
+                teamInfos?.let {
+                    var prefTeam = teamInfos.code.substring(teamInfos.code.length-1)
+                    if ("ABC".indexOf(prefTeam) < 0 ) {
+                        prefTeam = ""
+                    }
+                    champ.days.forEach { day ->
+                        if (day.id >= teamInfos.firstDay) {
+                            day.getMyClubMatch(prefTeam)?.let { match ->
+                                matches.add(match)
+                            }
+                        }
+                    }
+                }
+            }
+
+            matches.sortWith(kotlin.Comparator { m1, m2  ->
+                val d1 = m1.getMatchDate()
+                val d2 = m2.getMatchDate()
+                if (d1 == d2){
+                    return@Comparator m1.hour.compareTo(m2.hour)
+                }
+                return@Comparator d1.compareTo(d2)
+            })
+
+            return matches
+        }
+
     } // fin companion Object
 
-
-    fun getAllChampData(): List<ChampData> {
-        val realm = Realm.getDefaultInstance()
-        return realm.where<ChampData>().findAll()
-    }
 
     fun getAllClubData(): List<ClubData> {
         val realm = Realm.getDefaultInstance()

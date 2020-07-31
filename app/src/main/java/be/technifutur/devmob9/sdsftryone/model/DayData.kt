@@ -27,7 +27,7 @@ open class DayData(
     @Ignore
     private var teamlist: List<String> = listOf()
 
-    fun getMyTeamMatch(preferedTeam: String): MatchData? {
+    fun getMyClubMatch(preferedTeam: String): MatchData? {
         if (this.preferedTeam != preferedTeam || teamlist.isEmpty()) {
             this.preferedTeam = preferedTeam
             val suffix = preferedTeam

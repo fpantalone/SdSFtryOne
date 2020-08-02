@@ -11,7 +11,10 @@ import androidx.core.animation.addListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import be.technifutur.devmob9.sdsftryone.R
+import be.technifutur.devmob9.sdsftryone.adapter.HomeItemAdapter
 import be.technifutur.devmob9.sdsftryone.webservice.WebService
+import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.adapters.ItemAdapter
 import kotlinx.android.synthetic.main.fragment_splash.*
 import java.lang.Exception
 import java.util.ArrayList
@@ -43,18 +46,10 @@ class SplashFragment : Fragment() {
 
         translationY(standardTextView, -150f, 2000, 0)
         translationY(deLiegeTextView, -150f,  2000, 400)
-
         animMaskFader(animMaskLayout, 1000, 1600)
-        //animMaskFader(topLineFemina, 1000, 1600)
-
-        /*while(!checkAnimationsEnded()) {
-            try {
-                Thread.sleep(5)
-            }
-            catch (ex: Exception){ }
-        }*/
 
         WebService.updateDataBase(findNavController())
+
 
         //this.testTextView.text = DbManager.sharedInstance().getAllClubData().size.toString()
 

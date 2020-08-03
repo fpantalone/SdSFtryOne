@@ -2,6 +2,7 @@ package be.technifutur.devmob9.sdsftryone.fragment
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -50,6 +51,12 @@ class SplashFragment : Fragment() {
 
         translateStandart()
 
+        Handler().postDelayed({
+            animMaskLayout.visibility = View.INVISIBLE
+        },1000L)
+
+
+
 
         // TODO Faire le webservice dans un autre process
         // TODO mettre l'animation dans un autre process
@@ -60,11 +67,11 @@ class SplashFragment : Fragment() {
         val animSet = AnimationSet(true)
 
         val translateAnim = TranslateAnimation (0f,0f, 600f, 0f)
-        translateAnim.duration = 2000
+        translateAnim.duration = 3000
         animSet.addAnimation(translateAnim)
 
         val alphaAnim = AlphaAnimation(0.0f, 1.0f)
-        alphaAnim.duration = 2000
+        alphaAnim.duration = 3000
         animSet.addAnimation(alphaAnim)
 
         standardTextView.startAnimation(animSet)
@@ -78,12 +85,12 @@ class SplashFragment : Fragment() {
         val animSet = AnimationSet(true)
 
         val translateAnim = TranslateAnimation (0f,0f, 600f, 0f)
-        translateAnim.duration = 2000
+        translateAnim.duration = 3000
         translateAnim.startOffset = 500
         animSet.addAnimation(translateAnim)
 
         val alphaAnim = AlphaAnimation (0.0f, 1.0f)
-        alphaAnim.duration = 2000
+        alphaAnim.duration = 3000
         alphaAnim.startOffset = 500
         animSet.addAnimation(alphaAnim)
 

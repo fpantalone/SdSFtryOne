@@ -86,13 +86,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/deLiegeTextView" />
 
-
         <FrameLayout
             android:id="@+id/animMaskLayout"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:background="@color/dark_red"
+            android:background="@color/transparent_dark_red"
             app:layout_constraintTop_toTopOf="@id/sectionTextView" />
+
 
         <View
             android:layout_width="50dp"

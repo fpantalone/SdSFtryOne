@@ -6,6 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.view.animation.AnimationSet
+import android.view.animation.TranslateAnimation
 import android.widget.TextView
 import androidx.core.animation.addListener
 import androidx.fragment.app.Fragment
@@ -16,6 +19,7 @@ import be.technifutur.devmob9.sdsftryone.webservice.WebService
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import kotlinx.android.synthetic.main.fragment_splash.*
+import kotlinx.coroutines.delay
 import java.lang.Exception
 import java.util.ArrayList
 import kotlin.concurrent.thread
@@ -44,57 +48,56 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        translationY(standardTextView, -150f, 2000, 0)
-        translationY(deLiegeTextView, -150f,  2000, 400)
-        animMaskFader(animMaskLayout, 1000, 1600)
+        translateStandart()
 
-        WebService.updateDataBase(findNavController())
-
-
-        //this.testTextView.text = DbManager.sharedInstance().getAllClubData().size.toString()
 
         // TODO Faire le webservice dans un autre process
         // TODO mettre l'animation dans un autre process
     }
 
+    fun translateStandart () {
 
-    fun translationY (view: View, distance: Float, duration: Long, delay: Long) {
-        val animator = ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, distance)
-        animator.repeatCount = 1
-        animator.duration = duration
-        animator.startDelay = delay
-        animator.start()
+        val animSet = AnimationSet(true)
 
-        val numberAnimation= listAnimationsEnded.size
-        listAnimationsEnded.add(false)
+        val translateAnim = TranslateAnimation (0f,0f, 600f, 0f)
+        translateAnim.duration = 2000
+        animSet.addAnimation(translateAnim)
 
-        animator.addListener(onEnd = {
-            listAnimationsEnded[numberAnimation] = true
-        })
+        val alphaAnim = AlphaAnimation(0.0f, 1.0f)
+        alphaAnim.duration = 2000
+        animSet.addAnimation(alphaAnim)
+
+        standardTextView.startAnimation(animSet)
+
+        translateDeLiege ()
 
     }
 
-    fun animMaskFader (view: View, duration: Long, delay: Long) {
-        val animator = ObjectAnimator.ofFloat(view, View.ALPHA, 0f)
-        animator.repeatCount = 1
-        animator.duration = duration
-        animator.startDelay = delay
-        animator.start()
+    fun translateDeLiege () {
 
-        val numberAnimation= listAnimationsEnded.size
-        listAnimationsEnded.add(false)
+        val animSet = AnimationSet(true)
 
-        animator.addListener(onEnd = {
-            listAnimationsEnded[numberAnimation] = true
-        })
+        val translateAnim = TranslateAnimation (0f,0f, 600f, 0f)
+        translateAnim.duration = 2000
+        translateAnim.startOffset = 500
+        animSet.addAnimation(translateAnim)
+
+        val alphaAnim = AlphaAnimation (0.0f, 1.0f)
+        alphaAnim.duration = 2000
+        alphaAnim.startOffset = 500
+        animSet.addAnimation(alphaAnim)
+
+        deLiegeTextView.startAnimation(animSet)
+
+        fadeFemina()
+
     }
 
-    fun checkAnimationsEnded() : Boolean{
-        var animationsEnded = true
-
-        if(listAnimationsEnded.contains(false))
-            animationsEnded = false
-
-        return animationsEnded
+    fun fadeFemina () {
+        val fadeAnim = AlphaAnimation (1.0f, 0.0f)
+        fadeAnim.duration = 3000
+        fadeAnim.startOffset = 500
+        animMaskLayout.startAnimation(fadeAnim)
     }
+
 }

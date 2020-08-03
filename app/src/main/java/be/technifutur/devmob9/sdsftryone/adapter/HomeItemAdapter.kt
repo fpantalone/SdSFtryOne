@@ -45,7 +45,7 @@ class HomeItemAdapter(var datafeed: MatchData) : AbstractItem<HomeItemAdapter.Ho
 
                 }
                 else -> {
-                    itemView.lockImageView.setImageDrawable(getDrawable(itemView.context,R.drawable.lock_open_24px))
+                   // itemView.lockImageView.setImageDrawable(getDrawable(itemView.context,R.drawable.lock_open_24px))
 
                 }
             }

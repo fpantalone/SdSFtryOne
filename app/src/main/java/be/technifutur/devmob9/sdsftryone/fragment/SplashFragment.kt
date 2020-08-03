@@ -102,8 +102,8 @@ class SplashFragment : Fragment() {
 
     fun fadeFemina () {
         val fadeAnim = AlphaAnimation (1.0f, 0.0f)
-        fadeAnim.duration = 3000
-        fadeAnim.startOffset = 500
+        fadeAnim.duration = 2000
+        fadeAnim.startOffset = 2000
         animMaskLayout.startAnimation(fadeAnim)
     }
 

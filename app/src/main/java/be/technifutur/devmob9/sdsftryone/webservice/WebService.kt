@@ -13,6 +13,7 @@ import be.technifutur.devmob9.sdsftryone.R
 import be.technifutur.devmob9.sdsftryone.dao.DbManager
 import be.technifutur.devmob9.sdsftryone.fragment.SplashFragment
 import be.technifutur.devmob9.sdsftryone.model.ChampTeamData
+import be.technifutur.devmob9.sdsftryone.tools.AllTableResult
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
@@ -23,7 +24,6 @@ class WebService() {
 
     companion object {
         private lateinit var context: Context
-
         private lateinit var retrofit: Retrofit
         lateinit var interfaceInstance: WebServiceInterface private set
         lateinit var uuid: String private set
@@ -68,38 +68,39 @@ class WebService() {
             }
             return false
         }
-
-        fun displayError(navController: NavController? = null) {
+        // navController: NavController? = null
+        fun displayError() {
 
             Toast.makeText(context, context.getString(R.string.loading_error), Toast.LENGTH_SHORT)
                 .show()
 
-            navController?.let {
-                Handler().postDelayed({
-                    it.navigate(R.id.action_splashFragment_to_homeFragment)
-                }, SplashFragment.SPLASH_SCREEN_DURATION.toLong())
-            }
+//            navController?.let {
+//                Handler().postDelayed({
+//                    it.navigate(R.id.action_splashFragment_to_homeFragment)
+//                }, SplashFragment.SPLASH_SCREEN_DURATION.toLong())
+//            }
         }
 
-        private var navController: NavController? = null
+//        private var navController: NavController? = null
 
-        fun updateDataBase(navController: NavController? = null) {
-            this.navController = navController
+        fun updateDataBase(onComplete: (AllTableResult) -> Unit)  {
+//            this.navController = navController
             // si on a du réseau
             if (isOnline()) {
                 // liste de DataReader
                 val readers = LinkedList<DataReader>()
                 readers.add(AllTableDataReader())
-                readers.add(DataReader { _ ->
-                    WebService.navController?.let {
-                        // passer à l'écran d'accueil
-                        it.navigate(R.id.action_splashFragment_to_homeFragment)
-                    }
-                    DbManager.endUpdate()
-                    return@DataReader
-                })
+//                readers.add(DataReader { _ ->
+//                    WebService.navController?.let {
+//                        // passer à l'écran d'accueil
+//                        it.navigate(R.id.action_splashFragment_to_homeFragment)
+//                    }
+//                    DbManager.endUpdate()
+//                    return@DataReader
+//                })
                 DbManager.startUpdate()
                 DataReader.start(readers)
+                DbManager.endUpdate()
             }
             // si on a pas de réseau
             else {
@@ -109,7 +110,7 @@ class WebService() {
         }
 
         fun failure(t: Throwable) {
-            displayError(navController)
+            displayError() //navController
             Log.d("WEBSERVICE", t.message ?: "")
         }
 

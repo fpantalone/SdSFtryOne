@@ -57,10 +57,8 @@ class SplashFragment : Fragment() {
         },1000L)
 
 
-
-
         // TODO Faire le webservice dans un autre process
-        // TODO mettre l'animation dans un autre process
+
     }
 
     fun translateStandart () {

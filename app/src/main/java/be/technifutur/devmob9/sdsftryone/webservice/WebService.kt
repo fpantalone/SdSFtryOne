@@ -27,7 +27,8 @@ class WebService() {
         private lateinit var retrofit: Retrofit
         lateinit var interfaceInstance: WebServiceInterface private set
         lateinit var uuid: String private set
-        val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        private val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE)
+        private val dateTimeFormater = SimpleDateFormat("yyyy,MM-dd-HH-mm-ss", Locale.FRANCE)
 
         fun init(context: Context) {
             WebService.context = context

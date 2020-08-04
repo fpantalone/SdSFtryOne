@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.view.animation.AnimationSet
+import android.view.animation.ScaleAnimation
 import android.view.animation.TranslateAnimation
 import android.widget.TextView
 import androidx.core.animation.addListener
@@ -74,6 +75,11 @@ class SplashFragment : Fragment() {
         alphaAnim.duration = 3000
         animSet.addAnimation(alphaAnim)
 
+        val scaleAnim = ScaleAnimation(1f,1f, 0f,1f)
+        scaleAnim.duration = 2000
+        animSet.addAnimation(scaleAnim)
+
+
         standardTextView.startAnimation(animSet)
 
         translateDeLiege ()
@@ -94,10 +100,14 @@ class SplashFragment : Fragment() {
         alphaAnim.startOffset = 500
         animSet.addAnimation(alphaAnim)
 
+        val scaleAnim = ScaleAnimation(1f,1f, 0f,1f)
+        scaleAnim.duration = 2000
+        scaleAnim.startOffset = 500
+        animSet.addAnimation(scaleAnim)
+
         deLiegeTextView.startAnimation(animSet)
 
         fadeFemina()
-
     }
 
     fun fadeFemina () {

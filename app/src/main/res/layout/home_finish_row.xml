@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/calendarRow"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_corner_2">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/match_cell_title_backgound"
+        app:layout_constraintBottom_toBottomOf="@id/champTextView"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+        android:id="@+id/champTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_mono_bold"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingBottom="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Coupe de Belgique" />
+
+    <TableRow
+        android:id="@+id/calendarTableRow"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/background_1"
+        app:layout_constraintTop_toBottomOf="@+id/champTextView"
+        />
+
+    <ImageView
+        android:id="@+id/lockImageView"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/lockerDescription"
+        android:src="@drawable/lock_open_24px"
+        app:layout_constraintEnd_toStartOf="@id/champDayTextView"
+
+        app:layout_constraintTop_toTopOf="@id/champDayTextView" />
+
+    <TextView
+        android:id="@+id/champDayTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/champTextView"
+
+        tools:text="finale" />
+
+    <ImageView
+        android:id="@+id/team_a_imageView"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/imageDescription"
+        app:layout_constraintEnd_toStartOf="@+id/date_timeTextView"
+        
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/champTextView"
+        tools:src="@color/dark_red" />
+
+    <TextView
+        android:id="@+id/team_a_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/roboto_mono_bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/team_a_imageView"
+        app:layout_constraintStart_toStartOf="@+id/team_a_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/team_a_imageView"
+        tools:text="Team A" />
+
+    <TextView
+        android:id="@+id/date_timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/scoreTextView"
+        app:layout_constraintEnd_toStartOf="@+id/team_b_imageView"
+        app:layout_constraintStart_toEndOf="@+id/team_a_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/champTextView"
+        app:layout_constraintVertical_bias="0.52"
+        tools:text="date et heure" />
+
+    <ImageView
+        android:id="@+id/team_b_imageView"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/imageDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        
+        app:layout_constraintStart_toEndOf="@+id/date_timeTextView"
+        app:layout_constraintTop_toTopOf="@+id/team_a_imageView"
+        tools:src="@color/dark_red" />
+
+    <TextView
+        android:id="@+id/team_b_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/team_b_imageView"
+        app:layout_constraintStart_toStartOf="@+id/team_b_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/team_b_imageView"
+        tools:text="Team B" />
+
+    <TextView
+        android:id="@+id/scoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="36sp"
+        android:fontFamily="@font/roboto_mono_bold"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/date_timeTextView"
+        app:layout_constraintStart_toStartOf="@+id/date_timeTextView"
+        app:layout_constraintTop_toBottomOf="@id/date_timeTextView"
+        app:layout_constraintVertical_bias="0.47000003"
+        tools:text="2-0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,7 @@
 package be.technifutur.devmob9.sdsftryone.fragment
 
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,20 +9,10 @@ import android.view.animation.AlphaAnimation
 import android.view.animation.AnimationSet
 import android.view.animation.ScaleAnimation
 import android.view.animation.TranslateAnimation
-import android.widget.TextView
-import androidx.core.animation.addListener
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import be.technifutur.devmob9.sdsftryone.R
-import be.technifutur.devmob9.sdsftryone.adapter.HomeItemAdapter
-import be.technifutur.devmob9.sdsftryone.webservice.WebService
-import com.mikepenz.fastadapter.FastAdapter
-import com.mikepenz.fastadapter.adapters.ItemAdapter
 import kotlinx.android.synthetic.main.fragment_splash.*
-import kotlinx.coroutines.delay
-import java.lang.Exception
 import java.util.ArrayList
-import kotlin.concurrent.thread
 
 /**
  * A simple [Fragment] subclass.

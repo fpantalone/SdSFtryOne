@@ -1,36 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="all">
         <item
             android:id="@+id/menu_team_a"
             android:title="@string/team_a_menu_label" />
-
         <item
             android:id="@+id/menu_team_b"
             android:title="@string/team_b_menu_label" />
-
         <item
             android:id="@+id/menu_Team_C"
             android:title="@string/team_c_menu_label" />
-
         <item
             android:id="@+id/menu_Team_u16"
             android:title="@string/team_u16_menu_label" />
-
         <item
             android:id="@+id/menu_Team_u14"
             android:title="@string/team_u14_menu_label" />
-
         <item
             android:id="@+id/menu_Team_u13"
             android:title="@string/team_u13_menu_label" />
-
         <item
             android:id="@+id/menu_Team_u12"
-            android:title="@string/team_u12_menu_label" />
-
+            android:title="@string/team_u12_menu_label"/>
         <item
             android:id="@+id/menu_Team_u11"
-            android:title="@string/team_u11_menu_label" />
-    </group>
+            android:title="@string/team_u11_menu_label"/>
 </menu>

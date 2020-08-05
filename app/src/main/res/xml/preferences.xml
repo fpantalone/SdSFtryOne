@@ -1,17 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="Information">
-        <Preference
-            android:key="app_uuid"
-            android:summary="on affiche l'uuid"
-            android:title="UUID" />
-
-        <Preference
-            android:key="app_version"
-            android:summary="La version"
-            android:title="Version" />
-
+    <PreferenceCategory android:title="@string/pref_team_title">
+        <CheckBoxPreference android:title="@string/team_a_menu_label"
+            android:defaultValue="true"
+            android:key="Team_a_pref"
+            />
+        <CheckBoxPreference android:title="@string/team_b_menu_label"
+            android:defaultValue="true"
+            android:key="Team_b_pref"
+             />
+        <CheckBoxPreference android:title="@string/team_c_menu_label"
+            android:defaultValue="true"
+            android:key="team_C_pref"
+            />
+        <CheckBoxPreference android:title="@string/team_u16_menu_label"
+            android:defaultValue="true"
+            android:key="team_u16_pref"
+            />
+        <CheckBoxPreference android:title="@string/team_u14_menu_label"
+            android:defaultValue="true"
+            android:key="team_u14_pref"
+            />
+        <CheckBoxPreference android:title="@string/team_u12_menu_label"
+            android:defaultValue="true"
+            android:key="team_12_pref"
+            />
+        <CheckBoxPreference android:title="@string/team_u11_menu_label"
+            app:defaultValue="true"
+            android:key="team_u11_pref"
+            />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/pref_info_title">
+        <Preference android:title="UUID"
+            android:key="app_uuid"
+            android:summary="on affiche l'uuid" />
+
+        <Preference android:title="Version"
+            android:key="app_version"
+            android:summary="La version" />
+    </PreferenceCategory>
 </PreferenceScreen>

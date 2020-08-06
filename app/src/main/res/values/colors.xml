@@ -11,4 +11,7 @@
     <color name="home_default_cell_title_background">#F9F9F9</color>
     <color name="home_default_cell_title_border">#CFCFCF</color>
     <color name="transparent_dark_red">#FF990000</color>
+    <color name="dark_gray_brow">#BEB193</color>
+    <color name="light_gray_brown">#E8E3D9</color>
+    <color name="brown_1">#A29065</color>
 </resources>

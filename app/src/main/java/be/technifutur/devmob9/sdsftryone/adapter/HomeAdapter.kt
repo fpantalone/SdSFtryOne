@@ -33,7 +33,7 @@ class HomeAdapter (val teamHeading: ArrayList<String>,
             layoutManager = subLayoutManager
             // il faut envoyer une liste de match au sous adapter
             adapter = SubHomeAdater(teamHeading[position])
-            setRecycledViewPool(recycledViewPool)
+            setRecycledViewPool(viewPool)
         }
     }
 

@@ -20,7 +20,7 @@ class SubHomeAdater(val data: List<MatchData>) : RecyclerView.Adapter<SubHomeAda
         if (data[position].isInWeek()) {
             holder.championat.text = data[position].day?.get(0)?.name
             holder.ChampDay
-            holder.team_A_Logo
+            holder.team_A_Logo = data[position].
             holder.team_A_Name
             holder.team_B_Logo
             holder.team_B_Name

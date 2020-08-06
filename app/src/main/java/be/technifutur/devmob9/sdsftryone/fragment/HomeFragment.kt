@@ -19,6 +19,13 @@ class HomeFragment : Fragment() {
 
     lateinit var preferedTeam: ArrayList<String>
 
+    val adapter by lazy {
+        HomeAdapter(preferedTeam, View.OnClickListener {
+            val pos = it?.tag as Int
+            // envoyer la liste des matchs
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,12 +42,8 @@ class HomeFragment : Fragment() {
         // rechercher la listes des matches par équipes et l'envoyer à l'adapteur
         // comme ça on le fais qu'une seulez fois
 
-        val itemAdapter = ItemAdapter<HomeAdapter>()
-        val fastAdapter = FastAdapter.with(itemAdapter)
-        calendarRecyclerView.adapter = fastAdapter
-        calendarRecyclerView.layoutManager = LinearLayoutManager (context, RecyclerView.VERTICAL,false)
-
-        val toto = DbManager.getCalendar("")
+        calendarRecyclerView.layoutManager = LinearLayoutManager(context)
+        calendarRecyclerView.adapter = adapter
     }
 }
 

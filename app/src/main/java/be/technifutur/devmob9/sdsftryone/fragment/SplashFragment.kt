@@ -10,7 +10,12 @@ import android.view.animation.AnimationSet
 import android.view.animation.ScaleAnimation
 import android.view.animation.TranslateAnimation
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import be.technifutur.devmob9.sdsftryone.R
+import be.technifutur.devmob9.sdsftryone.dao.DbManager
+import be.technifutur.devmob9.sdsftryone.webservice.AllTable
+import be.technifutur.devmob9.sdsftryone.webservice.WebService
+import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.fragment_splash.*
 import java.util.ArrayList
 
@@ -45,7 +50,32 @@ class SplashFragment : Fragment() {
         },1000L)
 
 
-        // TODO Faire le webservice dans un autre process
+        // Lecture des données
+        WebService.getAllData(
+            Consumer { data: AllTable ->
+                DbManager.updateData(data, Consumer { success ->
+                    if (success) {
+                        WebService.updateDbSyncTime()
+                    }
+                })
+                // attend la fin de l'animation
+
+                // passe à l'écran d'accueil
+                val navController = Navigation.findNavController(view)
+                val direction = SplashFragmentDirections.actionSplashFragmentToHomeFragment()
+                navController.navigate(direction)
+            },
+            Consumer { error: Throwable ->
+                if (error is IllegalStateException) {
+                    // affiche le message "Pas de connexion réseau"
+                }
+                else {
+                    // affiche le message "Erreur de lecture des données"
+                }
+                // dans les deux cas la boîte de dialogue propose de "Continuer" avec les données actuelles (à droite)
+                // ou de "Réessayer" de charger les données (à gauche).
+            }
+        )
 
     }
 

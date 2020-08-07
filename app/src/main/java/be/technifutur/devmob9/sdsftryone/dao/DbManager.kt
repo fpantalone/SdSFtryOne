@@ -4,6 +4,13 @@ import android.content.Context
 import android.util.Log
 import androidx.preference.PreferenceManager
 import be.technifutur.devmob9.sdsftryone.model.*
+import be.technifutur.devmob9.sdsftryone.webservice.AllTable
+import be.technifutur.devmob9.sdsftryone.webservice.WebService
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
 import io.realm.exceptions.RealmException
 import io.realm.kotlin.where
@@ -308,6 +315,25 @@ class DbManager {
             matchPlayer.delete()
         }
 
+        fun updateData (data: AllTable, onComplete: Consumer<Boolean>) {
+            // passe dans le thread computation
+            Single.create<Boolean> { emitter ->
+                val realm = Realm.getDefaultInstance()
+                try {
+                    realm.beginTransaction()
+                    // TODO enregistre les données dans la base de données
+                    realm.commitTransaction()
+                    emitter.onSuccess(true)
+                }
+                catch (ex: Exception) {
+                    emitter.onError(ex)
+                }
+            }
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(onComplete, Consumer { onComplete.accept(false) })
+        }
+
         fun getTableUpdateTime(): String? {
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
             val lastDbUpdateTimeStr = preferences.getString("db_update_time", "")
@@ -316,18 +342,6 @@ class DbManager {
             } else {
                 lastDbUpdateTimeStr
             }
-        }
-
-        fun startUpdate() {
-            Realm.getDefaultInstance().beginTransaction()
-        }
-
-        fun endUpdate() {
-            Realm.getDefaultInstance().commitTransaction()
-            val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-            val editor = preferences.edit()
-            editor.putString("db_update_time", dateTimeFormatter.format(Date()))
-            editor.apply()
         }
 
         fun getAllChampData(): List<ChampData> {

@@ -4,13 +4,14 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
-import android.widget.Toast
 import androidx.preference.PreferenceManager
 import be.technifutur.devmob9.sdsftryone.BuildConfig
-import be.technifutur.devmob9.sdsftryone.R
 import be.technifutur.devmob9.sdsftryone.dao.DbManager
 import be.technifutur.devmob9.sdsftryone.model.ChampTeamData
-import be.technifutur.devmob9.sdsftryone.tools.AllTableResult
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -23,12 +24,16 @@ class WebService() {
     companion object {
         private lateinit var context: Context
         private lateinit var retrofit: Retrofit
-        lateinit var interfaceInstance: WebServiceInterface private set
-        lateinit var uuid: String private set
-        private val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE)
-        private val dateTimeFormater = SimpleDateFormat("yyyy,MM-dd-HH-mm-ss", Locale.FRANCE)
+        private lateinit var interfaceInstance: WebServiceInterface
+        lateinit var uuid: String
+            private set
+        var dbUpdateTime: Date? = null
+            private set
+        private val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.ROOT)
+        private val dateTimeFormater = SimpleDateFormat("yyyy-MM-dd HH-mm-ss", Locale.ROOT)
+        private var currentCall: Disposable? = null
 
-        fun init(context: Context) {
+        fun init (context: Context) {
             WebService.context = context
 
             retrofit = Retrofit.Builder()
@@ -41,13 +46,17 @@ class WebService() {
 
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
             val spUuid = preferences.getString("app_uuid", "")
-            if (spUuid?.isEmpty() ?: true) {
+            if (spUuid?.isEmpty() != false) {
                 val editor = preferences.edit()
                 uuid = UUID.randomUUID().toString().toUpperCase()
                 editor.putString("app_uuid", uuid)
                 editor.apply()
             } else {
                 uuid = spUuid!!
+            }
+            val spDbUpdateTime = preferences.getString("app_db_update_time", "")
+            if (spDbUpdateTime?.isNotEmpty() == true) {
+                dbUpdateTime = dateTimeFormater.parse(spDbUpdateTime)
             }
         }
 
@@ -61,47 +70,53 @@ class WebService() {
                 if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
                     Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
                     return true
-                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                }
+                else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
                     Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
                     return true
                 }
             }
             return false
         }
-        // navController: NavController? = null
-        fun displayError() {
 
-            Toast.makeText(context, context.getString(R.string.loading_error), Toast.LENGTH_SHORT)
-                .show()
-
-//            navController?.let {
-//                Handler().postDelayed({
-//                    it.navigate(R.id.action_splashFragment_to_homeFragment)
-//                }, SplashFragment.SPLASH_SCREEN_DURATION.toLong())
-//            }
+        fun updateDbSyncTime () {
+            dbUpdateTime = Date()
+            val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+            val editor = preferences.edit()
+            editor.putString("app_db_update_time", dateTimeFormater.format(dbUpdateTime))
+            editor.apply()
         }
 
-//        private var navController: NavController? = null
+        fun clearDbSyncTime () {
+            dbUpdateTime = null
+            val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+            val editor = preferences.edit()
+            editor.putString("app_db_update_time", null)
+            editor.apply()
+        }
 
-        fun updateDataBase(onComplete: (AllTableResult?,Boolean) -> Unit)  {
+        private fun <T>dispose (consumer: Consumer<T>): Consumer<T> {
+            return Consumer { t: T ->
+                consumer.accept(t)
+                currentCall?.dispose()
+                currentCall = null
+            }
+        }
 
+        fun getAllData (onSuccess: Consumer<AllTable>, onError: Consumer<Throwable>) {
             // si on a du réseau
             if (isOnline()) {
-
-//                DbManager.startUpdate()
-//                DataReader.start(readers)
-//                DbManager.endUpdate()
+                currentCall?.dispose()
+                currentCall = interfaceInstance.readAll(uuid, dateTimeFormater.format(dbUpdateTime))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(dispose(onSuccess), dispose(onError))
             }
             // si on a pas de réseau
             else {
-                // on a pas de réseau on informe l'utilisateur
-                onComplete (null, false)
+                // on a pas de réseau, on en informe l'utilisateur
+                onError.accept(IllegalStateException("No Internet connection"))
             }
-        }
-
-        fun failure(t: Throwable) {
-            displayError() //navController
-            Log.d("WEBSERVICE", t.message ?: "")
         }
 
         fun updateMatch(matchList: List<Match>) {

@@ -54,22 +54,25 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    // librairie recyclerView
+    // recyclerView
     implementation 'com.mikepenz:fastadapter:5.0.2'
     implementation "androidx.recyclerview:recyclerview:1.1.0"
 
     // For control over item selection of both touch and mouse driven selection
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc01"
-    // librairie navigation
+    // navigation fragment
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
-    // lbrairie réseaux
+    // Rx (multi-thread)
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    // Retrofit (réseaux)
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
 
     // For control over item selection of both touch and mouse driven selection
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc01"
-    // librarie pour les images
+    // Glide (images sur le réseau)
     implementation 'com.github.bumptech.glide:glide:4.10.0'
 }

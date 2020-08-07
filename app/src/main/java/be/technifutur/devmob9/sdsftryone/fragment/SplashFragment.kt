@@ -54,17 +54,16 @@ class SplashFragment : Fragment() {
         val animSet = AnimationSet(true)
 
         val translateAnim = TranslateAnimation (0f,0f, 600f, 0f)
-        translateAnim.duration = 3000
+        translateAnim.duration = 2000
         animSet.addAnimation(translateAnim)
 
         val alphaAnim = AlphaAnimation(0.0f, 1.0f)
-        alphaAnim.duration = 3000
+        alphaAnim.duration = 2000
         animSet.addAnimation(alphaAnim)
 
         val scaleAnim = ScaleAnimation(1f,1f, 0f,1f)
         scaleAnim.duration = 2000
         animSet.addAnimation(scaleAnim)
-
 
         standardTextView.startAnimation(animSet)
 
@@ -77,18 +76,18 @@ class SplashFragment : Fragment() {
         val animSet = AnimationSet(true)
 
         val translateAnim = TranslateAnimation (0f,0f, 600f, 0f)
-        translateAnim.duration = 3000
-        translateAnim.startOffset = 500
+        translateAnim.duration = 2000
+        translateAnim.startOffset = 400
         animSet.addAnimation(translateAnim)
 
         val alphaAnim = AlphaAnimation (0.0f, 1.0f)
-        alphaAnim.duration = 3000
-        alphaAnim.startOffset = 500
+        alphaAnim.duration = 2000
+        alphaAnim.startOffset = 400
         animSet.addAnimation(alphaAnim)
 
         val scaleAnim = ScaleAnimation(1f,1f, 0f,1f)
         scaleAnim.duration = 2000
-        scaleAnim.startOffset = 500
+        scaleAnim.startOffset = 400
         animSet.addAnimation(scaleAnim)
 
         deLiegeTextView.startAnimation(animSet)

@@ -32,7 +32,7 @@ class HomeAdapter (val teamHeading: ArrayList<String>,
         holder.itemView.matchRecyclerView.apply {
             layoutManager = subLayoutManager
             // il faut envoyer une liste de match au sous adapter
-            adapter = SubHomeAdater(teamHeading[position])
+           // adapter = SubHomeAdater(teamHeading[position])
             setRecycledViewPool(viewPool)
         }
     }

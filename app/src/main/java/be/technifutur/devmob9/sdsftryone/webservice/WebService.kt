@@ -3,18 +3,16 @@ package be.technifutur.devmob9.sdsftryone.webservice
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Handler
 import android.util.Log
 import android.widget.Toast
-import androidx.navigation.NavController
 import androidx.preference.PreferenceManager
 import be.technifutur.devmob9.sdsftryone.BuildConfig
 import be.technifutur.devmob9.sdsftryone.R
 import be.technifutur.devmob9.sdsftryone.dao.DbManager
-import be.technifutur.devmob9.sdsftryone.fragment.SplashFragment
 import be.technifutur.devmob9.sdsftryone.model.ChampTeamData
 import be.technifutur.devmob9.sdsftryone.tools.AllTableResult
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.*
@@ -36,6 +34,7 @@ class WebService() {
             retrofit = Retrofit.Builder()
                 .baseUrl(BuildConfig.SERVER_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
 
             interfaceInstance = retrofit.create(WebServiceInterface::class.java)
@@ -84,29 +83,19 @@ class WebService() {
 
 //        private var navController: NavController? = null
 
-        fun updateDataBase(onComplete: (AllTableResult) -> Unit)  {
-//            this.navController = navController
+        fun updateDataBase(onComplete: (AllTableResult?,Boolean) -> Unit)  {
+
             // si on a du réseau
             if (isOnline()) {
-                // liste de DataReader
-                val readers = LinkedList<DataReader>()
-                readers.add(AllTableDataReader())
-//                readers.add(DataReader { _ ->
-//                    WebService.navController?.let {
-//                        // passer à l'écran d'accueil
-//                        it.navigate(R.id.action_splashFragment_to_homeFragment)
-//                    }
-//                    DbManager.endUpdate()
-//                    return@DataReader
-//                })
-                DbManager.startUpdate()
-                DataReader.start(readers)
-                DbManager.endUpdate()
+
+//                DbManager.startUpdate()
+//                DataReader.start(readers)
+//                DbManager.endUpdate()
             }
             // si on a pas de réseau
             else {
                 // on a pas de réseau on informe l'utilisateur
-                Toast.makeText(context, "il n'y a pas de réseau", Toast.LENGTH_SHORT).show()
+                onComplete (null, false)
             }
         }
 

@@ -67,9 +67,13 @@ class SplashFragment : Fragment() {
             },
             Consumer { error: Throwable ->
                 if (error is IllegalStateException) {
+
+
                     // affiche le message "Pas de connexion réseau"
                 }
                 else {
+
+
                     // affiche le message "Erreur de lecture des données"
                 }
                 // dans les deux cas la boîte de dialogue propose de "Continuer" avec les données actuelles (à droite)

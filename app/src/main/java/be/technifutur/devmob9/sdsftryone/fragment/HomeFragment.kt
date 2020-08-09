@@ -4,12 +4,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import be.technifutur.devmob9.sdsftryone.R
 import be.technifutur.devmob9.sdsftryone.adapter.HomeAdapter
-import be.technifutur.devmob9.sdsftryone.dao.DbManager
-import com.mikepenz.fastadapter.FastAdapter
-import com.mikepenz.fastadapter.adapters.ItemAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -42,8 +38,8 @@ class HomeFragment : Fragment() {
         // rechercher la listes des matches par équipes et l'envoyer à l'adapteur
         // comme ça on le fais qu'une seulez fois
 
-        calendarRecyclerView.layoutManager = LinearLayoutManager(context)
-        calendarRecyclerView.adapter = adapter
+        homeRecyclerView.layoutManager = LinearLayoutManager(context)
+        homeRecyclerView.adapter = adapter
     }
 }
 

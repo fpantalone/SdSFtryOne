@@ -18,5 +18,34 @@
         android:id="@+id/homeFragment"
         android:name="be.technifutur.devmob9.sdsftryone.fragment.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_calendarFragment2"
+            app:destination="@id/calendarFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/calendarFragment2"
+        android:name="be.technifutur.devmob9.sdsftryone.fragment.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/matchManagerFragment"
+        android:name="be.technifutur.devmob9.sdsftryone.fragment.MatchManagerFragment"
+        android:label="fragment_match_manager"
+        tools:layout="@layout/fragment_match_manager" />
+    <fragment
+        android:id="@+id/matchEventFragment"
+        android:name="be.technifutur.devmob9.sdsftryone.fragment.MatchEventFragment"
+        android:label="fragment_match_event"
+        tools:layout="@layout/fragment_match_event" />
+    <fragment
+        android:id="@+id/matchConfigFragment"
+        android:name="be.technifutur.devmob9.sdsftryone.fragment.MatchConfigFragment"
+        android:label="fragment_match_config"
+        tools:layout="@layout/fragment_match_config" />
+    <fragment
+        android:id="@+id/tabContainerFragment"
+        android:name="be.technifutur.devmob9.sdsftryone.fragment.TabContainerFragment"
+        android:label="fragment_tab_container"
+        tools:layout="@layout/fragment_tab_container" />
 </navigation>

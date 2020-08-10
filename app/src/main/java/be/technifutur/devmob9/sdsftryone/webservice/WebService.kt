@@ -92,7 +92,7 @@ class WebService() {
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
             val editor = preferences.edit()
             val since = if (dbUpdateTime != null) {
-                dateTimeFormater.format(dbUpdateTime)
+                dateTimeFormater.format(dbUpdateTime!!)
             }
             else {
                 null
@@ -122,7 +122,7 @@ class WebService() {
             if (isOnline()) {
                 currentCall?.dispose()
                 val since = if (dbUpdateTime != null) {
-                    dateTimeFormater.format(dbUpdateTime)
+                    dateTimeFormater.format(dbUpdateTime!!)
                 }
                 else {
                     null

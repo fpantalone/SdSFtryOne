@@ -22,6 +22,10 @@
     <string name="network_error">Pas de réseau</string>
     <string name="retryDialog">Réessayer</string>
     <string name="cancelDialog">Annuler</string>
+    <string name="db_error_title">Erreur Base de données</string>
+    <string name="db_error_msg">Erreur lors du chargement de la base de donnée</string>
+    <string name="network_error_title">Problème réseau</string>
+    <string name="networ_error_msg">Activer le Wifi ou les données mobiles</string>
 
     <string-array name="match_tad_txt">
         <item>Sélection</item>

@@ -1,5 +1,7 @@
 package be.technifutur.devmob9.sdsftryone.fragment
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -67,14 +69,10 @@ class SplashFragment : Fragment() {
             },
             Consumer { error: Throwable ->
                 if (error is IllegalStateException) {
-
-
-                    // affiche le message "Pas de connexion réseau"
+                    alertBox(R.string.network_error_title, R.string.networ_error_msg)
                 }
                 else {
-
-
-                    // affiche le message "Erreur de lecture des données"
+                        alertBox(R.string.db_error_title, R.string.db_error_msg)
                 }
                 // dans les deux cas la boîte de dialogue propose de "Continuer" avec les données actuelles (à droite)
                 // ou de "Réessayer" de charger les données (à gauche).
@@ -136,4 +134,12 @@ class SplashFragment : Fragment() {
         animMaskLayout.startAnimation(fadeAnim)
     }
 
+    fun alertBox (title: Int, message: Int) {
+        val dialog = AlertDialog.Builder(context)
+        dialog.setTitle(title)
+        dialog.setMessage(message)
+        dialog.setPositiveButton(R.string.retryDialog, DialogInterface.OnClickListener())
+        dialog.setNegativeButton(R.string.cancelDialog, DialogInterface.OnClickListener())
+        dialog.show()
+    }
 }

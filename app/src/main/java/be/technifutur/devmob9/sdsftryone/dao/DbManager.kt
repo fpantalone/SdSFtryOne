@@ -316,7 +316,9 @@ class DbManager {
 
         fun updateData (data: AllTable, onComplete: Consumer<Boolean>) {
             // passe dans le thread computation
-            Single.create<Boolean> { emitter ->
+
+            val disposable
+                    = Single.create<Boolean> { emitter ->
                 val realm = Realm.getDefaultInstance()
                 try {
                     realm.beginTransaction()
@@ -328,11 +330,12 @@ class DbManager {
                     updatePlayer(data.player)
                     updateEvent(data.event)
                     updateMatchPlayer(data.matchPlayer)
-
                     realm.commitTransaction()
                     emitter.onSuccess(true)
                 }
                 catch (ex: Exception) {
+                    ex.printStackTrace()
+                    Log.d("DBMANAGER",ex.message ?:" updateData" )
                     emitter.onError(ex)
                 }
             }

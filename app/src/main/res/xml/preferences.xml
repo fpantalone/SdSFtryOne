@@ -23,6 +23,10 @@
             android:defaultValue="true"
             android:key="team_u14_pref"
             />
+        <CheckBoxPreference android:title="@string/team_u13_menu_label"
+            android:defaultValue="true"
+            android:key="team_u13_pref"
+            />
         <CheckBoxPreference android:title="@string/team_u12_menu_label"
             android:defaultValue="true"
             android:key="team_12_pref"

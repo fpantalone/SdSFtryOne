@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
  */
 class HomeFragment : Fragment() {
 
-    lateinit var preferedTeam: ArrayList<String>
+    var preferedTeam: ArrayList<String> = arrayListOf()
 
     val adapter by lazy {
         var matchMap: MutableMap<String, List<MatchData>> = mutableMapOf()
@@ -52,14 +52,13 @@ class HomeFragment : Fragment() {
     fun getPreferedTeam() {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
 
-        if (prefs.getBoolean("team_a_prefs", true)) preferedTeam.add(resources.getString(R.string.team_a_menu_label))
-        if (prefs.getBoolean("team_b_prefs", true)) preferedTeam.add(resources.getString(R.string.team_b_menu_label))
-        if (prefs.getBoolean("team_c_prefs", true)) preferedTeam.add(resources.getString(R.string.team_c_menu_label))
-        if (prefs.getBoolean("team_u16_prefs", true)) preferedTeam.add(resources.getString(R.string.team_u16_menu_label))
-        if (prefs.getBoolean("team_u14_prefs", true)) preferedTeam.add(resources.getString(R.string.team_u14_menu_label))
-        if (prefs.getBoolean("team_u12_prefs", true)) preferedTeam.add(resources.getString(R.string.team_u12_menu_label))
-        if (prefs.getBoolean("team_u11_prefs", true)) preferedTeam.add(resources.getString(R.string.team_u11_menu_label))
-
+        val keyFormat = "team_%s_prefs"
+        arrayOf("A", "B", "C", "U16", "U14", "U13", "U12", "U11").forEach { team ->
+            val key = String.format(keyFormat, team.toLowerCase())
+            if (prefs.getBoolean(key, true)) {
+                preferedTeam.add(team)
+            }
+        }
     }
 }
 

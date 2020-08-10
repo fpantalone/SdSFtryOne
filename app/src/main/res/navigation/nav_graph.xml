@@ -21,7 +21,14 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_calendarFragment2"
-            app:destination="@id/calendarFragment2" />
+            app:destination="@id/calendarFragment2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_homeFragment_to_tabContainerFragment"
+            app:destination="@id/tabContainerFragment" />
     </fragment>
     <fragment
         android:id="@+id/calendarFragment2"

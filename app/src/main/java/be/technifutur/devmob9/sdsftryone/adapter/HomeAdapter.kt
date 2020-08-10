@@ -36,7 +36,7 @@ class HomeAdapter (val teamHeading: ArrayList<String>,
             layoutManager = subLayoutManager
             // il faut envoyer une liste de match au sous adapter
             //feedMatchList.get(teamHeading[position])
-           adapter = SubHomeAdater(feedMatchList[teamHeading[position]]?.filter { it.isInWeek() } ?: listOf())
+           adapter = SubHomeAdapter(feedMatchList[teamHeading[position]]?.filter { it.isInWeek() } ?: listOf())
             setRecycledViewPool(viewPool)
         }
     }

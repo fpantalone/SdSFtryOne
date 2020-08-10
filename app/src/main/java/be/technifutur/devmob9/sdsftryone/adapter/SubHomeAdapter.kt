@@ -12,7 +12,7 @@ import be.technifutur.devmob9.sdsftryone.tools.TeamSide
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.home_row.view.*
 
-class SubHomeAdater(val data: List<MatchData>) : RecyclerView.Adapter<SubHomeAdater.SubViewHolder>() {
+class SubHomeAdapter(val data: List<MatchData>) : RecyclerView.Adapter<SubHomeAdapter.SubViewHolder>() {
 
     override fun getItemCount(): Int {
        return data.count()
@@ -21,7 +21,7 @@ class SubHomeAdater(val data: List<MatchData>) : RecyclerView.Adapter<SubHomeAda
     // !! afficher les matchs qui sont dans le range -7 +6 par rapport à la date du jour !!
     override fun onBindViewHolder(holder: SubViewHolder, position: Int) {
 
-        if (data[position].isInWeek()) {
+       if (data[position].isInWeek()) {
             holder.championat.text = data[position].day?.get(0)?.name
             holder.ChampDay.text = data[position].day.toString()
             Glide.with(FragmentActivity(R.layout.fragment_home)).load(data[position].getTeam(TeamSide.HOME).getLogoURL()).into(holder.team_A_Logo)
@@ -41,7 +41,7 @@ class SubHomeAdater(val data: List<MatchData>) : RecyclerView.Adapter<SubHomeAda
                     holder.locker.setImageResource(R.drawable.lock_open_24px)
                 }
             }
-        }
+       }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubViewHolder {

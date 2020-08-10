@@ -3,6 +3,7 @@ package be.technifutur.devmob9.sdsftryone.fragment
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import be.technifutur.devmob9.sdsftryone.R
@@ -22,10 +23,12 @@ class HomeFragment : Fragment() {
         var matchMap: MutableMap<String, List<MatchData>> = mutableMapOf()
         preferedTeam.forEach { team ->
                 matchMap[team] = DbManager.getCalendar(team)
+            print (matchMap)
         }
         return@lazy HomeAdapter(preferedTeam, matchMap, View.OnClickListener {
-            val pos = it?.tag as Int
-        })
+            val navController = Navigation.findNavController(it)
+            val direction = HomeFragmentDirections.actionHomeFragmentToCalendarFragment2()
+            navController.navigate(direction)        })
     }
 
     override fun onCreateView(

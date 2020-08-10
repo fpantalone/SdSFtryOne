@@ -5,11 +5,11 @@
     <PreferenceCategory android:title="@string/pref_team_title">
         <CheckBoxPreference android:title="@string/team_a_menu_label"
             android:defaultValue="true"
-            android:key="Team_a_pref"
+            android:key="team_a_pref"
             />
         <CheckBoxPreference android:title="@string/team_b_menu_label"
             android:defaultValue="true"
-            android:key="Team_b_pref"
+            android:key="team_b_pref"
              />
         <CheckBoxPreference android:title="@string/team_c_menu_label"
             android:defaultValue="true"

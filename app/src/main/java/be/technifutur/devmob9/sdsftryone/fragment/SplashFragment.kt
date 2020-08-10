@@ -138,8 +138,15 @@ class SplashFragment : Fragment() {
         val dialog = AlertDialog.Builder(context)
         dialog.setTitle(title)
         dialog.setMessage(message)
-        dialog.setPositiveButton(R.string.retryDialog, DialogInterface.OnClickListener())
-        dialog.setNegativeButton(R.string.cancelDialog, DialogInterface.OnClickListener())
+        dialog.setPositiveButton(R.string.retryDialog, DialogInterface.OnClickListener { _, _ ->
+            val direction = SplashFragmentDirections.actionSplashFragmentToHomeFragment()
+            view?.let { Navigation.findNavController(it) }?.navigate(direction)
+        })
+        dialog.setNegativeButton(R.string.cancelDialog, DialogInterface.OnClickListener { _, _ ->
+            val direction = SplashFragmentDirections.actionSplashFragmentToHomeFragment()
+            view?.let { Navigation.findNavController(it) }?.navigate(direction)
+
+        })
         dialog.show()
     }
 }

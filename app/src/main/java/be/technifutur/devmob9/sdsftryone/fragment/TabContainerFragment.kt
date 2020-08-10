@@ -29,7 +29,7 @@ class TabContainerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // récuperation du string-array
-        val tabTitleArray = resources.getStringArray(R.array.match_tad_txt)
+        val tabTitleArray = resources.getStringArray(R.array.match_tab_txt)
         // adapter pour le ViewPager
         val matchPagerAdapter = MatchPagerAdapter(this, tabTitleArray.size)
         matchViewPager.adapter = matchPagerAdapter

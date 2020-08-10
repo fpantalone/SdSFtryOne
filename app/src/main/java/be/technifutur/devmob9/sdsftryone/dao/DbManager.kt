@@ -320,7 +320,15 @@ class DbManager {
                 val realm = Realm.getDefaultInstance()
                 try {
                     realm.beginTransaction()
-                    // TODO enregistre les données dans la base de données
+                    // enregistre les données dans la base de données
+                    updateClub(data.club)
+                    updateChamp(data.champ)
+                    updateDay(data.day)
+                    updateMatch(data.match)
+                    updatePlayer(data.player)
+                    updateEvent(data.event)
+                    updateMatchPlayer(data.matchPlayer)
+
                     realm.commitTransaction()
                     emitter.onSuccess(true)
                 }

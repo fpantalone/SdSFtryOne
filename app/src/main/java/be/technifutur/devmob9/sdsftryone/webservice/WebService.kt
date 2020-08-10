@@ -44,10 +44,19 @@ class WebService() {
 
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
             val spUuid = preferences.getString("app_uuid", "")
+
             if (spUuid?.isEmpty() != false) {
                 val editor = preferences.edit()
                 uuid = UUID.randomUUID().toString().toUpperCase()
                 editor.putString("app_uuid", uuid)
+                editor.putBoolean("team_a_pref",true)
+                editor.putBoolean("team_b_pref",true)
+                editor.putBoolean("team_b_pref",true)
+                editor.putBoolean("team_c_pref",true)
+                editor.putBoolean("team_u16_pref",true)
+                editor.putBoolean("team_u14_pref",true)
+                editor.putBoolean("team_u12_pref",true)
+                editor.putBoolean("team_u11_pref",true)
                 editor.apply()
             } else {
                 uuid = spUuid
@@ -81,7 +90,7 @@ class WebService() {
             dbUpdateTime = Date()
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
             val editor = preferences.edit()
-            editor.putString("app_db_update_time", dateTimeFormater.format(dbUpdateTime!!))
+            editor.putString("app_db_update_time", dateTimeFormater.format(dbUpdateTime))
             editor.apply()
         }
 
@@ -105,7 +114,7 @@ class WebService() {
             // si on a du réseau
             if (isOnline()) {
                 currentCall?.dispose()
-                currentCall = interfaceInstance.readAll(uuid, dateTimeFormater.format(dbUpdateTime!!))
+                currentCall = interfaceInstance.readAll(uuid, dateTimeFormater.format(dbUpdateTime))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(dispose(onSuccess), dispose(onError))

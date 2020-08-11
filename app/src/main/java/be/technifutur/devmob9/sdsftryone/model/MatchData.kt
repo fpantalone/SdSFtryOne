@@ -101,7 +101,8 @@ open class MatchData(
         }
 
         DbManager.findClub(clubCode)?.let {
-            it.suffix = suffix
+            it.setSuffix(suffix)
+            //it.suffix = suffix
             return it
         }
         val club = ClubData()

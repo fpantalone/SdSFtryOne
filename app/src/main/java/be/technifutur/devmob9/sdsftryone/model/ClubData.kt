@@ -2,6 +2,7 @@ package be.technifutur.devmob9.sdsftryone.model
 
 import be.technifutur.devmob9.sdsftryone.BuildConfig
 import io.realm.RealmObject
+import io.realm.annotations.Ignore
 import io.realm.annotations.PrimaryKey
 
 open class ClubData(
@@ -11,8 +12,18 @@ open class ClubData(
     var logo: String? = null
 
 ) : RealmObject() {
-    var suffix: String = ""
-        get() = if (field.isEmpty()) { "" } else { " $field" }
+
+    @Ignore
+    private var suffix: String = ""
+        //get() = if (field.isEmpty()) { "" } else { " $field" }
+
+    fun setSuffix (suffix: String) {
+        this.suffix = suffix
+    }
+
+    fun getSuffix (): String {
+        return suffix
+    }
 
     fun getSuffixedShortName (): String {
         return shortName+suffix

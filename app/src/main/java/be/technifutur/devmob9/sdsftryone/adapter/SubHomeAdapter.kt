@@ -24,9 +24,24 @@ class SubHomeAdapter(val data: List<MatchData>) : RecyclerView.Adapter<SubHomeAd
        if (data[position].isInWeek()) {
             holder.championat.text = data[position].day?.get(0)?.name
             holder.ChampDay.text = data[position].day.toString()
-            Glide.with(FragmentActivity(R.layout.fragment_home)).load(data[position].getTeam(TeamSide.HOME).getLogoURL()).into(holder.team_A_Logo)
+
+           if (null != data[position].getTeam(TeamSide.HOME).logo) {
+               Glide.with(FragmentActivity(R.layout.fragment_home))
+                   .load(data[position].getTeam(TeamSide.HOME).getLogoURL())
+                   .into(holder.team_A_Logo)
+           } else {
+               holder.team_A_Logo.setImageResource(R.drawable.default_logo)
+           }
+
             holder.team_A_Name.text = data[position].getTeam(TeamSide.HOME).fullName
-            Glide.with(FragmentActivity(R.layout.fragment_home)).load(data[position].getTeam(TeamSide.AWAY).getLogoURL()).into(holder.team_B_Logo)
+           if (null != data[position].getTeam(TeamSide.AWAY).logo) {
+               Glide.with(FragmentActivity(R.layout.fragment_home))
+                   .load(data[position].getTeam(TeamSide.AWAY).getLogoURL())
+                   .into(holder.team_B_Logo)
+           }
+           else {
+               holder.team_B_Logo.setImageResource(R.drawable.default_logo)
+           }
             holder.team_B_Name.text = data[position].getTeam(TeamSide.AWAY).fullName
             holder.matchate.text = data[position].date.toString()
             when (data[position].getLockStatus()) {

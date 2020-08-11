@@ -13,9 +13,6 @@ open class ClubData(
 ) : RealmObject() {
     var suffix: String = ""
         get() = if (field.isEmpty()) { "" } else { " $field" }
-        set(value) {
-            field = value
-        }
 
     fun getSuffixedShortName (): String {
         return shortName+suffix

@@ -61,7 +61,6 @@ class DbManager {
 
         fun findEvent(id: Int, match: Int, day: Int, champ: Int): EventData? {
            return findMatch(match, day, champ)?.events?.firstOrNull { it.id == id }
-
         }
 
         fun findMatchPlayer(id: Int, match: Int, day: Int, champ: Int): MatchPlayerData? {
@@ -70,7 +69,7 @@ class DbManager {
             }?.matches?.firstOrNull { it.id == match }?.players?.firstOrNull { it.id == id }
         }
 
-        fun addClub(code: String, shortName: String, fullName: String, logo: String?): ClubData? {
+        private fun addClub(code: String, shortName: String, fullName: String, logo: String?): ClubData? {
             val realm = Realm.getDefaultInstance()
             var club: ClubData?
             try {
@@ -84,11 +83,10 @@ class DbManager {
                 club.fullName = fullName
                 club.logo = logo
             }
-
             return club
         }
 
-        fun addChampTeam(team: String, code: String): ChampTeamData? {
+        private fun addChampTeam(team: String, code: String): ChampTeamData? {
             val realm = Realm.getDefaultInstance()
 
             try {
@@ -97,12 +95,12 @@ class DbManager {
                 champTeam.code = code
                 return champTeam
             } catch (e: RealmException) {
-                Log.d("DBMANAGER", e.message ?: "addChampTeam")
+                Log.d("DdManager", "Create ChampTeam ${e.message}", e)
             }
             return null
         }
 
-        fun addChamp(
+        private fun addChamp(
             id: Int, name: String, numDay: Int, season: Int, matchConfig: String,
             genForfeit: List<String>, teams: List<ChampTeamData>
         ): ChampData? {
@@ -123,55 +121,52 @@ class DbManager {
                 champ.teams.addAll(teams)
                 champ.genForfeit.addAll(genForfeit)
             }
-
             return champ
         }
 
-        fun addDay(
+        private fun addDay(
             id: Int, champ: Int, name: String, date: Date,
             comment: String
         ): DayData? {
 
             val realm = Realm.getDefaultInstance()
-            var day: DayData?
+            var day: DayData? = null
 
             try {
                 day = realm.createObject(DayData::class.java)
-
             } catch (e: RealmException) {
-                day = findDay(id, champ)
+                Log.d("DbManager", "Create Day ${e.message}", e)
             }
 
             day?.let {
-
+                day.id = id
                 day.name = name
                 day.date = date
                 day.comment = comment
                 val champData = findChamp(champ)
                 champData?.days?.add(day)
             }
-
             return day
 
         }
 
-        fun addMatch(
+        private fun addMatch(
             id: Int, day: Int, champ: Int, date: Date?, hour: String, homeTeam: String,
             awayTeam: String, homeScore: Int?, awayScore: Int?, comment: String?, locked: String?
         ): MatchData? {
 
             val realm = Realm.getDefaultInstance()
-            var match: MatchData?
+            var match: MatchData? = null
 
             try {
                 match = realm.createObject(MatchData::class.java)
 
             } catch (e: RealmException) {
-                Log.d("DBMANAGER", e.message ?: "addMatch")
-                match = findMatch(id, day, champ)
+                Log.d("DbManager", "Create Match ${e.message}", e)
             }
 
             match?.let {
+                match.id = id
                 match.date = date
                 match.hour = hour
                 match.homeTeam = homeTeam
@@ -187,7 +182,7 @@ class DbManager {
             return match
         }
 
-        fun addPlayer(
+        private fun addPlayer(
             id: Int, firstName: String, lastName: String,
             number: Int, team: List<String>
         ): PlayerData? {
@@ -199,7 +194,7 @@ class DbManager {
                 player = realm.createObject(PlayerData::class.java, id)
             } catch (e: RealmException) {
                 player = findPlayer(id)
-                Log.d("DBMANAGER", e.message ?: "addPlayer")
+                Log.d("DbManaager", "Create Player ${e.message}", e)
             }
 
             player?.let {
@@ -208,57 +203,55 @@ class DbManager {
                 player.number = number
                 player.team.addAll(team)
             }
-
             return player
         }
 
-        fun addEvent(
+        private fun addEvent(
             id: Int, match: Int, day: Int, champ: Int, time: String,
             team: String, type: String, param: String
         ): EventData? {
 
             val realm = Realm.getDefaultInstance()
-            var event: EventData?
+            var event: EventData? = null
 
             try {
                 event = realm.createObject(EventData::class.java)
             } catch (e: RealmException) {
-                event = findEvent(id, match, day, champ)
-                Log.d("DBMANAGER", e.message ?: "addEventt")
+                Log.d("DbManager", "Create Event ${e.message}", e)
             }
 
             event?.let {
+                event.id = id
                 event.time = time
                 event.team = team
                 event.type = type
                 event.team = team
                 event.param = param
             }
-
             return event
         }
 
-        fun addMatchPlayer(
+        private fun addMatchPlayer(
             id: Int, match: Int, day: Int, champ: Int,
             player: Int, name: String, number: Int,
             status: Int
         ): MatchPlayerData? {
             val realm = Realm.getDefaultInstance()
-            var matchPlayer: MatchPlayerData?
+            var matchPlayer: MatchPlayerData? = null
 
             try {
                 matchPlayer = realm.createObject(MatchPlayerData::class.java)
             } catch (e: RealmException) {
-                matchPlayer = findMatchPlayer(id, match, day, champ)
+                Log.d("DbManager", "Create MatchPlayer ${e.message}", e)
             }
 
             matchPlayer?.let {
+                matchPlayer.id = id
                 matchPlayer.player = findPlayer(player)
                 matchPlayer.name = name
                 matchPlayer.number = number
                 matchPlayer.status = status
             }
-
             return matchPlayer
         }
 
@@ -390,7 +383,6 @@ class DbManager {
                 }
                 return@Comparator d1.compareTo(d2)
             })
-
             return matches
         }
 
@@ -402,7 +394,6 @@ class DbManager {
                         match.date?.let {
                             date = WebService.dateFormatter.parse(it)
                         }
-
                         addMatch(
                             match.id, match.day, match.champ, date,
                             match.hour, match.eq1, match.eq2, match.re1, match.re2,
@@ -459,7 +450,7 @@ class DbManager {
                         val teams = ArrayList<ChampTeamData>()
 
                         champ.team?.let {
-                            val champTeam = addChampTeam(it, "#00016")
+                            val champTeam = addChampTeam(it,    "#00016")
                             if (champTeam != null) {
                                 teams.add(champTeam)
                             }
@@ -636,35 +627,4 @@ class DbManager {
         }
 
     } // fin companion Object
-
-
-    fun getAllClubData(): List<ClubData> {
-        val realm = Realm.getDefaultInstance()
-        return realm.where<ClubData>().findAll()
-    }
-
-    fun getAllDayData(): List<DayData> {
-        val realm = Realm.getDefaultInstance()
-        return realm.where<DayData>().findAll()
-    }
-
-    fun getAlltMatchData(): List<MatchData> {
-        val realm = Realm.getDefaultInstance()
-        return realm.where<MatchData>().findAll()
-    }
-
-    fun getAllEventData(): List<EventData> {
-        val realm = Realm.getDefaultInstance()
-        return realm.where<EventData>().findAll()
-    }
-
-    fun getAllMatchPlayerData(): List<MatchPlayerData> {
-        val realm = Realm.getDefaultInstance()
-        return realm.where<MatchPlayerData>().findAll()
-    }
-
-    fun getallPlayerData(): List<PlayerData> {
-        val realm = Realm.getDefaultInstance()
-        return realm.where<PlayerData>().findAll()
-    }
 }

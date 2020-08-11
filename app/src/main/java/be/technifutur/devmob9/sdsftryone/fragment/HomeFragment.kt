@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
 
     fun getPreferedTeam() {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-
+        preferedTeam.clear()
         val keyFormat = "team_%s_prefs"
         arrayOf("A", "B", "C", "U16", "U14", "U13", "U12", "U11").forEach { team ->
             val key = String.format(keyFormat, team.toLowerCase())

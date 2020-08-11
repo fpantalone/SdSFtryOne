@@ -30,8 +30,6 @@ class SplashFragment : Fragment() {
         const val SPLASH_SCREEN_DURATION: Int = 5000
     }
 
-    var listAnimationsEnded= ArrayList<Boolean>()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,7 +37,6 @@ class SplashFragment : Fragment() {
         // Inflate the layout for this fragment
 
         return inflater.inflate(R.layout.fragment_splash, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,9 +45,10 @@ class SplashFragment : Fragment() {
         translateStandart()
 
         Handler().postDelayed({
-            animMaskLayout.visibility = View.INVISIBLE
+            animMaskLayout?.let {
+                it.visibility = View.INVISIBLE
+            }
         },1000L)
-
 
         // Lecture des données
         WebService.getAllData(
@@ -66,6 +64,7 @@ class SplashFragment : Fragment() {
                 val navController = Navigation.findNavController(view)
                 val direction = SplashFragmentDirections.actionSplashFragmentToHomeFragment()
                 navController.navigate(direction)
+
             },
             Consumer { error: Throwable ->
                 if (error is IllegalStateException) {
@@ -78,7 +77,6 @@ class SplashFragment : Fragment() {
                 // ou de "Réessayer" de charger les données (à gauche).
             }
         )
-
     }
 
     fun translateStandart () {

@@ -8,7 +8,6 @@ import io.realm.RealmResults
 import io.realm.annotations.Ignore
 import io.realm.annotations.Index
 import io.realm.annotations.LinkingObjects
-import java.time.LocalDate
 import java.util.*
 
 open class MatchData(
@@ -101,8 +100,7 @@ open class MatchData(
         }
 
         DbManager.findClub(clubCode)?.let {
-            it.setSuffix(suffix)
-            //it.suffix = suffix
+            it.suffix = suffix
             return it
         }
         val club = ClubData()

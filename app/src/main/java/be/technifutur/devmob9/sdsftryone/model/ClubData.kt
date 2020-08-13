@@ -14,16 +14,16 @@ open class ClubData(
 ) : RealmObject() {
 
     @Ignore
-    private var suffix: String = ""
-        //get() = if (field.isEmpty()) { "" } else { " $field" }
+    var suffix: String = ""
+        get() = if (field.isEmpty()) { "" } else { " $field" }
 
-    fun setSuffix (suffix: String) {
-        this.suffix = suffix
-    }
-
-    fun getSuffix (): String {
-        return suffix
-    }
+//    fun setSuffix (sufix: String) {
+//        this.teamSuffix = sufix
+//    }
+//
+//    fun getSuffix (): String {
+//        return teamSuffix
+//    }
 
     fun getSuffixedShortName (): String {
         return shortName+suffix

@@ -7,7 +7,6 @@ import be.technifutur.devmob9.sdsftryone.model.*
 import be.technifutur.devmob9.sdsftryone.webservice.*
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import io.realm.Realm

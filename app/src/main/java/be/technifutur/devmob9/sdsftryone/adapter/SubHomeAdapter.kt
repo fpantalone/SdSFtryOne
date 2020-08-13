@@ -26,7 +26,7 @@ class SubHomeAdapter(val data: List<MatchData>) : RecyclerView.Adapter<SubHomeAd
             holder.ChampDay.text = data[position].day.toString()
 
            if (null != data[position].getTeam(TeamSide.HOME).logo) {
-               Glide.with(FragmentActivity(R.layout.fragment_home))
+               Glide.with(holder.team_A_Logo)
                    .load(data[position].getTeam(TeamSide.HOME).getLogoURL())
                    .into(holder.team_A_Logo)
            } else {
@@ -35,7 +35,7 @@ class SubHomeAdapter(val data: List<MatchData>) : RecyclerView.Adapter<SubHomeAd
 
             holder.team_A_Name.text = data[position].getTeam(TeamSide.HOME).fullName
            if (null != data[position].getTeam(TeamSide.AWAY).logo) {
-               Glide.with(FragmentActivity(R.layout.fragment_home))
+               Glide.with(holder.team_B_Logo)
                    .load(data[position].getTeam(TeamSide.AWAY).getLogoURL())
                    .into(holder.team_B_Logo)
            }

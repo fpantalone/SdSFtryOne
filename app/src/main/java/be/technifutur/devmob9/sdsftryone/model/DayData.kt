@@ -1,7 +1,9 @@
 package be.technifutur.devmob9.sdsftryone.model
 
+import be.technifutur.devmob9.sdsftryone.R
 import be.technifutur.devmob9.sdsftryone.tools.LocalizedName
 import be.technifutur.devmob9.sdsftryone.tools.MatchConfig
+import be.technifutur.devmob9.sdsftryone.tools.RessourceReader
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.RealmResults
@@ -75,25 +77,20 @@ open class DayData(
     }
 
 
-    fun getName(locale: Locale): String {
+    fun getName(locale: Locale, shortStyle: Boolean = false): String {
 
         val localizedName = LocalizedName.createFrom(name)
+        val locName = localizedName[locale.language]
 
-        if (localizedName != null) {
-            return when (locale.language) {
-
-                "nl" -> {
-                    localizedName.nl
-                }
-                "en" -> {
-                    localizedName.en
-                }
-                else -> {
-                    localizedName.fr
-                }
+        if (locName.isEmpty()) {
+            if (shortStyle) {
+                return id.toString()
+            }
+            else {
+               return RessourceReader.getString(R.string.day_name_format, id)
             }
         }
-        return ""
+        return locName
     }
 
     fun isPostpone (): Boolean {

@@ -2,7 +2,10 @@ package be.technifutur.devmob9.sdsftryone.fragment
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.Navigation
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,6 +39,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        activity?.setActionBar(homeToolBar)
+
         return inflater.inflate(R.layout.fragment_home, container, false)
 
     }
@@ -62,6 +67,12 @@ class HomeFragment : Fragment() {
                 preferedTeam.add(team)
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
+
+
     }
 }
 

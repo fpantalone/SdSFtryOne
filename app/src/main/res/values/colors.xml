@@ -2,17 +2,19 @@
 <resources>
     <!--  TODO changer les couleur par défaut pour Primary PrimaryDark colorAccent -->
     <color name="colorPrimary">#990000</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimaryDark">#660000</color>
+    <color name="colorAccent">#A29065</color>
 
     <color name="dark_red">#990000</color>
     <color name="gold">#A29065</color>
-    <color name="background_1">#E5E5E5</color>
-    <color name="home_default_cell_title_background">#F9F9F9</color>
-    <color name="home_default_cell_title_border">#CFCFCF</color>
+    <color name="light_gray">#E5E5E5</color>
+    <color name="red">#E00000</color>
+    <color name="title_gray">#F9F9F9</color>
+    <color name="gray">#CFCFCF</color>
     <color name="transparent_dark_red">#FF990000</color>
-    <color name="dark_gray_brow">#BEB193</color>
-    <color name="calandar_header">#F2F2F2</color>
-    <color name="light_gray_brown">#E8E3D9</color>
+    <color name="title_gold">#BEB194</color>
+    <color name="background_gray">#F2F2F2</color>
+    <color name="light_gold">#E7E3D8</color>
     <color name="brown_1">#A29065</color>
+    <color name="anthracite">#333333</color>
 </resources>

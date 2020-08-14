@@ -3,14 +3,12 @@
 
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/home_default_cell_title_border"/>
+            <solid android:color="@color/gray"/>
         </shape>
     </item>
-    <item android:bottom="@dimen/tab_active_margin_top"
-        android:top="10dp">
+    <item android:bottom="@dimen/tab_active_margin_top">
         <shape android:shape="rectangle">
-            <solid android:color="@color/home_default_cell_title_background"/>
+            <solid android:color="@color/title_gray"/>
         </shape>
     </item>
-
 </layer-list>

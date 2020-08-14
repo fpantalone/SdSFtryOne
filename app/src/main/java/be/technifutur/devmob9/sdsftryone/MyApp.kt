@@ -2,6 +2,7 @@ package be.technifutur.devmob9.sdsftryone
 
 import android.app.Application
 import be.technifutur.devmob9.sdsftryone.dao.DbManager
+import be.technifutur.devmob9.sdsftryone.tools.RessourceReader
 import be.technifutur.devmob9.sdsftryone.webservice.WebService
 
 class MyApp : Application() {
@@ -10,6 +11,7 @@ class MyApp : Application() {
         super.onCreate()
         DbManager.init(this)
         WebService.init(this)
+        RessourceReader.init(this)
     }
 
 }

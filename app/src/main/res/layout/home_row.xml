@@ -5,119 +5,159 @@
     android:id="@+id/calendarRow"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="12dp"
     android:background="@drawable/plain_white_rounded_corner">
 
     <View
+        android:id="@+id/titleView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:clickable="true"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="34dp"
         android:background="@drawable/top_rounded_corner_title_cell"
-        app:layout_constraintBottom_toBottomOf="@id/champTextView"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/topView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        app:layout_constraintTop_toBottomOf="@+id/titleView"/>
+
+
     <TextView
         android:id="@+id/champTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto_mono_bold"
+        android:fontFamily="@font/roboto"
+        android:paddingBottom="6dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:paddingBottom="6dp"
+        android:textColor="@color/anthracite"
+        android:layout_marginStart="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/titleView"
+        app:layout_constraintBottom_toBottomOf="@id/titleView"
         tools:text="Coupe de Belgique" />
-
-    <TableRow
-        android:id="@+id/calendarTableRow"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/background_1"
-        app:layout_constraintTop_toBottomOf="@+id/champTextView"
-        />
 
     <ImageView
         android:id="@+id/lockImageView"
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="10dp"
         android:contentDescription="@string/lockerDescription"
         android:src="@drawable/lock_open_24px"
+        android:tint="@color/anthracite"
         app:layout_constraintEnd_toStartOf="@id/champDayTextView"
-
-        app:layout_constraintTop_toTopOf="@id/champDayTextView" />
+        app:layout_constraintTop_toTopOf="@id/titleView"
+        app:layout_constraintBottom_toBottomOf="@id/titleView"/>
 
     <TextView
         android:id="@+id/champDayTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/roboto"
+        android:textSize="18sp"
+        android:textColor="@color/anthracite"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/champTextView"
-
+        app:layout_constraintTop_toTopOf="@+id/titleView"
+        app:layout_constraintBottom_toBottomOf="@id/titleView"
         tools:text="finale" />
 
     <ImageView
         android:id="@+id/team_a_imageView"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="79dp"
+        android:layout_height="79dp"
         android:layout_marginTop="8dp"
         android:contentDescription="@string/imageDescription"
-        app:layout_constraintEnd_toStartOf="@+id/date_timeTextView"
-        
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/champTextView"
-        tools:src="@color/dark_red" />
+        app:layout_constraintEnd_toEndOf="@+id/team_a_TextView"
+        app:layout_constraintStart_toStartOf="@+id/team_a_TextView"
+        app:layout_constraintTop_toBottomOf="@+id/topView"
+        tools:src="@drawable/default_logo" />
 
     <TextView
         android:id="@+id/team_a_TextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="37.5dp"
         android:layout_marginBottom="8dp"
-        android:fontFamily="@font/roboto_mono_bold"
+        android:fontFamily="@font/roboto"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/anthracite"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/team_a_imageView"
-        app:layout_constraintStart_toStartOf="@+id/team_a_imageView"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/team_a_imageView"
         tools:text="Team A" />
 
     <TextView
-        android:id="@+id/date_timeTextView"
+        android:id="@+id/homeDateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:fontFamily="@font/roboto"
+        android:textSize="17sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toStartOf="@+id/team_b_imageView"
-        
         app:layout_constraintStart_toEndOf="@+id/team_a_imageView"
         app:layout_constraintTop_toBottomOf="@+id/champTextView"
-        app:layout_constraintVertical_bias="0.49"
-        tools:text="date et heure" />
+        tools:text="Dim. 05 mai" />
+
+    <TextView
+        android:id="@+id/homeHourTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:fontFamily="@font/roboto"
+        android:textSize="17sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="6dp"
+        app:layout_constraintEnd_toEndOf="@+id/homeDateTextView"
+        app:layout_constraintStart_toStartOf="@+id/homeDateTextView"
+        app:layout_constraintTop_toBottomOf="@+id/homeDateTextView"
+        tools:text="15h30" />
 
     <ImageView
         android:id="@+id/team_b_imageView"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="79dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="8dp"
         android:contentDescription="@string/imageDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        
-        app:layout_constraintStart_toEndOf="@+id/date_timeTextView"
-        app:layout_constraintTop_toTopOf="@+id/team_a_imageView"
-        tools:src="@color/dark_red" />
+        app:layout_constraintEnd_toEndOf="@+id/team_b_TextView"
+        app:layout_constraintStart_toStartOf="@+id/team_b_TextView"
+        app:layout_constraintTop_toBottomOf="@+id/topView"
+        tools:src="@drawable/default_logo" />
 
     <TextView
         android:id="@+id/team_b_TextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="37.5dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/roboto"
+        android:textAlignment="center"
         android:textStyle="bold"
+        android:textColor="@color/anthracite"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/team_b_imageView"
-        app:layout_constraintStart_toStartOf="@+id/team_b_imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/team_b_imageView"
         tools:text="Team B" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

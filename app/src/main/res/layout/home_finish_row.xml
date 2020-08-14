@@ -33,7 +33,7 @@
         android:id="@+id/calendarTableRow"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/background_1"
+        android:background="@color/light_gray"
         app:layout_constraintTop_toBottomOf="@+id/champTextView"
         />
 
@@ -65,7 +65,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:contentDescription="@string/imageDescription"
-        app:layout_constraintEnd_toStartOf="@+id/date_timeTextView"
+        app:layout_constraintEnd_toStartOf="@+id/homeDateTextView"
         
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +87,7 @@
         tools:text="Team A" />
 
     <TextView
-        android:id="@+id/date_timeTextView"
+        android:id="@+id/homeDateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -107,7 +107,7 @@
         android:contentDescription="@string/imageDescription"
         app:layout_constraintEnd_toEndOf="parent"
         
-        app:layout_constraintStart_toEndOf="@+id/date_timeTextView"
+        app:layout_constraintStart_toEndOf="@+id/homeDateTextView"
         app:layout_constraintTop_toTopOf="@+id/team_a_imageView"
         tools:src="@color/dark_red" />
 
@@ -130,9 +130,9 @@
         android:fontFamily="@font/roboto_mono_bold"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/date_timeTextView"
-        app:layout_constraintStart_toStartOf="@+id/date_timeTextView"
-        app:layout_constraintTop_toBottomOf="@id/date_timeTextView"
+        app:layout_constraintEnd_toEndOf="@+id/homeDateTextView"
+        app:layout_constraintStart_toStartOf="@+id/homeDateTextView"
+        app:layout_constraintTop_toBottomOf="@id/homeDateTextView"
         app:layout_constraintVertical_bias="0.47000003"
         tools:text="2-0" />
 

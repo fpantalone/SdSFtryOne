@@ -23,10 +23,9 @@ class HomeFragment : Fragment() {
     var preferedTeam: ArrayList<String> = arrayListOf()
 
     val adapter by lazy {
-        var matchMap: MutableMap<String, List<MatchData>> = mutableMapOf()
+        val matchMap: MutableMap<String, List<MatchData>> = mutableMapOf()
         preferedTeam.forEach { team ->
                 matchMap[team] = DbManager.getCalendar(team)
-            print (matchMap)
         }
         return@lazy HomeAdapter(preferedTeam, matchMap, View.OnClickListener {
             val navController = Navigation.findNavController(it)
@@ -67,6 +66,10 @@ class HomeFragment : Fragment() {
                 preferedTeam.add(team)
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

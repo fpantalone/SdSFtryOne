@@ -28,6 +28,7 @@
     <string name="network_error_title">Problème réseau</string>
     <string name="networ_error_msg">Activer le Wifi ou les données mobiles</string>
     <string name="day_name_format">J %d</string>
+    <string name="score_separator">−</string>
 
     <string-array name="match_tab_txt">
         <item>Sélection</item>

@@ -29,15 +29,15 @@ open class ChampData(
         return when (locale.language) {
 
             "nl" -> {
-                localizedName?.nl
+                localizedName.nl
             }
             "en" -> {
-                localizedName?.en
+                localizedName.en
             }
             else -> {
-                localizedName?.fr
+                localizedName.fr
             }
-        } ?: ""
+        }
     }
 
     fun delete () {

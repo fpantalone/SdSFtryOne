@@ -7,16 +7,32 @@ import androidx.recyclerview.widget.RecyclerView
 import be.technifutur.devmob9.sdsftryone.R
 import be.technifutur.devmob9.sdsftryone.model.MatchData
 import be.technifutur.devmob9.sdsftryone.tools.LockStatus
+import be.technifutur.devmob9.sdsftryone.tools.MatchStatus
 import be.technifutur.devmob9.sdsftryone.tools.TeamSide
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.home_finish_row.view.*
+import kotlinx.android.synthetic.main.home_live_row.view.*
 import kotlinx.android.synthetic.main.home_row.view.*
+import kotlinx.android.synthetic.main.home_row.view.champDayTextView
+import kotlinx.android.synthetic.main.home_row.view.champTextView
+import kotlinx.android.synthetic.main.home_row.view.homeDateTextView
+import kotlinx.android.synthetic.main.home_row.view.lockImageView
+import kotlinx.android.synthetic.main.home_row.view.team_a_TextView
+import kotlinx.android.synthetic.main.home_row.view.team_a_imageView
+import kotlinx.android.synthetic.main.home_row.view.team_b_TextView
+import kotlinx.android.synthetic.main.home_row.view.team_b_imageView
 import java.text.SimpleDateFormat
 import java.util.*
 
 class SubHomeAdapter(val data: List<MatchData>) :
     RecyclerView.Adapter<SubHomeAdapter.SubViewHolder>() {
 
-    val dateFormat = SimpleDateFormat("E. dd MMM", Locale.ROOT)
+    companion object {
+        private val dateFormat = SimpleDateFormat("E. dd MMM", Locale.ROOT)
+        private val FUTURE_TYPE = 1
+        private val LIVE_TYPE = 2
+        private val PLAYED_TYPE = 3
+    }
 
     override fun getItemCount(): Int {
         return data.count()
@@ -24,57 +40,41 @@ class SubHomeAdapter(val data: List<MatchData>) :
 
     // !! afficher les matchs qui sont dans le range -7 +6 par rapport à la date du jour !!
     override fun onBindViewHolder(holder: SubViewHolder, position: Int) {
-
-        val day = data[position].day?.firstOrNull()
-        val champ = day?.champ?.firstOrNull()
-
-        if (data[position].isInWeek()) {
-            holder.champName.text = champ?.name
-            holder.champDay.text = day?.getName(Locale.getDefault())
-
-            if (null != data[position].getTeam(TeamSide.HOME).logo) {
-                Glide.with(holder.team_A_Logo)
-                    .load(data[position].getTeam(TeamSide.HOME).getLogoURL())
-                    .into(holder.team_A_Logo)
-            } else {
-                holder.team_A_Logo.setImageResource(R.drawable.default_logo)
-            }
-
-            holder.team_A_Name.text = data[position].getTeam(TeamSide.HOME).fullName
-            if (null != data[position].getTeam(TeamSide.AWAY).logo) {
-                Glide.with(holder.team_B_Logo)
-                    .load(data[position].getTeam(TeamSide.AWAY).getLogoURL())
-                    .into(holder.team_B_Logo)
-            } else {
-                holder.team_B_Logo.setImageResource(R.drawable.default_logo)
-            }
-            holder.team_B_Name.text = data[position].getTeam(TeamSide.AWAY).fullName
-
-            holder.matchDate.text = dateFormat.format(data[position].getMatchDate())
-            holder.valmatchHour.text = data[position].hour
-
-            when (data[position].getLockStatus()) {
-                LockStatus.OWNED -> {
-                    holder.locker.setImageResource(R.drawable.lock_24px)
-                    holder.locker.setColorFilter(R.color.dark_red)
-                }
-                LockStatus.CLOSED -> {
-                    holder.locker.setImageResource(R.drawable.lock_24px)
-                }
-                else -> {
-                    holder.locker.setImageResource(R.drawable.lock_open_24px)
-                }
-            }
-        }
+        holder.bind(data[position])
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubViewHolder {
-        return SubViewHolder(
+    override fun getItemViewType(position: Int): Int {
+        val match = data[position]
+        val comment = match.getComment()
+
+        if (comment.status == MatchStatus.LIVE)
+            return LIVE_TYPE
+
+        if (null != match.homeScore && null != match.awayScore)
+            return PLAYED_TYPE
+
+        return FUTURE_TYPE
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
+
+        LIVE_TYPE -> {
+            LiveMatchViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.home_live_row, parent, false))
+        }
+        PLAYED_TYPE -> {
+            PlayedMatchViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.home_finish_row, parent, false))
+        }
+        else -> FuturMatchViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.home_row, parent, false)
         )
     }
 
-    class SubViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    abstract class SubViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+        abstract fun bind(match: MatchData)
+    }
+
+    class FuturMatchViewHolder(view: View) : SubViewHolder(view) {
         val champName = view.champTextView
         val champDay = view.champDayTextView
         val team_A_Logo = view.team_a_imageView
@@ -84,5 +84,70 @@ class SubHomeAdapter(val data: List<MatchData>) :
         val matchDate = view.homeDateTextView
         val valmatchHour = view.homeHourTextView
         val locker = view.lockImageView
+
+        override fun bind(match: MatchData) {
+
+            val day = match.day?.firstOrNull()
+            val champ = day?.champ?.firstOrNull()
+
+            if (match.isInWeek()) {
+                champName.text = champ?.name
+                champDay.text = day?.getName(Locale.getDefault())
+
+                if (null != match.getTeam(TeamSide.HOME).logo) {
+                    Glide.with(team_A_Logo)
+                        .load(match.getTeam(TeamSide.HOME).getLogoURL())
+                        .into(team_A_Logo)
+                } else {
+                    team_A_Logo.setImageResource(R.drawable.default_logo)
+                }
+
+                team_A_Name.text = match.getTeam(TeamSide.HOME).fullName
+                if (null != match.getTeam(TeamSide.AWAY).logo) {
+                    Glide.with(team_B_Logo)
+                        .load(match.getTeam(TeamSide.AWAY).getLogoURL())
+                        .into(team_B_Logo)
+                } else {
+                    team_B_Logo.setImageResource(R.drawable.default_logo)
+                }
+                team_B_Name.text = match.getTeam(TeamSide.AWAY).fullName
+
+                matchDate.text = dateFormat.format(match.getMatchDate())
+                valmatchHour.text = match.hour
+
+                when (match.getLockStatus()) {
+                    LockStatus.OWNED -> {
+                        locker.setImageResource(R.drawable.lock_24px)
+                        locker.setColorFilter(R.color.dark_red)
+                    }
+                    LockStatus.CLOSED -> {
+                        locker.setImageResource(R.drawable.lock_24px)
+                    }
+                    else -> {
+                        locker.setImageResource(R.drawable.lock_open_24px)
+                    }
+                }
+            }
+        }
+    }
+
+    class LiveMatchViewHolder(view: View) : SubViewHolder(view) {
+
+
+        val champName = view.liveChampTextView
+        val champDay = view.liveChampDayTextView
+        val homeLogo = view.liveHomeTeamImageView
+        val homeName = view.liveHomeTeamTextView
+        val awayLogo = view.liveAwayTeamImageView
+
+        override fun bind(match: MatchData) {
+            TODO("Not yet implemented")
+        }
+    }
+
+    class PlayedMatchViewHolder(view: View) : SubViewHolder(view) {
+        override fun bind(match: MatchData) {
+            TODO("Not yet implemented")
+        }
     }
 }

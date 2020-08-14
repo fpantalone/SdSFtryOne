@@ -5,135 +5,206 @@
     android:id="@+id/calendarRow"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="12dp"
     android:background="@drawable/plain_white_rounded_corner">
+
+    <View
+        android:id="@+id/finishTitleView"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:background="@drawable/top_rounded_corner_title_cell"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/finishTopView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gold"
+        app:layout_constraintTop_toBottomOf="@+id/finishTitleView"/>
+
+    <TextView
+        android:id="@+id/finishDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/finishGuideline"
+        app:layout_constraintStart_toEndOf="@+id/finishGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/finishTopView"
+        tools:text="Dim. 05 mai" />
+
+    <TextView
+        android:id="@+id/finishChampTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
+        android:paddingBottom="6dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/anthracite"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/finishTitleView"
+        app:layout_constraintBottom_toBottomOf="@id/finishTitleView"
+        tools:text="Coupe de Belgique" />
+
+    <ImageView
+        android:id="@+id/finishLockImageView"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/lockerDescription"
+        android:src="@drawable/lock_open_24px"
+        android:tint="@color/anthracite"
+        app:layout_constraintEnd_toStartOf="@id/finishChampDayTextView"
+        app:layout_constraintTop_toTopOf="@id/finishTitleView"
+        app:layout_constraintBottom_toBottomOf="@id/finishTitleView"/>
+
+    <TextView
+        android:id="@+id/finishChampDayTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/roboto"
+        android:textSize="18sp"
+        android:textColor="@color/anthracite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/finishTitleView"
+        app:layout_constraintBottom_toBottomOf="@id/finishTitleView"
+        tools:text="finale" />
+
+    <ImageView
+        android:id="@+id/finishHomeTeamImageView"
+        android:layout_width="79dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/imageDescription"
+        app:layout_constraintEnd_toEndOf="@+id/finishHomeTextView"
+        app:layout_constraintStart_toStartOf="@+id/finishHomeTextView"
+        app:layout_constraintTop_toBottomOf="@+id/finishTopView"
+        tools:src="@drawable/default_logo" />
+
+    <TextView
+        android:id="@+id/finishHomeTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="37.5dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/roboto"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/anthracite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/finishGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/finishHomeTeamImageView"
+        tools:text="Team A" />
+
+    <ImageView
+        android:id="@+id/finisAwayImageView"
+        android:layout_width="79dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/imageDescription"
+        app:layout_constraintEnd_toEndOf="@+id/finishAwayTextView"
+        app:layout_constraintStart_toStartOf="@+id/finishAwayTextView"
+        app:layout_constraintTop_toBottomOf="@+id/finishTopView"
+        tools:src="@drawable/default_logo" />
+
+    <TextView
+        android:id="@+id/finishAwayTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="37.5dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/roboto"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="@color/anthracite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/finishGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/finisAwayImageView"
+        tools:text="Team B" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/finishGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/finisHomeScoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:textSize="38sp"
+        android:textStyle="bold"
+        android:textColor="@color/anthracite"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/finishScoreSeparator"
+        app:layout_constraintEnd_toStartOf="@id/finishScoreSeparator"
+        tools:text="0"/>
+
+    <TextView
+        android:id="@+id/finishScoreSeparator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:textSize="38sp"
+        android:textStyle="bold"
+        android:textColor="@color/anthracite"
+        android:text="@string/score_separator"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/finishDateTextView"
+        app:layout_constraintEnd_toEndOf="@id/finishGuideline"
+        app:layout_constraintStart_toStartOf="@+id/finishGuideline"/>
+
+
+    <TextView
+        android:id="@+id/finishAwayScoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:textSize="38sp"
+        android:textStyle="bold"
+        android:textColor="@color/anthracite"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@+id/finishScoreSeparator"
+        app:layout_constraintBaseline_toBaselineOf="@+id/finishScoreSeparator"
+        tools:text="0"/>
+
+    <TextView
+        android:id="@+id/finishScoreCommentTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:textSize="22sp"
+        android:textColor="@color/gold"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintStart_toStartOf="@+id/finishGuideline"
+        app:layout_constraintEnd_toEndOf="@id/finishGuideline"
+        app:layout_constraintTop_toBottomOf="@id/finishScoreSeparator"
+        android:visibility="gone"
+        tools:text="blabla" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/top_rounded_corner_title_cell"
-        app:layout_constraintBottom_toBottomOf="@id/champTextView"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-    <TextView
-        android:id="@+id/champTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto_mono_bold"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:paddingBottom="6dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Coupe de Belgique" />
-
-    <TableRow
-        android:id="@+id/calendarTableRow"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/light_gray"
-        app:layout_constraintTop_toBottomOf="@+id/champTextView"
-        />
-
-    <ImageView
-        android:id="@+id/lockImageView"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginEnd="8dp"
-        android:contentDescription="@string/lockerDescription"
-        android:src="@drawable/lock_open_24px"
-        app:layout_constraintEnd_toStartOf="@id/champDayTextView"
-
-        app:layout_constraintTop_toTopOf="@id/champDayTextView" />
-
-    <TextView
-        android:id="@+id/champDayTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/champTextView"
-
-        tools:text="finale" />
-
-    <ImageView
-        android:id="@+id/team_a_imageView"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/imageDescription"
-        app:layout_constraintEnd_toStartOf="@+id/homeDateTextView"
-        
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/champTextView"
-        tools:src="@color/dark_red" />
-
-    <TextView
-        android:id="@+id/team_a_TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/roboto_mono_bold"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/team_a_imageView"
-        app:layout_constraintStart_toStartOf="@+id/team_a_imageView"
-        app:layout_constraintTop_toBottomOf="@+id/team_a_imageView"
-        tools:text="Team A" />
-
-    <TextView
-        android:id="@+id/homeDateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/scoreTextView"
-        app:layout_constraintEnd_toStartOf="@+id/team_b_imageView"
-        app:layout_constraintStart_toEndOf="@+id/team_a_imageView"
-        app:layout_constraintTop_toBottomOf="@+id/champTextView"
-        app:layout_constraintVertical_bias="0.52"
-        tools:text="date et heure" />
-
-    <ImageView
-        android:id="@+id/team_b_imageView"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginEnd="8dp"
-        android:contentDescription="@string/imageDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        
-        app:layout_constraintStart_toEndOf="@+id/homeDateTextView"
-        app:layout_constraintTop_toTopOf="@+id/team_a_imageView"
-        tools:src="@color/dark_red" />
-
-    <TextView
-        android:id="@+id/team_b_TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/team_b_imageView"
-        app:layout_constraintStart_toStartOf="@+id/team_b_imageView"
-        app:layout_constraintTop_toBottomOf="@+id/team_b_imageView"
-        tools:text="Team B" />
-
-    <TextView
-        android:id="@+id/scoreTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="36sp"
-        android:fontFamily="@font/roboto_mono_bold"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/homeDateTextView"
-        app:layout_constraintStart_toStartOf="@+id/homeDateTextView"
-        app:layout_constraintTop_toBottomOf="@id/homeDateTextView"
-        app:layout_constraintVertical_bias="0.47000003"
-        tools:text="2-0" />
+        app:layout_constraintTop_toBottomOf="@id/finishScoreCommentTextView"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

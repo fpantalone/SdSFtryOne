@@ -7,5 +7,5 @@ class Day(
     var date: String = "",
     var comment: String? = null,
     var matchConfig: String? = null,
-    var action: Char = 'A'
-)
+    override var action: Char = 'A'
+): Action

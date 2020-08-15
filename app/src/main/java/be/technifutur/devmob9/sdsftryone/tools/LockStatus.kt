@@ -7,7 +7,7 @@ enum class LockStatus (var jsonString: String): StringDataConverter {
 
     companion object: StringDataCreator<LockStatus> {
         override fun createFrom(string: String): LockStatus? {
-            return values().first {
+            return values().firstOrNull {
                 it.jsonString == string
             }
         }

@@ -12,5 +12,5 @@ class Match(
     var re2: Int? = null,
     var comment: String? = null,
     var locked: String? = null,
-    var action: Char = 'A'
-)
+    override var action: Char = 'A'
+): Action

@@ -5,17 +5,17 @@ enum class EventType(val jsonString: String): StringDataConverter {
     FOUL("foul"),
     OFFSIDE("offside"),
     CORNER("corner"),
-    ONTARGET("ontarget"),
-    OFFTARGET("offtarget"),
-    SUBSTITUTION("substitution("),
+    ONTARGET("onTarget"),
+    OFFTARGET("offTarget"),
+    SUBSTITUTION("substitution"),
     CARD("card"),
-    BALLGAIN("ballgain"),
+    BALLGAIN("ballGain"),
     PENALTY("penalty"),
     CHRONO("chrono");
 
     companion object: StringDataCreator<EventType> {
         override fun createFrom(string: String): EventType? {
-            return values().first {
+            return values().firstOrNull {
                 it.jsonString == string
             }
         }

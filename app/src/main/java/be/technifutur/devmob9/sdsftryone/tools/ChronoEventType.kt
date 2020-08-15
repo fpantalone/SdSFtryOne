@@ -10,7 +10,7 @@ enum class ChronoEventType(val jsonString: String): StringDataConverter {
 
     companion object: StringDataCreator<ChronoEventType> {
         override fun createFrom(string: String): ChronoEventType? {
-            return values().first {
+            return values().firstOrNull {
                 it.jsonString == string
             }
         }

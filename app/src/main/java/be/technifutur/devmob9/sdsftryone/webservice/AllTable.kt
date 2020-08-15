@@ -7,9 +7,9 @@ class AllTable(
     val champ: List<Champ> = listOf(),
     val day: List<Day> = listOf(),
     val match: List<Match> = listOf(),
-    val player: List<Player>? = null,
-    val event: List<Event>? = null,
+    val player: List<Player> = listOf(),
+    val event: List<Event> = listOf(),
     @SerializedName("match_player")
-    val matchPlayer: List<MatchPlayer>? = null
+    val matchPlayer: List<MatchPlayer> = listOf()
 ) {
 }

@@ -7,7 +7,7 @@ enum class CardType(val jsonString: String): StringDataConverter {
 
     companion object: StringDataCreator<CardType> {
         override fun createFrom(string: String): CardType? {
-            return values().first {
+            return values().firstOrNull {
                 it.jsonString == string
             }
         }

@@ -10,4 +10,6 @@ class MatchPlayer(
     var number: Int = 0,
     var status: Int = 0,
     override var action: Char = 'A'
-) : ModificationData
+) : Modification {
+    override val modificationType = "player"
+}

@@ -13,6 +13,7 @@ import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -65,6 +66,16 @@ class WebService() {
             if (spDbUpdateTime?.isNotEmpty() == true) {
                 dbUpdateTime = dateTimeFormater.parse(spDbUpdateTime)
             }
+        }
+
+        fun parseDate (date: String): Date? {
+            try {
+                return dateFormatter.parse(date)
+            }
+            catch (ex: ParseException) {
+                Log.d("WebService", ex.message, ex)
+            }
+            return null
         }
 
         fun isOnline(): Boolean {

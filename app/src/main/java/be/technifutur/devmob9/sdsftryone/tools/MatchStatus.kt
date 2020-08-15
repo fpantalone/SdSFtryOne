@@ -10,7 +10,7 @@ enum class MatchStatus (val jsonString: String): StringDataConverter {
 
     companion object: StringDataCreator<MatchStatus> {
         override fun createFrom(string: String): MatchStatus? {
-            return values().first {
+            return values().firstOrNull {
                 it.jsonString == string
             }
         }

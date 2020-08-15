@@ -9,8 +9,8 @@ class Champ(
     var genForfeit: List<String> = listOf(),
     var team: String? = null,
     var teams: List<teamItem>? = null,
-    var action: Char = 'A'
-) {
+    override var action: Char = 'A'
+): Action {
     inner class teamItem(
         var team: String = "",
         var code: String = "",

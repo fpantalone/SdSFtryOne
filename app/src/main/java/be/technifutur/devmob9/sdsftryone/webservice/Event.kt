@@ -10,4 +10,6 @@ class Event(
     var type: String = "",
     var param: String = "",
     override var action: Char = 'A'
-) : ModificationData
+) : Modification {
+    override val modificationType = "event"
+}

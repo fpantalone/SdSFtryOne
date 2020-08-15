@@ -9,7 +9,7 @@ enum class TeamSide (val jsonString: String): StringDataConverter {
 
     companion object: StringDataCreator<TeamSide> {
         override fun createFrom(string: String): TeamSide? {
-            return values().first {
+            return values().firstOrNull {
                 it.jsonString == string
             }
         }

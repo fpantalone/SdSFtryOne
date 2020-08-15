@@ -5,5 +5,5 @@ class Club(
     var short: String = "",
     var full: String = "",
     var logo: String? = null,
-    var action: Char = 'A'
-)
+    override var action: Char = 'A'
+): Action

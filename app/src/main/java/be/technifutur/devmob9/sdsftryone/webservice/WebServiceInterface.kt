@@ -5,9 +5,6 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface WebServiceInterface {
-    @GET("request.php?cmd=get&table=tut")
-    fun readUpdateTime(@Query("uuid") uuid: String): Call<TableUpdateTimes>
-
     @GET("request.php?cmd=get&table=all")
     fun readAll(@Query("uuid") uuid: String, @Query("since") since: String?): Single<AllTable>
 

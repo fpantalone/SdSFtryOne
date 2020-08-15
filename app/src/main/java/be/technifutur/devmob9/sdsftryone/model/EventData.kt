@@ -17,6 +17,33 @@ open class EventData(
     val match: RealmResults<MatchData>? = null
 ) : RealmObject() {
 
+    companion object {
+        fun validateTime (time: String, type: EventType, param: String): Boolean {
+            val chronoType = ChronoEventParam.createFrom(param)?.type
+            val valideHourChronoType = arrayOf(ChronoEventType.BEGIN, ChronoEventType.RESUME, ChronoEventType.CANCEL)
+            val regexMatchHour = Regex("^(\\d)@(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d\$")
+            val matchHour = regexMatchHour.matchEntire(time)
+            if (null != matchHour && type == EventType.CHRONO && null != chronoType && chronoType in valideHourChronoType) {
+                val periodZero = "0" == matchHour.groupValues[1]
+                return if (chronoType == ChronoEventType.CANCEL) periodZero else !periodZero
+            }
+            val validePenaltyChronoType = arrayOf(ChronoEventType.BEGIN, ChronoEventType.END)
+            val regexMatchPenalty = Regex("^[1-9]@\\d+-\\d+(\\(\\d+-\\d+\\))?\$")
+            val matchPenalty = regexMatchPenalty.matchEntire(time)
+            if (null != matchPenalty && (type == EventType.PENALTY || (type == EventType.CHRONO && validePenaltyChronoType.contains(chronoType)))) {
+                if (matchPenalty.groupValues[1].isNotEmpty()) {
+                    return (chronoType != ChronoEventType.BEGIN || "(0-0)" == matchPenalty.groupValues[1])
+                }
+                return chronoType == ChronoEventType.END
+            }
+            val regexMatchTime  = Regex("^[1-8]@\\d{1,3}(:00\\+(\\d|1[0-5]))?:[0-5]\\d\$")
+            if (null != regexMatchTime.matchEntire(time)) {
+                return type != EventType.PENALTY && (type != EventType.CHRONO || !valideHourChronoType.contains(chronoType))
+            }
+            return false;
+        }
+    }
+
     fun getType (): EventType? {
         try {
             return EventType.valueOf(type)

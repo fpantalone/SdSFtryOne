@@ -12,7 +12,7 @@ class NameComment(
     companion object {
 
         private val regex =
-            Regex("\"(?:\\(([0-9]+) ?- ?([0-9]+)\\))?((?:rem|live|stop|fft)!)?(.*?)(?:\\^(.*?)(?:\\^(.*?))?)?\$\"")
+            Regex("^(?:\\(([0-9]+) ?- ?([0-9]+)\\))?((?:rem|live|stop|fft)!)?(.*?)(?:\\^(.*?)(?:\\^(.*?))?)?\$")
 
         fun getNameComment(string: String): NameComment? {
 

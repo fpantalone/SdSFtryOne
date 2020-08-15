@@ -16,6 +16,7 @@ open class ClubData(
     @Ignore
     var suffix: String = ""
         get() = if (field.isEmpty()) { "" } else { " $field" }
+        set(value) { field = value }
 
 //    fun setSuffix (sufix: String) {
 //        this.teamSuffix = sufix

@@ -13,14 +13,6 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.home_finish_row.view.*
 import kotlinx.android.synthetic.main.home_live_row.view.*
 import kotlinx.android.synthetic.main.home_row.view.*
-import kotlinx.android.synthetic.main.home_row.view.champDayTextView
-import kotlinx.android.synthetic.main.home_row.view.champTextView
-import kotlinx.android.synthetic.main.home_row.view.homeDateTextView
-import kotlinx.android.synthetic.main.home_row.view.lockImageView
-import kotlinx.android.synthetic.main.home_row.view.team_a_TextView
-import kotlinx.android.synthetic.main.home_row.view.team_a_imageView
-import kotlinx.android.synthetic.main.home_row.view.team_b_TextView
-import kotlinx.android.synthetic.main.home_row.view.team_b_imageView
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -47,7 +39,7 @@ class SubHomeAdapter(val data: List<MatchData>) :
         val match = data[position]
         val comment = match.getComment()
 
-        if (comment.status == MatchStatus.LIVE)
+        if (comment?.status == MatchStatus.LIVE)
             return LIVE_TYPE
 
         if (null != match.homeScore && null != match.awayScore)
@@ -59,10 +51,14 @@ class SubHomeAdapter(val data: List<MatchData>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
 
         LIVE_TYPE -> {
-            LiveMatchViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.home_live_row, parent, false))
+            LiveMatchViewHolder(
+                LayoutInflater.from(parent.context).inflate(R.layout.home_live_row, parent, false)
+            )
         }
         PLAYED_TYPE -> {
-            PlayedMatchViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.home_finish_row, parent, false))
+            PlayedMatchViewHolder(
+                LayoutInflater.from(parent.context).inflate(R.layout.home_finish_row, parent, false)
+            )
         }
         else -> FuturMatchViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.home_row, parent, false)
@@ -103,6 +99,7 @@ class SubHomeAdapter(val data: List<MatchData>) :
                 }
 
                 team_A_Name.text = match.getTeam(TeamSide.HOME).fullName
+
                 if (null != match.getTeam(TeamSide.AWAY).logo) {
                     Glide.with(team_B_Logo)
                         .load(match.getTeam(TeamSide.AWAY).getLogoURL())
@@ -123,8 +120,11 @@ class SubHomeAdapter(val data: List<MatchData>) :
                     LockStatus.CLOSED -> {
                         locker.setImageResource(R.drawable.lock_24px)
                     }
-                    else -> {
+                    LockStatus.OPEN -> {
                         locker.setImageResource(R.drawable.lock_open_24px)
+                    }
+                    else -> {
+                        locker.visibility = View.INVISIBLE
                     }
                 }
             }
@@ -133,21 +133,129 @@ class SubHomeAdapter(val data: List<MatchData>) :
 
     class LiveMatchViewHolder(view: View) : SubViewHolder(view) {
 
-
         val champName = view.liveChampTextView
         val champDay = view.liveChampDayTextView
         val homeLogo = view.liveHomeTeamImageView
         val homeName = view.liveHomeTeamTextView
         val awayLogo = view.liveAwayTeamImageView
+        val awayName = view.liveAwayTeamTextView
+        val homeScore = view.liveHomeScoreTextView
+        val awayScore = view.liveAwayScoreTextView
+        val locker = view.liveLockImageView
 
+        // TODO: mettre le timer
         override fun bind(match: MatchData) {
-            TODO("Not yet implemented")
+
+            val day = match.day?.firstOrNull()
+            val champ = day?.champ?.firstOrNull()
+
+            champName.text = champ?.name
+            champDay.text = day?.getName(Locale.getDefault())
+
+            if (null != match.getTeam(TeamSide.HOME).logo) {
+                Glide.with(homeLogo)
+                    .load(match.getTeam(TeamSide.HOME).getLogoURL())
+                    .into(homeLogo)
+            } else {
+                homeLogo.setImageResource(R.drawable.default_logo)
+            }
+
+            homeName.text = match.getTeam(TeamSide.HOME).fullName
+
+            if (null != match.getTeam(TeamSide.AWAY).logo) {
+                Glide.with(awayLogo)
+                    .load(match.getTeam(TeamSide.AWAY).getLogoURL())
+                    .into(awayLogo)
+            } else {
+                awayLogo.setImageResource(R.drawable.default_logo)
+            }
+            awayName.text = match.getTeam(TeamSide.AWAY).fullName
+
+            homeScore.text = match.homeScore.toString()
+            awayScore.text = match.awayScore.toString()
+
+            when (match.getLockStatus()) {
+                LockStatus.OWNED -> {
+                    locker.setImageResource(R.drawable.lock_24px)
+                    locker.setColorFilter(R.color.dark_red)
+                }
+                LockStatus.CLOSED -> {
+                    locker.setImageResource(R.drawable.lock_24px)
+                }
+                LockStatus.OPEN -> {
+                    locker.setImageResource(R.drawable.lock_open_24px)
+                }
+                else -> {
+                    locker.visibility = View.INVISIBLE
+                }
+            }
+
+            // ToDO: !!!! AffichageLive !!!!
         }
     }
 
     class PlayedMatchViewHolder(view: View) : SubViewHolder(view) {
+
+        val champName = view.finishChampTextView
+        val champDay = view.finishChampDayTextView
+        val date = view.finishDateTextView
+        val homeLogo = view.finishHomeTeamImageView
+        val homeName = view.finishHomeTeamTextView
+        val awayLogo = view.finisAwayTeamImageView
+        val awayName = view.finishAwayTeamTextView
+        val homeScore = view.finisHomeScoreTextView
+        val awayScore = view.finishAwayScoreTextView
+        val locker = view.finishLockImageView
+
         override fun bind(match: MatchData) {
-            TODO("Not yet implemented")
+
+            val day = match.day?.firstOrNull()
+            val champ = day?.champ?.firstOrNull()
+
+            if (match.isInWeek()) {
+                champName.text = champ?.name
+                champDay.text = day?.getName(Locale.getDefault())
+
+                date.text = dateFormat.format(match.getMatchDate())
+
+                if (null != match.getTeam(TeamSide.HOME).logo) {
+                    Glide.with(homeLogo)
+                        .load(match.getTeam(TeamSide.HOME).getLogoURL())
+                        .into(homeLogo)
+                } else {
+                    homeLogo.setImageResource(R.drawable.default_logo)
+                }
+
+                homeName.text = match.getTeam(TeamSide.HOME).fullName
+
+                if (null != match.getTeam(TeamSide.AWAY).logo) {
+                    Glide.with(awayLogo)
+                        .load(match.getTeam(TeamSide.AWAY).getLogoURL())
+                        .into(awayLogo)
+                } else {
+                    awayLogo.setImageResource(R.drawable.default_logo)
+                }
+                awayName.text = match.getTeam(TeamSide.AWAY).fullName
+
+                homeScore.text = match.homeScore.toString()
+                awayScore.text = match.awayScore.toString()
+
+                when (match.getLockStatus()) {
+                    LockStatus.OWNED -> {
+                        locker.setImageResource(R.drawable.lock_24px)
+                        locker.setColorFilter(R.color.dark_red)
+                    }
+                    LockStatus.CLOSED -> {
+                        locker.setImageResource(R.drawable.lock_24px)
+                    }
+                    LockStatus.OPEN -> {
+                        locker.setImageResource(R.drawable.lock_open_24px)
+                    }
+                    else -> {
+                        locker.visibility = View.INVISIBLE
+                    }
+                }
+            }
         }
     }
 }

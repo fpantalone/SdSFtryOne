@@ -52,8 +52,8 @@ open class MatchData(
         return players.filter { it.isKeeper() }.size
     }
 
-    fun getComment(): MatchComment {
-        return MatchComment.createFrom(comment)!!
+    fun getComment(): MatchComment? {
+        return MatchComment.createFrom(comment)
     }
 
     fun getLockStatus(): LockStatus? {
@@ -141,7 +141,7 @@ open class MatchData(
         val aScore = awayScore ?: return null
         val comment = getComment()
 
-        when (comment.status) {
+        when (comment?.status) {
             MatchStatus.NONE -> {
                 var hGoal = hScore
                 var aGoal = aScore
@@ -183,15 +183,15 @@ open class MatchData(
         now.set (now.get(Calendar.YEAR),now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH))
         // on prend la date 7 jpurs avant
         val lastWeek = now.clone() as GregorianCalendar
-        lastWeek.add(Calendar.DAY_OF_MONTH, -7)
+        lastWeek.add(Calendar.DAY_OF_MONTH, -8)
         // on prend la date 6 jours après
         val nextWeek = now.clone() as GregorianCalendar
-        nextWeek.add(Calendar.DAY_OF_MONTH,6)
+        nextWeek.add(Calendar.DAY_OF_MONTH,7)
         // on récupère la date du match
         val matchDay = GregorianCalendar()
         matchDay.time = getMatchDate()
         // on regarde si la date est comprise dans l'intervale
-        return matchDay.after(lastWeek) && matchDay.before(nextWeek)
+        return (matchDay.after(lastWeek) || matchDay == lastWeek) && (matchDay.before(nextWeek) || matchDay == nextWeek)
     }
 
     fun delete() {

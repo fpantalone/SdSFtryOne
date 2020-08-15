@@ -6,7 +6,6 @@ import android.net.NetworkCapabilities
 import android.util.Log
 import androidx.preference.PreferenceManager
 import be.technifutur.devmob9.sdsftryone.BuildConfig
-import be.technifutur.devmob9.sdsftryone.dao.DbManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer

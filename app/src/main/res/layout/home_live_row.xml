@@ -131,7 +131,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="208dp" />
+        app:layout_constraintGuide_percent="0.5" />
 
     <TextView
         android:id="@+id/liveHomeScoreTextView"
@@ -191,6 +191,7 @@
             android:id="@+id/liveLiveTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Live"
             android:background="@drawable/plain_red_top_rounded_corner"
             android:fontFamily="@font/roboto"
             android:textColor="@android:color/white"

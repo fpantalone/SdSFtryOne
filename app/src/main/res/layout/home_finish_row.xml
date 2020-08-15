@@ -87,13 +87,13 @@
         android:layout_height="79dp"
         android:layout_marginTop="8dp"
         android:contentDescription="@string/imageDescription"
-        app:layout_constraintEnd_toEndOf="@+id/finishHomeTextView"
-        app:layout_constraintStart_toStartOf="@+id/finishHomeTextView"
+        app:layout_constraintEnd_toEndOf="@+id/finishHomeTeamTextView"
+        app:layout_constraintStart_toStartOf="@+id/finishHomeTeamTextView"
         app:layout_constraintTop_toBottomOf="@+id/finishTopView"
         tools:src="@drawable/default_logo" />
 
     <TextView
-        android:id="@+id/finishHomeTextView"
+        android:id="@+id/finishHomeTeamTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -111,18 +111,18 @@
         tools:text="Team A" />
 
     <ImageView
-        android:id="@+id/finisAwayImageView"
+        android:id="@+id/finisAwayTeamImageView"
         android:layout_width="79dp"
         android:layout_height="79dp"
         android:layout_marginTop="8dp"
         android:contentDescription="@string/imageDescription"
-        app:layout_constraintEnd_toEndOf="@+id/finishAwayTextView"
-        app:layout_constraintStart_toStartOf="@+id/finishAwayTextView"
+        app:layout_constraintEnd_toEndOf="@+id/finishAwayTeamTextView"
+        app:layout_constraintStart_toStartOf="@+id/finishAwayTeamTextView"
         app:layout_constraintTop_toBottomOf="@+id/finishTopView"
         tools:src="@drawable/default_logo" />
 
     <TextView
-        android:id="@+id/finishAwayTextView"
+        android:id="@+id/finishAwayTeamTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="37.5dp"
@@ -136,7 +136,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/finishGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/finisAwayImageView"
+        app:layout_constraintTop_toBottomOf="@+id/finisAwayTeamImageView"
         tools:text="Team B" />
 
     <androidx.constraintlayout.widget.Guideline

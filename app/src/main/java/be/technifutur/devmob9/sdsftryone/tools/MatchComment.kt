@@ -8,13 +8,26 @@ class MatchComment(
     companion object : StringDataCreator<MatchComment> {
         override fun createFrom(string: String): MatchComment? {
             val regex = Regex("^(?:\\((\\d+) ?- ?(\\d+)\\))?((?:rem|live|stop|fft)!)?(.*)\$")
-            val result = regex.matchEntire(string)
+            val result = regex.matchEntire(string)!!
             val matchComment = MatchComment("", "", "", null, null, MatchStatus.NONE)
 
-            matchComment.homePenalty = result?.groupValues?.get(1)?.toInt()
-            matchComment.awayPenalty = result?.groupValues?.get(2)?.toInt()
-            matchComment.status = MatchStatus.valueOf(result?.groupValues?.get(3) ?: "")
-            matchComment.parse(result?.groupValues?.get(4) ?: "")
+            val hPen = result.groupValues[1]
+            if (hPen.isEmpty()) {
+                matchComment.homePenalty = null
+            } else {
+                matchComment.homePenalty = hPen.toInt()
+            }
+
+            val aPen = result.groupValues[2]
+
+            if (aPen.isEmpty()) {
+                matchComment.awayPenalty = null
+            } else {
+                matchComment.awayPenalty = result.groupValues[2].toInt()
+            }
+
+            matchComment.status = MatchStatus.createFrom(result.groupValues[3]) ?: MatchStatus.NONE
+            matchComment.parse(result.groupValues[4])
 
             return matchComment
         }

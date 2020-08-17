@@ -44,6 +44,7 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         WebService.clearDbSyncTime()
 
         translateStandart()
@@ -56,7 +57,7 @@ class SplashFragment : Fragment() {
 
         // Lecture des données
         WebService.getAllData(
-            Consumer { data: AllTable ->
+            { data: AllTable ->
                 DbManager.updateData(data, Consumer { success ->
                     if (success) {
                         WebService.updateDbSyncTime()
@@ -70,7 +71,7 @@ class SplashFragment : Fragment() {
                 navController.navigate(direction)
 
             },
-            Consumer { error: Throwable ->
+            { error: Throwable ->
                 if (error is IllegalStateException) {
                     alertBox(R.string.network_error_title, R.string.networ_error_msg)
                 }

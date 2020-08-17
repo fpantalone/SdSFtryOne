@@ -34,7 +34,11 @@
         android:id="@+id/calendarFragment2"
         android:name="be.technifutur.devmob9.sdsftryone.fragment.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar" >
+        <argument
+            android:name="teamName"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/matchManagerFragment"
         android:name="be.technifutur.devmob9.sdsftryone.fragment.MatchManagerFragment"

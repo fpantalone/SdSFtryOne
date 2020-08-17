@@ -57,7 +57,7 @@ open class MatchData(
     }
 
     fun getLockStatus(): LockStatus? {
-        return locked?.let { LockStatus.valueOf(it) }
+        return locked?.let { LockStatus.createFrom(it) }
     }
 
     fun getEvents(type: EventType?): List<EventData>? {

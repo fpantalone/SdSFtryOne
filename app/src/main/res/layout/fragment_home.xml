@@ -12,6 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentTop="true"
+        android:title="@string/home_fragment_title"
+        android:titleTextColor="@android:color/white"
+        android:logo="@drawable/sports_soccer_24px"
         android:background="@color/dark_red"
         android:elevation="4dp" />
 
@@ -24,3 +27,4 @@
         />
 
 </RelativeLayout>
+

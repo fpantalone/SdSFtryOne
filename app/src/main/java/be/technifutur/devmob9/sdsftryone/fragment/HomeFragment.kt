@@ -3,6 +3,7 @@ package be.technifutur.devmob9.sdsftryone.fragment
 import android.os.Bundle
 import android.view.*
 import android.widget.Toolbar
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -28,9 +29,11 @@ class HomeFragment : Fragment() {
                 matchMap[team] = DbManager.getCalendar(team)
         }
         return@lazy HomeAdapter(preferedTeam, matchMap, View.OnClickListener {
+            val pos = it?.tag as Int
+
             val navController = Navigation.findNavController(it)
-            val direction = HomeFragmentDirections.actionHomeFragmentToCalendarFragment2()
-            navController.navigate(direction)        })
+            val direction = HomeFragmentDirections.actionHomeFragmentToCalendarFragment2(preferedTeam[pos])
+            navController.navigate(direction) })
     }
 
     override fun onCreateView(
@@ -39,6 +42,8 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         activity?.setActionBar(homeToolBar)
+        activity?.title = "Live Score"
+        setHasOptionsMenu(true)
 
         return inflater.inflate(R.layout.fragment_home, container, false)
 
@@ -70,6 +75,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

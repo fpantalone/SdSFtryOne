@@ -49,6 +49,7 @@ class SplashFragment : Fragment() {
 
         translateStandart()
 
+
         Handler().postDelayed({
             animMaskLayout?.let {
                 it.visibility = View.INVISIBLE

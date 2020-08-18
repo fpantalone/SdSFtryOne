@@ -15,8 +15,7 @@ class CalendarFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        activity?.calendarToolBar?.title = args.teamName
+        // activity?.setActionBar(calendarToolBar)
 
     }
 
@@ -25,8 +24,9 @@ class CalendarFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        activity?.setActionBar(calendarToolBar)
 
+
+        // tpous les matches de l'équi dans l'ordre chronologique, pour les matchs qui sont isinweek afficher tous les matchs de la journée même si c'est pas ceux du standard
 
         return inflater.inflate(R.layout.fragment_calendar, container, false)
     }

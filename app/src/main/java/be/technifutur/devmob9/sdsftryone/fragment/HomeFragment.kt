@@ -30,6 +30,7 @@ class HomeFragment : Fragment() {
         }
         return@lazy HomeAdapter(preferedTeam, matchMap, View.OnClickListener {
             val pos = it?.tag as Int
+            val team = preferedTeam[pos]
 
             val navController = Navigation.findNavController(it)
             val direction = HomeFragmentDirections.actionHomeFragmentToCalendarFragment2(preferedTeam[pos])

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:id="@+id/calendarAwayWrapLayout"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="32dp"
+        android:background="@drawable/white_round_shape"
+        android:backgroundTint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/calendarHomeWrapLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/calendarHomeWrapLayout">
+
+        <ImageView
+            android:id="@+id/calendarAwayTeamImageView"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_margin="2dp"
+            android:layout_gravity="center"
+            android:background="@drawable/white_round_shape"
+            android:src="@drawable/default_logo" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/calendarHomeWrapLayout"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/white_round_shape"
+        android:backgroundTint="@color/gray"
+        android:layout_marginStart="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"   >
+
+         <ImageView
+            android:id="@+id/calendarHomeTeamImageView"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+             android:background="@drawable/white_round_shape"
+            android:src="@drawable/default_logo"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/calendarHomeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+        android:padding="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/calendarAwayTextView"
+        app:layout_constraintStart_toEndOf="@+id/calendarAwayWrapLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Standard de Liège" />
+
+    <TextView
+        android:id="@+id/calendarAwayTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+        android:padding="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/calendarAwayWrapLayout"
+        app:layout_constraintTop_toBottomOf="@+id/calendarHomeTextView"
+        tools:text="RSC Anderlecht" />
+
+    <LinearLayout
+        android:id="@+id/CalendarLiveLinLayout"
+        android:layout_width="61dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/red_rounded_corner"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/calendarHomeTextView"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/calendarLiveTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/plain_red_top_rounded_corner"
+            android:fontFamily="@font/roboto"
+            android:text="@string/live"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Live" />
+
+        <TextView
+            android:id="@+id/CalendarLiveChronoTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:textAlignment="center"
+            android:textColor="@color/anthracite"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="45+2'" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/calendarHomeScoreTextWiew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:padding="1dp"
+        android:textColor="@color/anthracite"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/calendarHomeTextView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/calendarScoreBerrier"
+
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/calendarAwayScoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:padding="1dp"
+        android:textColor="@color/anthracite"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/calendarAwayTextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/calendarScoreBerrier"
+        tools:text="1" />
+
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/calendarScoreBerrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left"
+        app:layout_constraintStart_toEndOf="@+id/calendarHomeScoreTextWiew"
+        tools:layout_editor_absoluteX="415dp" />
+
+
+    <TextView
+        android:id="@+id/calendarHomeShootOutTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:padding="1dp"
+        android:textColor="@color/gold"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/calendarHomeTextView"
+        app:layout_constraintBottom_toTopOf="@+id/calendarAwayShootoutTextView"
+        app:layout_constraintStart_toStartOf="@+id/calendarScoreBerrier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        tools:text="34" />
+
+    <TextView
+        android:id="@+id/calendarAwayShootoutTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:padding="1dp"
+        android:textColor="@color/gold"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintBaseline_toBaselineOf="@+id/calendarAwayTextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/calendarScoreBerrier"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="5" />
+
+
+    <TextView
+        android:id="@+id/calendarMatchTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="14:00" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

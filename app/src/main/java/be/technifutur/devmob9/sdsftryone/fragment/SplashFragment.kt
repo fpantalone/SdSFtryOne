@@ -37,6 +37,8 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        activity?.title = ""
+
 
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }

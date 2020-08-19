@@ -23,9 +23,12 @@ class CalendarFragment: BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        activity?.setActionBar(calendarToolBar)
-        calendarToolBar?.let { it.title = "Title" }
+        val title = getString(R.string.team_name_format)
 
+        setHasOptionsMenu(true)
+        activity?.title = String.format(title, args.teamName)
+        activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
+        activity?.actionBar?.setDisplayShowHomeEnabled(true)
     }
 
     override fun onCreateView(

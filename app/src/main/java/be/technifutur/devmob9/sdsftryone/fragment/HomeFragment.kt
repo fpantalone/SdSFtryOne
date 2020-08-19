@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true)
-        activity?.setActionBar(homeToolBar)
+        // activity?.setActionBar(homeToolBar)
         activity?.title = "Live Score"
 
 

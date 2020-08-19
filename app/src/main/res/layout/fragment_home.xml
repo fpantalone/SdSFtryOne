@@ -7,7 +7,7 @@
     android:background="@color/light_gray"
     tools:context=".fragment.HomeFragment">
 
-    <android.widget.Toolbar
+    <android.sur
         android:id="@+id/homeToolBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
-        app:layout_constraintTop_toBottomOf="@+id/homeToolBar"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

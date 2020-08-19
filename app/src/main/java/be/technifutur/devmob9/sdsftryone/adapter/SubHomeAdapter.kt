@@ -26,9 +26,7 @@ class SubHomeAdapter(val data: List<MatchData>) :
         private val PLAYED_TYPE = 3
     }
 
-    override fun getItemCount(): Int {
-        return data.count()
-    }
+    override fun getItemCount()= data.count()
 
     // !! afficher les matchs qui sont dans le range -7 +6 par rapport à la date du jour !!
     override fun onBindViewHolder(holder: SubViewHolder, position: Int) {

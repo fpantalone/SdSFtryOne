@@ -118,6 +118,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:padding="1dp"
+        android:layout_marginEnd="4dp"
         android:textColor="@color/anthracite"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -133,6 +134,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:padding="1dp"
+        android:layout_marginEnd="4dp"
         android:textColor="@color/anthracite"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -157,6 +159,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:padding="1dp"
+        android:layout_marginEnd="4dp"
         android:textColor="@color/gold"
         android:textSize="14sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/calendarHomeTextView"
@@ -173,6 +176,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:padding="1dp"
+        android:layout_marginEnd="4dp"
         android:textColor="@color/gold"
         android:textSize="14sp"
         android:visibility="gone"
@@ -182,7 +186,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="5" />
 
-
     <TextView
         android:id="@+id/calendarMatchTimeTextView"
         android:layout_width="wrap_content"
@@ -190,10 +193,10 @@
         android:fontFamily="@font/roboto"
         android:textSize="14sp"
         android:visibility="invisible"
+        android:layout_marginEnd="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="14:00" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

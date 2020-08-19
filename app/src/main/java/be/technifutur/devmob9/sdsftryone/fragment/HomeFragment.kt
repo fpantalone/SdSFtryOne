@@ -42,9 +42,10 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         activity?.setActionBar(homeToolBar)
         activity?.title = "Live Score"
-        setHasOptionsMenu(true)
+
 
         return inflater.inflate(R.layout.fragment_home, container, false)
 
@@ -80,8 +81,6 @@ class HomeFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return super.onOptionsItemSelected(item)
-
-
     }
 }
 

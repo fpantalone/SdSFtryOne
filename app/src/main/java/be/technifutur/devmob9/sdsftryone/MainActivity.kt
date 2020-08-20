@@ -10,6 +10,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        val navController = findNavController(R.id.nav_host_fragment)
+//        val appBarConfiguration = AppBarConfiguration(navController.graph)
+//        val toolbar = findViewById<Toolbar>(R.id.theToolbar)
+        // setupWithNavController(appBarConfiguration, navController)
+
     }
 
 }

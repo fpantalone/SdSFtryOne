@@ -94,7 +94,6 @@
             android:background="@color/transparent_dark_red"
             app:layout_constraintTop_toTopOf="@id/sectionTextView" />
 
-
         <View
             android:layout_width="50dp"
             android:layout_height="1dp"

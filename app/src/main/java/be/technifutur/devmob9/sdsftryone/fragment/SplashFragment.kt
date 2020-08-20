@@ -37,7 +37,7 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        activity?.title = ""
+        activity?.title = "Live Score"
 
 
         return inflater.inflate(R.layout.fragment_splash, container, false)
@@ -103,7 +103,7 @@ class SplashFragment : Fragment() {
         scaleAnim.duration = 2000
         animSet.addAnimation(scaleAnim)
 
-        standardTextView.startAnimation(animSet)
+        standardTextView?.startAnimation(animSet)
 
         translateDeLiege ()
 

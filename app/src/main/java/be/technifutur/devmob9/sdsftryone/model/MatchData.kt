@@ -30,8 +30,7 @@ open class MatchData(
     val unknownPlayerId = 0
     @Ignore
     val opponentPlayerId = 200
-
-    // TODO: voir code swift sur Git
+    
     // si la date est null il faut aller chercher celle de la journée
 
     fun getMatchDate(): Date {

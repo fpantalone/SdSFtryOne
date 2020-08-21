@@ -83,4 +83,7 @@ dependencies {
 
     //round image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // Material Design pour le navidation Drawer
+    implementation "com.google.android.material:material:1.2.0."
 }

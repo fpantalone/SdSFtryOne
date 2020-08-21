@@ -50,7 +50,7 @@
         android:layout_marginEnd="10dp"
         android:contentDescription="@string/lockerDescription"
         android:src="@drawable/lock_open_24px"
-        android:tint="@color/anthracite"
+        app:tint="@color/anthracite"
         app:layout_constraintEnd_toStartOf="@id/liveChampDayTextView"
         app:layout_constraintTop_toTopOf="@id/liveTitleView"
         app:layout_constraintBottom_toBottomOf="@id/liveTitleView"/>

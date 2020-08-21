@@ -63,10 +63,11 @@
         android:layout_marginEnd="10dp"
         android:contentDescription="@string/lockerDescription"
         android:src="@drawable/lock_open_24px"
-        android:tint="@color/anthracite"
+        app:tint="@color/anthracite"
         app:layout_constraintEnd_toStartOf="@id/finishChampDayTextView"
         app:layout_constraintTop_toTopOf="@id/finishTitleView"
-        app:layout_constraintBottom_toBottomOf="@id/finishTitleView"/>
+        app:layout_constraintBottom_toBottomOf="@id/finishTitleView"
+         />
 
     <TextView
         android:id="@+id/finishChampDayTextView"

@@ -5,12 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import be.technifutur.devmob9.sdsftryone.R
 import be.technifutur.devmob9.sdsftryone.adapter.CalendarAdapter
 import be.technifutur.devmob9.sdsftryone.dao.DbManager
 import kotlinx.android.synthetic.main.fragment_calendar.*
+import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.team_row.*
 
 class CalendarFragment: BaseFragment() {
 
@@ -27,9 +32,7 @@ class CalendarFragment: BaseFragment() {
         val title = getString(R.string.team_name_format)
 
         setHasOptionsMenu(true)
-        activity?.title = String.format(title, args.teamName)
-        activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
-        activity?.actionBar?.setDisplayShowHomeEnabled(true)
+        
     }
 
     override fun onCreateView(
@@ -45,6 +48,15 @@ class CalendarFragment: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //val title = String.format(team)
+        
+        val navController = findNavController()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+
+        NavigationUI.setupWithNavController(calendarToolbar, navController, appBarConfiguration)
+
+
 
        calendarRecyclerView.layoutManager = LinearLayoutManager(context)
         calendarRecyclerView.adapter = adapter

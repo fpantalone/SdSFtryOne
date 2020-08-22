@@ -69,6 +69,7 @@ class SubCalendarAdapter (val match: MatchData) : RecyclerView.Adapter<SubCalend
                 homeScore.visibility = View.VISIBLE
                 awayScore.text = data[position].awayScore.toString()
                 awayScore.visibility = View.VISIBLE
+                matchTime.visibility = View.INVISIBLE
             }
 
             if (null == data[position].getComment()?.homePenalty && null == data[position].getComment()?.awayPenalty) {

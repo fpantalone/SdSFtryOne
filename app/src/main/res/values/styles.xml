@@ -13,7 +13,16 @@
         <item name="android:windowLayoutInDisplayCutoutMode">never</item>
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:colorControlNormal">@android:color/white</item>
-
     </style>
+
+    <style name="HomeToolBarTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:homeAsUpIndicator">@drawable/sports_soccer_24px</item>
+    </style>
+
+    <style name="ToolBarTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:homeAsUpIndicator">@drawable/ic_baseline_arrow_back_24</item>
+    </style>
+
+
 
 </resources>

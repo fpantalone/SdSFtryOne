@@ -3,8 +3,14 @@ package be.technifutur.devmob9.sdsftryone.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import be.technifutur.devmob9.sdsftryone.R
+import be.technifutur.devmob9.sdsftryone.fragment.HomeFragment
+import be.technifutur.devmob9.sdsftryone.fragment.HomeFragmentDirections
 import be.technifutur.devmob9.sdsftryone.model.MatchData
 import be.technifutur.devmob9.sdsftryone.tools.LockStatus
 import be.technifutur.devmob9.sdsftryone.tools.MatchStatus
@@ -16,21 +22,21 @@ import kotlinx.android.synthetic.main.home_row.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SubHomeAdapter(val data: List<MatchData>) :
+class SubHomeAdapter(val data: List<MatchData>, val listener: HomeMatchCellClickListener) :
     RecyclerView.Adapter<SubHomeAdapter.SubViewHolder>() {
 
     companion object {
         private val dateFormat = SimpleDateFormat("E. dd MMM", Locale.ROOT)
-        private val FUTURE_TYPE = 1
-        private val LIVE_TYPE = 2
-        private val PLAYED_TYPE = 3
+        private const val FUTURE_TYPE = 1
+        private const val LIVE_TYPE = 2
+        private const val PLAYED_TYPE = 3
     }
 
     override fun getItemCount()= data.count()
 
     // !! afficher les matchs qui sont dans le range -7 +6 par rapport à la date du jour !!
     override fun onBindViewHolder(holder: SubViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(data[position], listener)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -65,7 +71,7 @@ class SubHomeAdapter(val data: List<MatchData>) :
 
     abstract class SubViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        abstract fun bind(match: MatchData)
+        abstract fun bind(match: MatchData, listener: HomeMatchCellClickListener)
     }
 
     class FuturMatchViewHolder(view: View) : SubViewHolder(view) {
@@ -78,8 +84,9 @@ class SubHomeAdapter(val data: List<MatchData>) :
         val matchDate = view.homeDateTextView
         val valmatchHour = view.homeHourTextView
         val locker = view.lockImageView
+        val clickView = view.titleView
 
-        override fun bind(match: MatchData) {
+        override fun bind(match: MatchData, listener: HomeMatchCellClickListener) {
 
             val day = match.day?.firstOrNull()
             val champ = day?.champ?.firstOrNull()
@@ -125,6 +132,8 @@ class SubHomeAdapter(val data: List<MatchData>) :
                         locker.visibility = View.INVISIBLE
                     }
                 }
+
+                clickView.setOnClickListener{ listener.matchCellLongClicked(match) }
             }
         }
     }
@@ -140,9 +149,10 @@ class SubHomeAdapter(val data: List<MatchData>) :
         val homeScore = view.liveHomeScoreTextView
         val awayScore = view.liveAwayScoreTextView
         val locker = view.liveLockImageView
+        val clickView = view.liveTitleView
 
         // TODO: mettre le timer
-        override fun bind(match: MatchData) {
+        override fun bind(match: MatchData, listener: HomeMatchCellClickListener) {
 
             val day = match.day?.firstOrNull()
             val champ = day?.champ?.firstOrNull()
@@ -188,6 +198,8 @@ class SubHomeAdapter(val data: List<MatchData>) :
                 }
             }
 
+            clickView.setOnClickListener { listener.matchCellLongClicked(match) }
+
             // ToDO: !!!! AffichageLive !!!!
         }
     }
@@ -204,8 +216,9 @@ class SubHomeAdapter(val data: List<MatchData>) :
         val homeScore = view.finisHomeScoreTextView
         val awayScore = view.finishAwayScoreTextView
         val locker = view.finishLockImageView
+        val clickView = view.finishTitleView
 
-        override fun bind(match: MatchData) {
+        override fun bind(match: MatchData, listener: HomeMatchCellClickListener) {
 
             val day = match.day?.firstOrNull()
             val champ = day?.champ?.firstOrNull()
@@ -253,6 +266,7 @@ class SubHomeAdapter(val data: List<MatchData>) :
                         locker.visibility = View.INVISIBLE
                     }
                 }
+                clickView.setOnClickListener { listener.matchCellLongClicked(match) }
             }
         }
     }

@@ -9,16 +9,16 @@
     <string name="lockerDescription">it\'s a locker</string>
     <string name="loading_error">Data loading error</string>
     <string name="team_name_format">Équipe %s</string>
-    <string name="team_a_menu_label">Equipe A</string>
-    <string name="team_b_menu_label">Equipe B</string>
-    <string name="team_c_menu_label">Equipe C</string>
-    <string name="team_u16_menu_label">Equipe U16</string>
-    <string name="team_u14_menu_label">Equipe U14</string>
-    <string name="team_u13_menu_label">Equipe U13</string>
-    <string name="team_u12_menu_label">Equipe U12</string>
-    <string name="team_u11_menu_label">Equipe U11</string>
+    <string name="team_a_menu_label">Équipe A</string>
+    <string name="team_b_menu_label">Équipe B</string>
+    <string name="team_c_menu_label">Équipe C</string>
+    <string name="team_u16_menu_label">Équipe U16</string>
+    <string name="team_u14_menu_label">Équipe U14</string>
+    <string name="team_u13_menu_label">Équipe U13</string>
+    <string name="team_u12_menu_label">Équipe U12</string>
+    <string name="team_u11_menu_label">Équipe U11</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="pref_team_title">Equipe(s) préférée(s)</string>
+    <string name="pref_team_title">Équipe(s) préférée(s)</string>
     <string name="pref_info_title">Information</string>
     <string name="network_error">Pas de réseau</string>
     <string name="retryDialog">Réessayer</string>
@@ -31,6 +31,9 @@
     <string name="score_separator">−</string>
     <string name="home_fragment_title">Live Score</string>
     <string name="live">Live</string>
+    <string name="botomNavSelectLabel">Sélection</string>
+    <string name="bottomNavEventLabel">Évènements</string>
+    <string name="bottomNavConfigLabel">Config</string>
 
     <string-array name="match_tab_txt">
         <item>Sélection</item>

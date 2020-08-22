@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import be.technifutur.devmob9.sdsftryone.R
-import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_tab_container.*
 
 
@@ -28,16 +28,27 @@ class TabContainerFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // récuperation du string-array
-        val tabTitleArray = resources.getStringArray(R.array.match_tab_txt)
-        // adapter pour le ViewPager
-        val matchPagerAdapter = MatchPagerAdapter(this, tabTitleArray.size)
-        matchViewPager.adapter = matchPagerAdapter
-        // lien entre le Viewpager et le tabLayout
-        TabLayoutMediator(matchTabLayout, matchViewPager) { tab, position ->
-            tab.text = tabTitleArray[position].substringBefore(' ')
-        }.attach()
 
+        // lien bottomNavigationView et NavController
+        val navController = findNavController()
+        NavigationUI.setupWithNavController(bottomNavView, navController)
+
+        bottomNavView.setOnNavigationItemReselectedListener { item ->
+
+            when (item.itemId) {
+                R.id.matchManagerFragment -> {
+                    true
+                }
+                R.id.matchEventFragment -> {
+                    true
+                }
+                R.id.matchConfigFragment -> {
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
     }
-
 }

@@ -1,29 +1,28 @@
 package be.technifutur.devmob9.sdsftryone.fragment
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import be.technifutur.devmob9.sdsftryone.R
 import be.technifutur.devmob9.sdsftryone.adapter.HomeAdapter
+import be.technifutur.devmob9.sdsftryone.adapter.HomeMatchCellClickListener
 import be.technifutur.devmob9.sdsftryone.dao.DbManager
 import be.technifutur.devmob9.sdsftryone.model.MatchData
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.home_finish_row.*
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomeMatchCellClickListener {
 
     var preferedTeam: ArrayList<String> = arrayListOf()
 
@@ -37,9 +36,12 @@ class HomeFragment : Fragment() {
             val title = String.format(getString(R.string.team_name_format, preferedTeam[pos]))
 
             val navController = Navigation.findNavController(it)
-            val direction = HomeFragmentDirections.actionHomeFragmentToCalendarFragment2(title, preferedTeam[pos])
+            val direction = HomeFragmentDirections.actionHomeFragmentToCalendarFragment2(
+                title,
+                preferedTeam[pos]
+            )
             navController.navigate(direction)
-        })
+        }, this)
     }
 
     override fun onCreateView(
@@ -52,14 +54,14 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
 
     }
-    
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupWithNavController(homeToolbar,navController,appBarConfiguration)
-        
+        setupWithNavController(homeToolbar, navController, appBarConfiguration)
+
         // récupérer la liste des équipe sélectionée dans les préférences
 
         getPreferedTeam()
@@ -69,8 +71,6 @@ class HomeFragment : Fragment() {
 
         homeRecyclerView.layoutManager = LinearLayoutManager(context)
         homeRecyclerView.adapter = adapter
-
-        finishTitleView?.setOnClickListener {loadConfigScreen()}
 
     }
 
@@ -86,11 +86,17 @@ class HomeFragment : Fragment() {
         }
     }
 
-    fun loadConfigScreen () {
-        val navControler = findNavController()
+    override fun matchCellLongClicked(match: MatchData) {
+
+        val navController = findNavController()
         val direction = HomeFragmentDirections.actionHomeFragmentToTabContainerFragment()
-        navControler.navigate(direction)
+        navController.navigate(direction)
     }
+
+    override fun matchCellClicked(match: MatchData) {
+        // TODO Afficher le compte-rendu
+    }
+
 }
 
 

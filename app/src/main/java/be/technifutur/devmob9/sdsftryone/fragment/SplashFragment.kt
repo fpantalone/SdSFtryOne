@@ -70,8 +70,8 @@ class SplashFragment : Fragment() {
 
                 // passe à l'écran d'accueil
                 val navController = Navigation.findNavController(view)
-                val direction = SplashFragmentDirections.actionSplashFragmentToHomeFragment()
-                navController.navigate(direction)
+                // val direction = SplashFragmentDirections.actionSplashFragmentToHomeFragment()
+                navController.navigate(R.id.homeFragment)
 
             },
             { error: Throwable ->
@@ -145,12 +145,10 @@ class SplashFragment : Fragment() {
         dialog.setTitle(title)
         dialog.setMessage(message)
         dialog.setPositiveButton(R.string.retryDialog, DialogInterface.OnClickListener { _, _ ->
-            val direction = SplashFragmentDirections.actionSplashFragmentToHomeFragment()
-            view?.let { Navigation.findNavController(it) }?.navigate(direction)
+            view?.let { Navigation.findNavController(it) }?.navigate(R.id.homeFragment)
         })
         dialog.setNegativeButton(R.string.cancelDialog, DialogInterface.OnClickListener { _, _ ->
-            val direction = SplashFragmentDirections.actionSplashFragmentToHomeFragment()
-            view?.let { Navigation.findNavController(it) }?.navigate(direction)
+            view?.let { Navigation.findNavController(it) }?.navigate(R.id.homeFragment)
 
         })
         dialog.show()

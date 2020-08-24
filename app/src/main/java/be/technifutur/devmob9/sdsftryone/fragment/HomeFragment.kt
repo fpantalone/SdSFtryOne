@@ -49,7 +49,6 @@ class HomeFragment : Fragment(), HomeMatchCellClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        this.setHasOptionsMenu(true)
 
         return inflater.inflate(R.layout.fragment_home, container, false)
 
@@ -60,6 +59,7 @@ class HomeFragment : Fragment(), HomeMatchCellClickListener {
 
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
+
         setupWithNavController(homeToolbar, navController, appBarConfiguration)
 
         // récupérer la liste des équipe sélectionée dans les préférences

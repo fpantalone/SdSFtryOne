@@ -31,7 +31,9 @@ class TabContainerFragment : BaseFragment() {
 
         // lien bottomNavigationView et NavController
         val navController = findNavController()
+
         NavigationUI.setupWithNavController(bottomNavView, navController)
+
 
         bottomNavView.setOnNavigationItemReselectedListener { item ->
 

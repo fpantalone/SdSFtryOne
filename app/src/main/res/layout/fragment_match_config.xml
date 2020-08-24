@@ -7,16 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".fragment.MatchConfigFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/MatchConfigToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:titleTextColor="@android:color/white"
-        android:background="@color/dark_red"
-        android:theme="@style/ToolBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="match config frag"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,6 +34,22 @@
     <string name="botomNavSelectLabel">Sélection</string>
     <string name="bottomNavEventLabel">Évènements</string>
     <string name="bottomNavConfigLabel">Config</string>
+    <string name="MatchMngSearchLabel">Rechercher</string>
+    <string name="selectionLabel">Sélection</string>
+    <string name="cap_keep_label">🅖／🅲</string>
+    <string name="mm_score_label">Score</string>
+    <string name="mm_periode_label">Période</string>
+    <string name="em_miss_button_label"> Manqué </string>
+    <string name="em_success_button_label">Réussi</string>
+    <string name="em_possess_label">Possession</string>
+    <string name="em_foul">Faute</string>
+    <string name="em_offside">hors-jeux</string>
+    <string name="em_corner">corner</string>
+    <string name="em_center_shoot">tir cadré</string>
+    <string name="em_out_shoot">tir non cadré</string>
+    <string name="em_change">changement</string>
+    <string name="em_card">carte</string>
+
 
     <string-array name="match_tab_txt">
         <item>Sélection</item>

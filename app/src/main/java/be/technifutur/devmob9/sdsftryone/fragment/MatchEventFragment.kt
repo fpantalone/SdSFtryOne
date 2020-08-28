@@ -6,9 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import be.technifutur.devmob9.sdsftryone.R
+import com.addisonelliott.segmentedbutton.SegmentedButton
+import com.addisonelliott.segmentedbutton.SegmentedButtonGroup
+import com.addisonelliott.segmentedbutton.SegmentedButtonGroup.OnPositionChangedListener
+import kotlinx.android.synthetic.main.fragment_match_event.*
 
 
-class MatchEventFragment : BaseFragment() {
+class MatchEventFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,5 +27,10 @@ class MatchEventFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_match_event, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        super.onViewCreated(view, savedInstanceState)
+
+    }
 
 }

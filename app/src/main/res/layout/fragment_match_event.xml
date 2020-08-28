@@ -1,19 +1,325 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.MatchEventFragment">
 
     <TextView
+        android:id="@+id/mmChronoTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/roboto"
+        android:text="105:00"
+        android:textAlignment="textEnd"
+        android:textColor="@color/anthracite"
+        android:textSize="56sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/mmScoreLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="105:00" />
+
+    <TextView
+        android:id="@+id/mmScoreLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:text="Match Event"
-        />
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/mm_score_label"
+        android:textColor="@color/anthracite"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/mmScoreTextView"
+        app:layout_constraintTop_toTopOf="@+id/mmChronoTextView" />
 
+    <TextView
+        android:id="@+id/mmScoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="2 - 3"
+        android:textColor="@color/anthracite"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mmScoreLabel"
+        tools:text="2 - 3" />
+
+    <TextView
+        android:id="@+id/mmPeriodLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mm_periode_label"
+        android:textColor="@color/anthracite"
+        app:layout_constraintBaseline_toBaselineOf="@+id/mmChronoTextView"
+        app:layout_constraintStart_toStartOf="@+id/mmScoreLabel" />
+
+    <TextView
+        android:id="@+id/mmPeriodeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="3"
+        android:textColor="@color/anthracite"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/mmChronoTextView"
+        app:layout_constraintEnd_toEndOf="@id/mmScoreTextView"
+        tools:text="3" />
+
+    <LinearLayout
+        android:id="@+id/mmWrapbuttonView"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/plain_light_gray_rounded_corner"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mmChronoTextView">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/play_arrow_24px" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/skip_next_24px" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/stop_24px" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/wrapToggleButtonFrame"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/plain_light_gray_rounded_corner"
+        android:padding="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mmWrapbuttonView">
+
+        <com.addisonelliott.segmentedbutton.SegmentedButtonGroup
+            android:id="@+id/toggleButtonGroup"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@color/light_gray"
+            android:backgroundTint="@color/light_gray"
+            app:draggable="true"
+            app:radius="10dp"
+            app:rippleColor="@color/anthracite"
+            app:selectedBackground="@color/gold"
+            app:selectedBorderColor="@color/light_gray"
+            app:selectedButtonRadius="8dp"
+            app:selectionAnimationDuration="800">
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                android:id="@+id/togglebuttonOne"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/light_gray"
+                android:fontFamily="@font/roboto"
+                android:padding="4dp"
+                app:selectedTextColor="@android:color/white"
+                app:text="Button One"
+                app:textColor="@color/anthracite"
+                app:textSize="14sp" />
+
+            <com.addisonelliott.segmentedbutton.SegmentedButton
+                android:id="@+id/togglebuttonTwo"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/light_gray"
+                android:fontFamily="@font/roboto"
+                android:padding="4dp"
+                app:selectedTextColor="@android:color/white"
+                app:text="Button Two"
+                app:textColor="@color/anthracite"
+                app:textSize="14sp" />
+
+        </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/emWrapMiddleControlLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wrapToggleButtonFrame">
+
+        <Button
+            android:id="@+id/emHomeCounteButtonr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0:00"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/emPossessionLabel"
+            />
+
+        <TextView
+            android:id="@+id/emPossessionLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/em_possess_label"
+            android:fontFamily="@font/roboto"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/emAwayCounteButtonr"
+            app:layout_constraintStart_toEndOf="@+id/emHomeCounteButtonr"
+            app:layout_constraintTop_toTopOf="@id/emHomeCounteButtonr"
+            app:layout_constraintBottom_toBottomOf="@id/emHomeCounteButtonr"/>
+
+        <Button
+            android:id="@+id/emAwayCounteButtonr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0:00"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/emPlayerSearchView"
+            android:layout_width="0dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="2dp"
+
+            android:background="@drawable/light_gray_rounded_corner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emHomeCounteButtonr" />
+
+        <Button
+            android:id="@+id/emMissedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_baseline_cancel_24"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/em_miss_button_label"
+            android:textColor="@color/dark_red"
+            app:layout_constraintEnd_toStartOf="@+id/emSuccessButtom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emPlayerSearchView" />
+
+        <Button
+            android:id="@+id/emSuccessButtom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_baseline_check_circle_24"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/em_success_button_label"
+            android:textColor="@color/dark_green"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/emMissedButton"
+            app:layout_constraintTop_toBottomOf="@+id/emPlayerSearchView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/emHomeGoalcounterTextView"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/roboto"
+        android:textAlignment="textEnd"
+        android:textColor="@color/anthracite"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/emGoalEventLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="0" />
+
+    <ImageButton
+        android:id="@+id/emHomePlusButton"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/add_circle_outline_24px"
+        app:layout_constraintBottom_toBottomOf="@+id/emGoalEventLabel"
+        app:layout_constraintEnd_toStartOf="@+id/emGoalEventLabel"
+        app:layout_constraintStart_toEndOf="@+id/emHomeGoalcounterTextView"
+        app:layout_constraintTop_toTopOf="@+id/emGoalEventLabel" />
+
+    <TextView
+        android:id="@+id/emGoalEventLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto"
+        android:textAlignment="center"
+        android:textColor="@color/anthracite"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toStartOf="@+id/emAwayGoalPlusButton"
+        app:layout_constraintStart_toEndOf="@+id/emHomePlusButton"
+        app:layout_constraintTop_toBottomOf="@+id/emWrapMiddleControlLayout"
+        tools:text="label labble" />
+
+    <ImageButton
+        android:id="@+id/emAwayGoalPlusButton"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/add_circle_outline_24px"
+        app:layout_constraintBottom_toBottomOf="@+id/emGoalEventLabel"
+        app:layout_constraintEnd_toStartOf="@+id/emAwayGoalCounter"
+        app:layout_constraintStart_toEndOf="@+id/emGoalEventLabel"
+        app:layout_constraintTop_toTopOf="@+id/emGoalEventLabel" />
+
+    <TextView
+        android:id="@+id/emAwayGoalCounter"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/anthracite"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/emGoalEventLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/emAwayGoalPlusButton"
+        tools:text="0" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/emRecyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/emGoalEventLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

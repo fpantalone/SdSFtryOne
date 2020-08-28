@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="34dp"
         android:background="@drawable/top_rounded_corner_title_cell"
-        android:clickable="true"
+        android:longClickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

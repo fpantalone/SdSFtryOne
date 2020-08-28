@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,9 +18,7 @@ import be.technifutur.devmob9.sdsftryone.dao.DbManager
 import be.technifutur.devmob9.sdsftryone.webservice.AllTable
 import be.technifutur.devmob9.sdsftryone.webservice.WebService
 import io.reactivex.functions.Consumer
-import io.realm.Realm
 import kotlinx.android.synthetic.main.fragment_splash.*
-import java.util.ArrayList
 
 /**
  * A simple [Fragment] subclass.
@@ -49,8 +46,7 @@ class SplashFragment : Fragment() {
 
         WebService.clearDbSyncTime()
 
-        translateStandart()
-
+        translateStandard()
 
         Handler().postDelayed({
             animMaskLayout?.let {
@@ -87,7 +83,7 @@ class SplashFragment : Fragment() {
         )
     }
 
-    fun translateStandart () {
+    fun translateStandard () {
 
         val animSet = AnimationSet(true)
 

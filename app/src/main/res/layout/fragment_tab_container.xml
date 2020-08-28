@@ -4,34 +4,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.TabContainerFragment">
-
+    tools:context=".fragment.TabContainerFragment"
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tabContainerToolbar"
+        android:id="@+id/tabContainerToolBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="@color/dark_red"
+        app:titleTextColor="@android:color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:titleTextColor="@android:color/white"
-        android:background="@color/dark_red"
-        android:theme="@style/ToolBarTheme"
+
+        />
+
+    <fragment
+        android:id="@+id/tab_nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/tab_nav_graph"
+        app:layout_constraintTop_toBottomOf="@+id/tabContainerToolBar"
+        app:layout_constraintBottom_toTopOf="@+id/tabContainerBottomNavView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavView"
+        android:id="@+id/tabContainerBottomNavView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        app:menu="@menu/mm_bottom_tab_menu"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav"
-        app:itemRippleColor="@color/anthracite"
-        app:itemIconTint="@android:color/white"
-        app:itemTextColor="@android:color/white"
-        android:background="@color/dark_red"
-        android:visibility="visible"
-        android:elevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

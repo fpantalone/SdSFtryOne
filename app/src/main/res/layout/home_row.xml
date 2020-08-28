@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="34dp"
         android:background="@drawable/top_rounded_corner_title_cell"
-        android:clickable="true"
+        android:longClickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -51,10 +51,10 @@
         android:layout_marginEnd="10dp"
         android:contentDescription="@string/lockerDescription"
         android:src="@drawable/lock_open_24px"
-        android:tint="@color/anthracite"
         app:layout_constraintEnd_toStartOf="@id/champDayTextView"
         app:layout_constraintTop_toTopOf="@id/titleView"
-        app:layout_constraintBottom_toBottomOf="@id/titleView"/>
+        app:layout_constraintBottom_toBottomOf="@id/titleView"
+        app:tint="@color/anthracite" />
 
     <TextView
         android:id="@+id/champDayTextView"

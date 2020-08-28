@@ -43,10 +43,13 @@ class SubCalendarAdapter (val match: MatchData) : RecyclerView.Adapter<SubCalend
                 holder.homeLogo.setImageResource(be.technifutur.devmob9.sdsftryone.R.drawable.default_logo)
             }
 
+            awayClipFrame.clipToOutline = true
+            homeClipFrame.clipToOutline = true
+
             if (null != data[position].getTeam(be.technifutur.devmob9.sdsftryone.tools.TeamSide.AWAY).logo) {
-                com.bumptech.glide.Glide.with(holder.awayLogo)
+                Glide.with(holder.awayLogo)
                     .load(
-                        data[position].getTeam(be.technifutur.devmob9.sdsftryone.tools.TeamSide.AWAY)
+                        data[position].getTeam(TeamSide.AWAY)
                             .getLogoURL()
                     )
                     .into(holder.awayLogo)
@@ -97,6 +100,8 @@ class SubCalendarAdapter (val match: MatchData) : RecyclerView.Adapter<SubCalend
         val homePenalty: TextView = view.calendarHomeShootOutTextView
         val awayPenalty: TextView = view.calendarAwayShootoutTextView
         val matchTime: TextView = view.calendarMatchTimeTextView
+        val homeClipFrame = view.calendarHomeClipImageLayout
+        val awayClipFrame = view.calendarAwayImageClipFrame
 
     }
 

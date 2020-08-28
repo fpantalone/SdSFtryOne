@@ -16,34 +16,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/calendarHomeWrapLayout">
 
-        <ImageView
-            android:id="@+id/calendarAwayTeamImageView"
+        <FrameLayout
+            android:id="@+id/calendarAwayImageClipFrame"
             android:layout_width="34dp"
             android:layout_height="34dp"
-            android:layout_margin="2dp"
-            android:layout_gravity="center"
-            android:background="@drawable/white_round_shape"
-            android:src="@drawable/default_logo" />
+            android:layout_margin="1dp"
+            android:background="@drawable/white_round_shape">
+
+            <ImageView
+                android:id="@+id/calendarAwayTeamImageView"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="2dp"
+                android:background="@drawable/white_round_shape"
+                android:src="@drawable/default_logo" />
+        </FrameLayout>
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/calendarHomeWrapLayout"
         android:layout_width="36dp"
         android:layout_height="36dp"
+        android:layout_marginStart="6dp"
         android:background="@drawable/white_round_shape"
         android:backgroundTint="@color/gray"
-        android:layout_marginStart="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"   >
+        app:layout_constraintTop_toTopOf="parent">
 
-         <ImageView
-            android:id="@+id/calendarHomeTeamImageView"
+        <FrameLayout
+            android:id="@+id/calendarHomeClipImageLayout"
             android:layout_width="34dp"
             android:layout_height="34dp"
-             android:background="@drawable/white_round_shape"
-            android:src="@drawable/default_logo"
-            android:layout_gravity="center"/>
+            android:layout_margin="1dp"
+            android:background="@drawable/white_round_shape">
+
+            <ImageView
+                android:id="@+id/calendarHomeTeamImageView"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/white_round_shape"
+                android:src="@drawable/default_logo" />
+        </FrameLayout>
 
     </FrameLayout>
 
@@ -53,8 +69,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
-        android:textSize="14sp"
         android:padding="2dp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/calendarAwayTextView"
         app:layout_constraintStart_toEndOf="@+id/calendarAwayWrapLayout"
         app:layout_constraintTop_toTopOf="parent"
@@ -65,8 +81,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
-        android:textSize="14sp"
         android:padding="2dp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/calendarAwayWrapLayout"
         app:layout_constraintTop_toBottomOf="@+id/calendarHomeTextView"
@@ -116,15 +132,15 @@
         android:id="@+id/calendarHomeScoreTextWiew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
         android:fontFamily="@font/roboto"
         android:padding="1dp"
-        android:layout_marginEnd="4dp"
         android:textColor="@color/anthracite"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/calendarHomeTextView"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/calendarScoreBerrier"
+        app:layout_constraintTop_toTopOf="parent"
 
         tools:text="1" />
 
@@ -132,9 +148,9 @@
         android:id="@+id/calendarAwayScoreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
         android:fontFamily="@font/roboto"
         android:padding="1dp"
-        android:layout_marginEnd="4dp"
         android:textColor="@color/anthracite"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -157,43 +173,43 @@
         android:id="@+id/calendarHomeShootOutTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
         android:fontFamily="@font/roboto"
         android:padding="1dp"
-        android:layout_marginEnd="4dp"
         android:textColor="@color/gold"
         android:textSize="14sp"
+        android:visibility="gone"
         app:layout_constraintBaseline_toBaselineOf="@+id/calendarHomeTextView"
         app:layout_constraintBottom_toTopOf="@+id/calendarAwayShootoutTextView"
-        app:layout_constraintStart_toStartOf="@+id/calendarScoreBerrier"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/calendarScoreBerrier"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"
         tools:text="34" />
 
     <TextView
         android:id="@+id/calendarAwayShootoutTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
         android:fontFamily="@font/roboto"
         android:padding="1dp"
-        android:layout_marginEnd="4dp"
         android:textColor="@color/gold"
         android:textSize="14sp"
         android:visibility="gone"
         app:layout_constraintBaseline_toBaselineOf="@+id/calendarAwayTextView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/calendarScoreBerrier"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/calendarScoreBerrier"
         tools:text="5" />
 
     <TextView
         android:id="@+id/calendarMatchTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
         android:fontFamily="@font/roboto"
         android:textSize="14sp"
         android:visibility="invisible"
-        android:layout_marginEnd="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

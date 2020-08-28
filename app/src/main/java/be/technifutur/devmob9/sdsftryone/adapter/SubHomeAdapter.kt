@@ -229,6 +229,7 @@ class SubHomeAdapter(val data: List<MatchData>, val listener: HomeMatchCellClick
 
                 date.text = dateFormat.format(match.getMatchDate())
 
+
                 if (null != match.getTeam(TeamSide.HOME).logo) {
                     Glide.with(homeLogo)
                         .load(match.getTeam(TeamSide.HOME).getLogoURL())

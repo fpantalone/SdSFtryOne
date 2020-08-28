@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/emRowHomeGoalcounterTextView"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/roboto"
+        android:textAlignment="textEnd"
+        android:textColor="@color/anthracite"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/emRowGoalEventLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="0" />
+
+    <ImageButton
+        android:id="@+id/emRowHomePlusButton"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/add_circle_outline_24px"
+        app:layout_constraintBottom_toBottomOf="@+id/emRowGoalEventLabel"
+        app:layout_constraintEnd_toStartOf="@+id/emRowGoalEventLabel"
+        app:layout_constraintStart_toEndOf="@+id/emRowHomeGoalcounterTextView"
+        app:layout_constraintTop_toTopOf="@+id/emRowGoalEventLabel" />
+
+    <TextView
+        android:id="@+id/emRowGoalEventLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto"
+        android:textAlignment="center"
+        android:textColor="@color/anthracite"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toStartOf="@+id/emRowAwayGoalPlusButton"
+        app:layout_constraintStart_toEndOf="@+id/emRowHomePlusButton"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="label labble" />
+
+    <ImageButton
+        android:id="@+id/emRowAwayGoalPlusButton"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/add_circle_outline_24px"
+        app:layout_constraintBottom_toBottomOf="@+id/emRowGoalEventLabel"
+        app:layout_constraintEnd_toStartOf="@+id/emRowAwayGoalCounter"
+        app:layout_constraintStart_toEndOf="@+id/emRowGoalEventLabel"
+        app:layout_constraintTop_toTopOf="@+id/emRowGoalEventLabel" />
+
+    <TextView
+        android:id="@+id/emRowAwayGoalCounter"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/anthracite"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/emRowGoalEventLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/emRowAwayGoalPlusButton"
+        tools:text="0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

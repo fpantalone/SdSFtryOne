@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
         android:id="@+id/matchManagerFragment"
         android:title="@string/botomNavSelectLabel"
-        android:icon="@drawable/group_24px"
-        android:iconTint="@android:color/white"
-        android:iconTintMode="src_atop" />
+        android:icon="@drawable/group_24px" />
 
     <item
         android:id="@+id/matchEventFragment"
         android:title="@string/bottomNavEventLabel"
-        android:icon="@drawable/list4_24px"
-        android:iconTint="@android:color/white"
-        android:iconTintMode="src_atop"
-        />
+        android:icon="@drawable/list4_24px" />
 
     <item
         android:id="@+id/matchConfigFragment"
         android:title="@string/bottomNavConfigLabel"
         android:icon="@drawable/ic_baseline_build_24"
-        android:iconTint="@android:color/white"
-        android:iconTintMode="src_atop"
         />
-
 </menu>

@@ -27,7 +27,6 @@ class CalendarFragment: BaseFragment() {
         super.onCreate(savedInstanceState)
 
         setHasOptionsMenu(true)
-        
     }
 
     override fun onCreateView(

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -88,8 +89,11 @@ class HomeFragment : Fragment(), HomeMatchCellClickListener {
 
     override fun matchCellLongClicked(match: MatchData) {
 
+        // TODO - complèter le passage d'argument
+        val bundle = bundleOf("match" to match)
+
         val navController = findNavController()
-        val direction = HomeFragmentDirections.actionHomeFragmentToTabContainerFragment()
+        val direction = HomeFragmentDirections.actionHomeFragmentToTabContainerFragment(bundle)
         navController.navigate(direction)
     }
 

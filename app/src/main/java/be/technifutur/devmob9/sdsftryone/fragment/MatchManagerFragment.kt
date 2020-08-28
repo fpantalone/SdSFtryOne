@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import be.technifutur.devmob9.sdsftryone.R
 
 
-class MatchManagerFragment :BaseFragment() {
+class MatchManagerFragment :Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +23,4 @@ class MatchManagerFragment :BaseFragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_match_manager, container, false)
     }
-
-
 }

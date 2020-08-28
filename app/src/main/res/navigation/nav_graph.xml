@@ -5,6 +5,8 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/splashFragment">
 
+    <include app:graph="@navigation/tab_nav_graph"/>
+
     <fragment
         android:id="@+id/splashFragment"
         android:name="be.technifutur.devmob9.sdsftryone.fragment.SplashFragment"
@@ -40,21 +42,6 @@
             android:name="teamName"
             app:argType="string" />
     </fragment>
-    <fragment
-        android:id="@+id/matchManagerFragment"
-        android:name="be.technifutur.devmob9.sdsftryone.fragment.MatchManagerFragment"
-        android:label="fragment_match_manager"
-        tools:layout="@layout/fragment_match_manager" />
-    <fragment
-        android:id="@+id/matchEventFragment"
-        android:name="be.technifutur.devmob9.sdsftryone.fragment.MatchEventFragment"
-        android:label="fragment_match_event"
-        tools:layout="@layout/fragment_match_event" />
-    <fragment
-        android:id="@+id/matchConfigFragment"
-        android:name="be.technifutur.devmob9.sdsftryone.fragment.MatchConfigFragment"
-        android:label="fragment_match_config"
-        tools:layout="@layout/fragment_match_config" />
     <fragment
         android:id="@+id/tabContainerFragment"
         android:name="be.technifutur.devmob9.sdsftryone.fragment.TabContainerFragment"

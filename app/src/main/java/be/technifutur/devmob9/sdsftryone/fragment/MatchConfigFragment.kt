@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import be.technifutur.devmob9.sdsftryone.R
 
 
-class MatchConfigFragment : BaseFragment() {
+class MatchConfigFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

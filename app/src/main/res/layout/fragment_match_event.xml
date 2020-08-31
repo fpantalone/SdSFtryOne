@@ -105,7 +105,7 @@
             android:layout_margin="8dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/stop_24px" />
+            android:src="@drawable/clear_24px" />
 
     </LinearLayout>
 
@@ -318,8 +318,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/emRecyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/emGoalEventLabel"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/emGoalEventLabel" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -46,5 +46,9 @@
         android:id="@+id/tabContainerFragment"
         android:name="be.technifutur.devmob9.sdsftryone.fragment.TabContainerFragment"
         android:label="fragment_tab_container"
-        tools:layout="@layout/fragment_tab_container" />
+        tools:layout="@layout/fragment_tab_container" >
+        <argument
+            android:name="matchId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

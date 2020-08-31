@@ -1,10 +1,12 @@
 package be.technifutur.devmob9.sdsftryone.model
 
+import android.os.Parcelable
 import be.technifutur.devmob9.sdsftryone.tools.LocalizedName
 import be.technifutur.devmob9.sdsftryone.tools.MatchConfig
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 open class ChampData(

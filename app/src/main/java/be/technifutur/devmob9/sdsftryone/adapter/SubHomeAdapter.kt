@@ -3,14 +3,8 @@ package be.technifutur.devmob9.sdsftryone.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import be.technifutur.devmob9.sdsftryone.R
-import be.technifutur.devmob9.sdsftryone.fragment.HomeFragment
-import be.technifutur.devmob9.sdsftryone.fragment.HomeFragmentDirections
 import be.technifutur.devmob9.sdsftryone.model.MatchData
 import be.technifutur.devmob9.sdsftryone.tools.LockStatus
 import be.technifutur.devmob9.sdsftryone.tools.MatchStatus
@@ -132,8 +126,7 @@ class SubHomeAdapter(val data: List<MatchData>, val listener: HomeMatchCellClick
                         locker.visibility = View.INVISIBLE
                     }
                 }
-
-                clickView.setOnClickListener{ listener.matchCellLongClicked(match) }
+                clickView.setOnClickListener{ listener.matchCellLongClicked(match.id) }
             }
         }
     }
@@ -198,7 +191,7 @@ class SubHomeAdapter(val data: List<MatchData>, val listener: HomeMatchCellClick
                 }
             }
 
-            clickView.setOnClickListener { listener.matchCellLongClicked(match) }
+            clickView.setOnClickListener { listener.matchCellLongClicked(match.id) }
 
             // ToDO: !!!! AffichageLive !!!!
         }
@@ -267,7 +260,7 @@ class SubHomeAdapter(val data: List<MatchData>, val listener: HomeMatchCellClick
                         locker.visibility = View.INVISIBLE
                     }
                 }
-                clickView.setOnClickListener { listener.matchCellLongClicked(match) }
+                clickView.setOnClickListener { listener.matchCellLongClicked(match.id) }
             }
         }
     }

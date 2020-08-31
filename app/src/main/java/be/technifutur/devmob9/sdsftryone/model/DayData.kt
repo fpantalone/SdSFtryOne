@@ -14,6 +14,7 @@ import java.util.*
 import kotlin.math.max
 import kotlin.math.min
 
+
 open class DayData(
     @Index var id: Int = 0,
     var name: String = "",

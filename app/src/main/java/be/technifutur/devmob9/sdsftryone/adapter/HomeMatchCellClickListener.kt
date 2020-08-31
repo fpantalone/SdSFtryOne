@@ -4,7 +4,7 @@ import be.technifutur.devmob9.sdsftryone.model.MatchData
 
 interface HomeMatchCellClickListener {
 
-    fun matchCellLongClicked (match: MatchData)
-    fun matchCellClicked (match: MatchData)
+    fun matchCellLongClicked (matchId: Int)
+    fun matchCellClicked (matchId: Int)
 
 }

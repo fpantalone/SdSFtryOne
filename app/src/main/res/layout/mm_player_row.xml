@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <EditText
+        android:id="@+id/mmPlayerNumberTextView"
+        android:layout_width="36dp"
+        android:layout_height="24dp"
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:background="@drawable/light_gray_rounded_corner"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:inputType="number"
+        app:layout_constraintBaseline_toBaselineOf="@id/mmPlayerNameTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="16"
+        />
+
+    <TextView
+        android:id="@+id/mmPlayerNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:textSize="17sp"
+        android:layout_margin="4dp"
+        app:layout_constraintStart_toEndOf="@+id/mmPlayerNumberTextView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="Lisa Simpson"/>
+
+    <CheckBox
+        android:id="@+id/mmSelectPlayerChechBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/mmcapKeepTextView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    
+    <TextView
+        android:id="@+id/mmcapKeepTextView"
+        android:layout_width="55sp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/mmRemovePlayerButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="@string/cap_keep_label"
+        />
+
+    <ImageButton
+        android:id="@+id/mmRemovePlayerButton"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:src="@drawable/ic_baseline_remove_circle_outline_24"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

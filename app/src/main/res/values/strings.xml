@@ -34,7 +34,7 @@
     <string name="botomNavSelectLabel">Sélection</string>
     <string name="bottomNavEventLabel">Évènements</string>
     <string name="bottomNavConfigLabel">Config</string>
-    <string name="MatchMngSearchLabel">Rechercher</string>
+    <string name="MatchMngSearchLabel">Ajouter</string>
     <string name="selectionLabel">Sélection</string>
     <string name="cap_keep_label">🅖／🅲</string>
     <string name="mm_score_label">Score</string>
@@ -49,6 +49,7 @@
     <string name="em_out_shoot">tir non cadré</string>
     <string name="em_change">changement</string>
     <string name="em_card">carte</string>
+    <string name="mm_search_player">Entrez le nom de la joueuse</string>
 
 
     <string-array name="match_tab_txt">

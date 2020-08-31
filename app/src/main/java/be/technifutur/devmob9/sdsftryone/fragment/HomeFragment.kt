@@ -18,10 +18,6 @@ import be.technifutur.devmob9.sdsftryone.dao.DbManager
 import be.technifutur.devmob9.sdsftryone.model.MatchData
 import kotlinx.android.synthetic.main.fragment_home.*
 
-
-/**
- * A simple [Fragment] subclass.
- */
 class HomeFragment : Fragment(), HomeMatchCellClickListener {
 
     var preferedTeam: ArrayList<String> = arrayListOf()
@@ -51,7 +47,6 @@ class HomeFragment : Fragment(), HomeMatchCellClickListener {
         // Inflate the layout for this fragment
 
         return inflater.inflate(R.layout.fragment_home, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,9 +60,6 @@ class HomeFragment : Fragment(), HomeMatchCellClickListener {
         // récupérer la liste des équipe sélectionée dans les préférences
 
         getPreferedTeam()
-
-        // rechercher la listes des matches par équipes et l'envoyer à l'adapteur
-        // comme ça on le fais qu'une seulez fois
 
         homeRecyclerView.layoutManager = LinearLayoutManager(context)
         homeRecyclerView.adapter = adapter
@@ -87,8 +79,6 @@ class HomeFragment : Fragment(), HomeMatchCellClickListener {
     }
 
     override fun matchCellLongClicked(matchId: Int) {
-
-        // TODO - complèter le passage d'argument
         // passer l'id du match plutôt que le MatchData complet, Realm object not parcelable !!!
 
         val navController = findNavController()

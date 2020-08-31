@@ -18,7 +18,7 @@ class MmPlayerListAdapter (var player: PlayerData) : AbstractItem<MmPlayerListAd
         return ViewHolder(v)
     }
 
-    class ViewHolder(view: View): FastAdapter.ViewHolder<MmPlayerListAdapter> (view) {
+    class ViewHolder(view: View): FastAdapter.ViewHolder<MmPlayerListAdapter>(view) {
 
         var numPlayer = view.mmPlayerNumberTextView
         var namePlayer = view.mmPlayerNameTextView

@@ -285,10 +285,10 @@
         android:textAlignment="center"
         android:textColor="@color/anthracite"
         android:textSize="19sp"
+        android:text="@string/em_goal"
         app:layout_constraintEnd_toStartOf="@+id/emAwayGoalPlusButton"
         app:layout_constraintStart_toEndOf="@+id/emHomePlusButton"
-        app:layout_constraintTop_toBottomOf="@+id/emWrapMiddleControlLayout"
-        tools:text="label labble" />
+        app:layout_constraintTop_toBottomOf="@+id/emWrapMiddleControlLayout" />
 
     <ImageButton
         android:id="@+id/emAwayGoalPlusButton"

@@ -4,15 +4,16 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AlphaAnimation
-import android.view.animation.AnimationSet
-import android.view.animation.ScaleAnimation
-import android.view.animation.TranslateAnimation
+import android.view.animation.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import be.technifutur.devmob9.sdsftryone.R
 import be.technifutur.devmob9.sdsftryone.dao.DbManager
 import be.technifutur.devmob9.sdsftryone.webservice.AllTable
@@ -29,12 +30,14 @@ class SplashFragment : Fragment() {
         const val SPLASH_SCREEN_DURATION: Int = 5000
     }
 
+    private var animationFinished = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        activity?.title = "Live Score"
+        //activity?.title = "Live Score"
 
 
         return inflater.inflate(R.layout.fragment_splash, container, false)
@@ -46,7 +49,7 @@ class SplashFragment : Fragment() {
 
         WebService.clearDbSyncTime()
 
-        translateStandard()
+        startAnimations()
 
         Handler().postDelayed({
             animMaskLayout?.let {
@@ -63,12 +66,23 @@ class SplashFragment : Fragment() {
                     }
                 })
                 // attend la fin de l'animation
+                while (!animationFinished) {
+                    try {
+                        Thread.sleep(10)
+                    }
+                    catch (ex: InterruptedException) {}
+                }
 
                 // passe à l'écran d'accueil
-                val navController = Navigation.findNavController(view)
-                // val direction = SplashFragmentDirections.actionSplashFragmentToHomeFragment()
-                navController.navigate(R.id.homeFragment)
-
+                val handler = Handler(Looper.getMainLooper())
+                handler.post {
+                    //val navController = Navigation.findNavController(view)
+                    //navController.navigate(R.id.homeFragment)
+                    val direction = SplashFragmentDirections.actionSplashFragmentToHomeFragment()
+                    val options = NavOptions.Builder().setPopUpTo(R.id.splashFragment, true).build()
+                    val navController = findNavController()
+                    navController.navigate(direction, options)
+                }
             },
             { error: Throwable ->
                 if (error is IllegalStateException) {
@@ -83,57 +97,56 @@ class SplashFragment : Fragment() {
         )
     }
 
-    fun translateStandard () {
+    fun startAnimations () {
+        val translateY = 600f
 
-        val animSet = AnimationSet(true)
+        val firstLineAnimationSet = AnimationSet(true)
 
-        val translateAnim = TranslateAnimation (0f,0f, 600f, 0f)
-        translateAnim.duration = 2000
-        animSet.addAnimation(translateAnim)
+        val flScaleAnim = ScaleAnimation(0.01f, 1f, 0.01f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        flScaleAnim.duration = 2000
+        firstLineAnimationSet.addAnimation(flScaleAnim)
 
-        val alphaAnim = AlphaAnimation(0.0f, 1.0f)
-        alphaAnim.duration = 2000
-        animSet.addAnimation(alphaAnim)
+        val flTranslateAnim = TranslateAnimation (0f,0f, translateY, 0f)
+        flTranslateAnim.duration = 2000
+        firstLineAnimationSet.addAnimation(flTranslateAnim)
 
-        val scaleAnim = ScaleAnimation(1f,1f, 0f,1f)
-        scaleAnim.duration = 2000
-        animSet.addAnimation(scaleAnim)
+        val flAlphaAnim = AlphaAnimation(0.0f, 1.0f)
+        flAlphaAnim.duration = 2000
+        firstLineAnimationSet.addAnimation(flAlphaAnim)
 
-        standardTextView?.startAnimation(animSet)
+        standardTextView.startAnimation(firstLineAnimationSet)
 
-        translateDeLiege ()
+        val secondLineAnimationSet = AnimationSet(true)
 
-    }
+        val slScaleAnim = ScaleAnimation(0.01f,1f, 0.01f,1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        slScaleAnim.duration = 2000
+        slScaleAnim.startOffset = 400
+        secondLineAnimationSet.addAnimation(slScaleAnim)
 
-    fun translateDeLiege () {
+        val slTranslateAnim = TranslateAnimation (0f,0f, translateY, 0f)
+        slTranslateAnim.duration = 2000
+        slTranslateAnim.startOffset = 400
+        secondLineAnimationSet.addAnimation(slTranslateAnim)
 
-        val animSet = AnimationSet(true)
+        val slAlphaAnim = AlphaAnimation (0.0f, 1.0f)
+        slAlphaAnim.duration = 2000
+        slAlphaAnim.startOffset = 400
+        secondLineAnimationSet.addAnimation(slAlphaAnim)
 
-        val translateAnim = TranslateAnimation (0f,0f, 600f, 0f)
-        translateAnim.duration = 2000
-        translateAnim.startOffset = 400
-        animSet.addAnimation(translateAnim)
+        deLiegeTextView.startAnimation(secondLineAnimationSet)
 
-        val alphaAnim = AlphaAnimation (0.0f, 1.0f)
-        alphaAnim.duration = 2000
-        alphaAnim.startOffset = 400
-        animSet.addAnimation(alphaAnim)
+        val maskAnim = AlphaAnimation (1.0f, 0.0f)
+        maskAnim.duration = 1000
+        maskAnim.startOffset = 1600
+        maskAnim.setAnimationListener(object: Animation.AnimationListener {
+            override fun onAnimationStart(p0: Animation?) {}
+            override fun onAnimationRepeat(p0: Animation?) {}
 
-        val scaleAnim = ScaleAnimation(1f,1f, 0f,1f)
-        scaleAnim.duration = 2000
-        scaleAnim.startOffset = 400
-        animSet.addAnimation(scaleAnim)
-
-        deLiegeTextView.startAnimation(animSet)
-
-        fadeFemina()
-    }
-
-    fun fadeFemina () {
-        val fadeAnim = AlphaAnimation (1.0f, 0.0f)
-        fadeAnim.duration = 2000
-        fadeAnim.startOffset = 2000
-        animMaskLayout.startAnimation(fadeAnim)
+            override fun onAnimationEnd(p0: Animation?) {
+                animationFinished = true
+            }
+        })
+        animMaskLayout.startAnimation(maskAnim)
     }
 
     fun alertBox (title: Int, message: Int) {

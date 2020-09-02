@@ -57,7 +57,7 @@ class HomeFragment : Fragment(), HomeMatchCellClickListener {
 
         setupWithNavController(homeToolbar, navController, appBarConfiguration)
 
-        // récupérer la liste des équipe sélectionée dans les préférences
+        // TODO récupérer la liste des équipe sélectionée dans les préférences
 
         getPreferedTeam()
 

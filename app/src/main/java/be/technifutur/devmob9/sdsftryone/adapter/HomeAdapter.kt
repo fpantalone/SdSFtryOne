@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import be.technifutur.devmob9.sdsftryone.R
 import be.technifutur.devmob9.sdsftryone.model.MatchData
 import kotlinx.android.synthetic.main.team_row.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeAdapter (val teamHeading: ArrayList<String>,
                    val feedMatchList: Map<String, List<MatchData>>,
@@ -38,8 +40,27 @@ class HomeAdapter (val teamHeading: ArrayList<String>,
         holder.itemView.matchRecyclerView.apply {
             layoutManager = subLayoutManager
             // il faut envoyer une liste de match au sous adapter
-            //feedMatchList.get(teamHeading[position])
-           adapter = SubHomeAdapter(feedMatchList[teamHeading[position]]?.filter { it.isInWeek() } ?: listOf(), subCellClickListener)
+            var matchList: ArrayList<MatchData> = arrayListOf()
+            var lastInWeek = false
+            var nextFound = false
+            val now = Date()
+            feedMatchList[teamHeading[position]]?.forEach { match ->
+                if (match.getMatchDate() < now) {
+                    if (!lastInWeek) {
+                        matchList.clear()
+                        matchList.add(match)
+                        lastInWeek = match.isInWeek()
+                    }
+                    else {
+                        matchList.add(match)
+                    }
+                }
+                else if (match.isInWeek() || !nextFound) {
+                    matchList.add(match)
+                    nextFound = true
+                }
+            }
+            adapter = SubHomeAdapter(matchList, subCellClickListener)
             setRecycledViewPool(viewPool)
         }
     }

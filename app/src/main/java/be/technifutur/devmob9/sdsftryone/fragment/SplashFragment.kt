@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,16 +45,9 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        WebService.clearDbSyncTime()
+        //WebService.clearDbSyncTime()
 
         startAnimations()
-
-        Handler().postDelayed({
-            animMaskLayout?.let {
-                it.visibility = View.INVISIBLE
-            }
-        },1000L)
 
         // Lecture des données
         WebService.getAllData(
@@ -79,7 +71,7 @@ class SplashFragment : Fragment() {
                     //val navController = Navigation.findNavController(view)
                     //navController.navigate(R.id.homeFragment)
                     val direction = SplashFragmentDirections.actionSplashFragmentToHomeFragment()
-                    val options = NavOptions.Builder().setPopUpTo(R.id.splashFragment, true).build()
+                    val options = NavOptions.Builder().setLaunchSingleTop(true).build()
                     val navController = findNavController()
                     navController.navigate(direction, options)
                 }
@@ -138,6 +130,7 @@ class SplashFragment : Fragment() {
         val maskAnim = AlphaAnimation (1.0f, 0.0f)
         maskAnim.duration = 1000
         maskAnim.startOffset = 1600
+        maskAnim.fillAfter = true
         maskAnim.setAnimationListener(object: Animation.AnimationListener {
             override fun onAnimationStart(p0: Animation?) {}
             override fun onAnimationRepeat(p0: Animation?) {}

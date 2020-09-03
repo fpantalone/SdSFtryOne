@@ -127,7 +127,7 @@ class SubHomeAdapter(val data: List<MatchData>, val listener: HomeMatchCellClick
                     locker.visibility = View.INVISIBLE
                 }
             }
-            clickView.setOnClickListener{ listener.matchCellLongClicked(match.id) }
+            clickView.setOnClickListener{ listener.matchCellLongClicked(match) }
         }
     }
 
@@ -191,7 +191,9 @@ class SubHomeAdapter(val data: List<MatchData>, val listener: HomeMatchCellClick
                 }
             }
 
-            clickView.setOnClickListener { listener.matchCellLongClicked(match.id) }
+            clickView.setOnClickListener {
+                listener.matchCellLongClicked(match)
+            }
 
             // ToDO: !!!! AffichageLive !!!!
         }
@@ -259,7 +261,9 @@ class SubHomeAdapter(val data: List<MatchData>, val listener: HomeMatchCellClick
                     locker.visibility = View.INVISIBLE
                 }
             }
-            clickView.setOnClickListener { listener.matchCellLongClicked(match.id) }
+            clickView.setOnClickListener {
+                listener.matchCellLongClicked(match)
+            }
         }
     }
 }

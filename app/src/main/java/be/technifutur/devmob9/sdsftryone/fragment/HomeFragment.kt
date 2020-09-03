@@ -11,6 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import be.technifutur.devmob9.sdsftryone.MyApp
 import be.technifutur.devmob9.sdsftryone.R
 import be.technifutur.devmob9.sdsftryone.adapter.HomeAdapter
 import be.technifutur.devmob9.sdsftryone.adapter.HomeMatchCellClickListener
@@ -64,7 +65,6 @@ class HomeFragment : Fragment(), HomeMatchCellClickListener {
 
         homeRecyclerView.layoutManager = LinearLayoutManager(context)
         homeRecyclerView.adapter = adapter
-
     }
 
     fun getPreferedTeam() {
@@ -79,18 +79,18 @@ class HomeFragment : Fragment(), HomeMatchCellClickListener {
         }
     }
 
-    override fun matchCellLongClicked(matchId: Int, dayId: Int, champId: Int) {
+    override fun matchCellLongClicked(match: MatchData) {
         // passer l'id du match plutôt que le MatchData complet, Realm object not parcelable !!!
 
+        MyApp.match = match
         val navController = findNavController()
-        val direction = HomeFragmentDirections.actionHomeFragmentToTabContainerFragment(matchId, dayId, champId)
+        val direction = HomeFragmentDirections.actionHomeFragmentToTabContainerFragment()
         navController.navigate(direction)
     }
 
-    override fun matchCellClicked(matchId: Int, dayId: Int, champId: Int) {
-        // TODO Afficher le compte-rendu
-  }
-
+    override fun matchCellClicked(match: MatchData) {
+        // TODO("Not yet implemented")
+    }
 }
 
 

@@ -15,8 +15,6 @@ import kotlinx.android.synthetic.main.fragment_tab_container.*
 
 class TabContainerFragment : Fragment() {
 
-    val args: TabContainerFragmentArgs by navArgs()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }

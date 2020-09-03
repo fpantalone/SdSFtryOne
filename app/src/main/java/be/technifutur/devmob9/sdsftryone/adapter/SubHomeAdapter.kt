@@ -126,7 +126,11 @@ class SubHomeAdapter(val data: List<MatchData>, val listener: HomeMatchCellClick
                         locker.visibility = View.INVISIBLE
                     }
                 }
-                clickView.setOnClickListener{ listener.matchCellLongClicked(match.id) }
+                clickView.setOnClickListener{
+                    if (day != null && champ != null) {
+                        listener.matchCellLongClicked(match.id, day.id, champ.id)
+                    }
+                }
             }
         }
     }
@@ -191,7 +195,12 @@ class SubHomeAdapter(val data: List<MatchData>, val listener: HomeMatchCellClick
                 }
             }
 
-            clickView.setOnClickListener { listener.matchCellLongClicked(match.id) }
+            clickView.setOnClickListener {
+                if (day != null && champ != null) {
+                    listener.matchCellLongClicked(match.id, day.id , champ.id)
+                }
+
+            }
 
             // ToDO: !!!! AffichageLive !!!!
         }
@@ -260,7 +269,11 @@ class SubHomeAdapter(val data: List<MatchData>, val listener: HomeMatchCellClick
                         locker.visibility = View.INVISIBLE
                     }
                 }
-                clickView.setOnClickListener { listener.matchCellLongClicked(match.id) }
+                clickView.setOnClickListener {
+                    if (day != null && champ != null) {
+                        listener.matchCellLongClicked(match.id, day.id, champ.id)
+                    }
+                }
             }
         }
     }

@@ -14,4 +14,10 @@ class MyApp : Application() {
         RessourceReader.init(this)
     }
 
+   companion object {
+       fun getMatch () {}
+
+       fun setMatch() {}
+   }
+
 }

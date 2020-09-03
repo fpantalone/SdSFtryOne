@@ -205,12 +205,12 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <androidx.appcompat.widget.SearchView
+        <AutoCompleteTextView
             android:id="@+id/emPlayerSearchView"
             android:layout_width="0dp"
-            android:layout_height="26dp"
+            android:layout_height="34dp"
             android:layout_marginTop="2dp"
-
+            android:hint="@string/mm_search_player"
             android:background="@drawable/light_gray_rounded_corner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -259,6 +259,7 @@
         android:textAlignment="textEnd"
         android:textColor="@color/anthracite"
         android:textSize="18sp"
+        text="0"
         app:layout_constraintBaseline_toBaselineOf="@+id/emGoalEventLabel"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="0" />
@@ -310,6 +311,7 @@
         android:fontFamily="@font/roboto"
         android:textColor="@color/anthracite"
         android:textSize="18sp"
+        android:text="0"
         app:layout_constraintBaseline_toBaselineOf="@+id/emGoalEventLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/emAwayGoalPlusButton"

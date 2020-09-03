@@ -78,15 +78,15 @@ class HomeFragment : Fragment(), HomeMatchCellClickListener {
         }
     }
 
-    override fun matchCellLongClicked(matchId: Int) {
+    override fun matchCellLongClicked(matchId: Int, dayId: Int, champId: Int) {
         // passer l'id du match plutôt que le MatchData complet, Realm object not parcelable !!!
 
         val navController = findNavController()
-        val direction = HomeFragmentDirections.actionHomeFragmentToTabContainerFragment(matchId)
+        val direction = HomeFragmentDirections.actionHomeFragmentToTabContainerFragment(matchId, dayId, champId)
         navController.navigate(direction)
     }
 
-    override fun matchCellClicked(matchId: Int) {
+    override fun matchCellClicked(matchId: Int, dayId: Int, champId: Int) {
         // TODO Afficher le compte-rendu
   }
 

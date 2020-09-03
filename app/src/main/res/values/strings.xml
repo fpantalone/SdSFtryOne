@@ -17,12 +17,11 @@
     <string name="team_u13_menu_label">Équipe U13</string>
     <string name="team_u12_menu_label">Équipe U12</string>
     <string name="team_u11_menu_label">Équipe U11</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="pref_team_title">Équipe(s) préférée(s)</string>
     <string name="pref_info_title">Information</string>
     <string name="network_error">Pas de réseau</string>
     <string name="retryDialog">Réessayer</string>
-    <string name="cancelDialog">Annuler</string>
+    <string name="cancelDialog">Continuer</string>
     <string name="db_error_title">Erreur Base de données</string>
     <string name="db_error_msg">Erreur lors du chargement de la base de donnée</string>
     <string name="network_error_title">Problème réseau</string>
@@ -51,6 +50,17 @@
     <string name="em_change">changement</string>
     <string name="em_card">carte</string>
     <string name="mm_search_player">Entrez le nom de la joueuse</string>
+    <string name="match_data_label">Données du match</string>
+    <string name="mc_period_label">Périodes</string>
+    <string name="mcdirect_fired_label">Elimination direct</string>
+    <string name="mc_prolongation_label">Prologation</string>
+    <string name="mc_nb_player_label">Nombre de joueuses</string>
+    <string name="mc_nb_change_label">Changements (0 = volant)</string>
+    <string name="mc_personal_alert_label">Alertes Personnelles</string>
+    <string name="mc_new_activity_label">Nouvelle alerte</string>
+    <string name="mc_time_format_label">(min:sec)</string>
+    <string name="mc_gold_alert_label">Alertes</string>
+    <string name="mc_alert_mode_label">Mode</string>
 
 
     <string-array name="match_tab_txt">

@@ -2,7 +2,6 @@ package be.technifutur.devmob9.sdsftryone.dao
 
 import android.content.Context
 import android.util.Log
-import androidx.preference.PreferenceManager
 import be.technifutur.devmob9.sdsftryone.model.*
 import be.technifutur.devmob9.sdsftryone.tools.*
 import be.technifutur.devmob9.sdsftryone.webservice.*
@@ -44,18 +43,18 @@ class DbManager {
                 .findFirst()
         }
 
-        fun getAllPlayers () : List<PlayerData>? {
+        fun getAllPlayers(): List<PlayerData>? {
             val realm = Realm.getDefaultInstance()
             return realm.where(PlayerData::class.java)
                 .findAll()
         }
 
         fun findDay(id: Int, champ: Int): DayData? {
-            return findChamp(champ)?.days?.firstOrNull { it.id ==id }
+            return findChamp(champ)?.days?.firstOrNull { it.id == id }
         }
 
         fun findMatch(id: Int, day: Int, champ: Int): MatchData? {
-            return findDay(day, champ)?.matches?.firstOrNull {it.id == id}
+            return findDay(day, champ)?.matches?.firstOrNull { it.id == id }
         }
 
         fun findPlayer(id: Int): PlayerData? {
@@ -66,7 +65,7 @@ class DbManager {
         }
 
         fun findEvent(id: Int, match: Int, day: Int, champ: Int): EventData? {
-           return findMatch(match, day, champ)?.events?.firstOrNull { it.id == id }
+            return findMatch(match, day, champ)?.events?.firstOrNull { it.id == id }
         }
 
         fun findMatchPlayer(id: Int, match: Int, day: Int, champ: Int): MatchPlayerData? {
@@ -75,7 +74,7 @@ class DbManager {
             }?.matches?.firstOrNull { it.id == match }?.players?.firstOrNull { it.id == id }
         }
 
-        private fun doClubAction (club: Club) {
+        private fun doClubAction(club: Club) {
             club.getAction()?.let { action ->
                 val realm = Realm.getDefaultInstance()
                 val find = findClub(club.code)
@@ -93,7 +92,7 @@ class DbManager {
             }
         }
 
-        private fun doChampAction (champ: Champ) {
+        private fun doChampAction(champ: Champ) {
             champ.getAction()?.let { action ->
                 val realm = Realm.getDefaultInstance()
                 val find = findChamp(champ.id)
@@ -123,7 +122,7 @@ class DbManager {
             }
         }
 
-        private fun doDayAction (day: Day) {
+        private fun doDayAction(day: Day) {
             day.getAction()?.let { action ->
                 val realm = Realm.getDefaultInstance()
                 val find = findDay(day.id, day.champ)
@@ -148,7 +147,7 @@ class DbManager {
             }
         }
 
-        private fun doMatchAction (match: Match) {
+        private fun doMatchAction(match: Match) {
             match.getAction()?.let { action ->
                 val realm = Realm.getDefaultInstance()
                 val find = findMatch(match.id, match.day, match.champ)
@@ -175,7 +174,7 @@ class DbManager {
             }
         }
 
-        private fun doEventAction (event: Event) {
+        private fun doEventAction(event: Event) {
             event.getAction()?.let { action ->
                 val realm = Realm.getDefaultInstance()
                 val find = findEvent(event.id, event.match, event.day, event.champ)
@@ -184,12 +183,21 @@ class DbManager {
                         val param = event.param
                         val side = TeamSide.createFrom(event.team)
                         val type = EventType.createFrom(event.type)
-                        if (null == side || null == type || !EventData.validateTime(event.time, type, param) || (side != TeamSide.HOME && type == EventType.CHRONO)) {
+                        if (null == side || null == type || !EventData.validateTime(
+                                event.time,
+                                type,
+                                param
+                            ) || (side != TeamSide.HOME && type == EventType.CHRONO)
+                        ) {
                             return
                         }
                         val match = findMatch(event.match, event.day, event.champ)!!
                         val mySide = match.getMySide()
-                        if (null != mySide && side != mySide && type in arrayOf(EventType.SUBSTITUTION, EventType.CARD)) {
+                        if (null != mySide && side != mySide && type in arrayOf(
+                                EventType.SUBSTITUTION,
+                                EventType.CARD
+                            )
+                        ) {
                             return
                         }
                         when (type) {
@@ -223,7 +231,7 @@ class DbManager {
             }
         }
 
-        private fun doMatchPlayerAction (player: MatchPlayer) {
+        private fun doMatchPlayerAction(player: MatchPlayer) {
             player.getAction()?.let { action ->
                 val realm = Realm.getDefaultInstance()
                 val find = findMatchPlayer(player.id, player.match, player.day, player.champ)
@@ -232,7 +240,11 @@ class DbManager {
                         val dbPlayer = find ?: realm.createObject(MatchPlayerData::class.java)
                         if (null == find) {
                             dbPlayer.id = player.id
-                            findMatch(player.match, player.day, player.champ)!!.players.add(dbPlayer)
+                            findMatch(
+                                player.match,
+                                player.day,
+                                player.champ
+                            )!!.players.add(dbPlayer)
                         }
                         dbPlayer.player = findPlayer(player.player)
                         dbPlayer.name = player.name
@@ -246,7 +258,7 @@ class DbManager {
             }
         }
 
-        private fun doPlayerAction (player: Player) {
+        private fun doPlayerAction(player: Player) {
             if (player.id <= 0) {
                 return
             }
@@ -255,7 +267,9 @@ class DbManager {
                 val find = findPlayer(player.id)
                 when (action) {
                     ActionType.ADD, ActionType.UPDATE -> {
-                        if (player.firstName.isEmpty() || player.lastName.isEmpty() || 0 >= (player.number ?: 1)) {
+                        if (player.firstName.isEmpty() || player.lastName.isEmpty() || 0 >= (player.number
+                                ?: 1)
+                        ) {
                             return
                         }
                         val dbPlayer = find ?: realm.createObject(PlayerData::class.java, player.id)
@@ -334,7 +348,46 @@ class DbManager {
             return matchPlayer
         }
 
-        // TODO faire un deuxi§me addMatchPlayer paramètre id
+        fun addMatchPlayer(match: MatchData, fullName: String): MatchPlayerData? {
+
+            val realm = Realm.getDefaultInstance()
+
+            val matchPlayer = match.players.firstOrNull {
+                if (it.name.isEmpty()) {
+                    return@firstOrNull fullName == it.player?.fullName
+                } else {
+                    return@firstOrNull fullName == it.name
+                }
+            }
+            matchPlayer?.let { return null }
+
+            val id = (match.players.max("id") ?: 0).toInt() + 1
+
+            val player = realm.where(PlayerData::class.java)
+                .equalTo("fullname", fullName)
+                .findFirst()
+
+            try {
+                realm.beginTransaction()
+                val newMpd = realm.createObject(MatchPlayerData::class.java)
+
+                if (null == player) {
+                    newMpd.id = id
+                    newMpd.name = fullName
+                }
+                else {
+                    newMpd.id = id
+                    newMpd.player = player
+                    newMpd.number = player.number
+                }
+                match.players.add(newMpd)
+                realm.commitTransaction()
+                return newMpd
+            } catch (ex: RealmException) {
+                Log.d("DBMANAGER", ex.message ?: "addMatchPlayer")
+            }
+            return null
+        }
 
         fun removeEvent(id: Int, match: Int, day: Int, champ: Int) {
             findEvent(id, match, day, champ)?.let { removeEvent(it) }
@@ -352,11 +405,10 @@ class DbManager {
             matchPlayer.delete()
         }
 
-        fun updateData (data: AllTable, onComplete: Consumer<Boolean>) {
+        fun updateData(data: AllTable, onComplete: Consumer<Boolean>) {
             // passe dans le thread computation
 
-            val disposable
-                    = Single.create<Boolean> { emitter ->
+            val disposable = Single.create<Boolean> { emitter ->
                 val realm = Realm.getDefaultInstance()
                 try {
                     realm.beginTransaction()
@@ -370,10 +422,9 @@ class DbManager {
                     data.event.forEach { doEventAction(it) }
                     realm.commitTransaction()
                     emitter.onSuccess(true)
-                }
-                catch (ex: Exception) {
+                } catch (ex: Exception) {
                     ex.printStackTrace()
-                    Log.d("DBMANAGER",ex.message ?:" updateData" )
+                    Log.d("DBMANAGER", ex.message ?: " updateData")
                     emitter.onError(ex)
                 }
             }
@@ -396,8 +447,8 @@ class DbManager {
                     .findFirst()
 
                 teamInfos?.let {
-                    var prefTeam = teamInfos.code.substring(teamInfos.code.length-1)
-                    if ("ABC".indexOf(prefTeam) < 0 ) {
+                    var prefTeam = teamInfos.code.substring(teamInfos.code.length - 1)
+                    if ("ABC".indexOf(prefTeam) < 0) {
                         prefTeam = ""
                     }
                     champ.days.forEach { day ->
@@ -410,10 +461,10 @@ class DbManager {
                 }
             }
 
-            matches.sortWith(kotlin.Comparator { m1, m2  ->
+            matches.sortWith(kotlin.Comparator { m1, m2 ->
                 val d1 = m1.getMatchDate()
                 val d2 = m2.getMatchDate()
-                if (d1 == d2){
+                if (d1 == d2) {
                     return@Comparator m1.hour.compareTo(m2.hour)
                 }
                 return@Comparator d1.compareTo(d2)

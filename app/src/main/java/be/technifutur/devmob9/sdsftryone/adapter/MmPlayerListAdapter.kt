@@ -2,12 +2,12 @@ package be.technifutur.devmob9.sdsftryone.adapter
 
 import android.view.View
 import be.technifutur.devmob9.sdsftryone.R
-import be.technifutur.devmob9.sdsftryone.model.PlayerData
+import be.technifutur.devmob9.sdsftryone.model.MatchPlayerData
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import kotlinx.android.synthetic.main.mm_player_row.view.*
 
-class MmPlayerListAdapter (var player: PlayerData) : AbstractItem<MmPlayerListAdapter.ViewHolder>() {
+class MmPlayerListAdapter(var player: MatchPlayerData) : AbstractItem<MmPlayerListAdapter.ViewHolder>() {
 
     override val layoutRes: Int
         get() = R.layout.mm_player_row
@@ -28,7 +28,7 @@ class MmPlayerListAdapter (var player: PlayerData) : AbstractItem<MmPlayerListAd
 
         override fun bindView(item: MmPlayerListAdapter, payloads: List<Any>) {
             numPlayer.setText(item.player.number.toString())
-            namePlayer.text = item.player.fullName
+            namePlayer.text = item.player.name
         }
 
         override fun unbindView(item: MmPlayerListAdapter) {

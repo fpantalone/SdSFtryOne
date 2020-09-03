@@ -8,13 +8,345 @@
     tools:context=".fragment.MatchConfigFragment">
 
     <TextView
+        android:id="@+id/mcMatchDataLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/match_data_label"
+        android:fontFamily="@font/roboto"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/anthracite"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mcPeriodeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mc_period_label"
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+        android:textColor="@color/anthracite"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mcMatchDataLabel" />
+
+    <EditText
+        android:id="@+id/mcNbPeriodEditText"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/light_gray_rounded_corner"
+        android:inputType="number"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="4dp"
+        android:textAlignment="textEnd"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/mcPeriodeLabel"
+        app:layout_constraintEnd_toStartOf="@+id/mcMultiplied"
+        app:layout_constraintTop_toTopOf="@+id/mcPeriodeLabel"
+        tools:text="2" />
+
+    <TextView
+        android:id="@+id/mcMultiplied"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="×"
+        android:textColor="@color/anthracite"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintTop_toTopOf="@+id/mcPeriodeLabel"
+        app:layout_constraintEnd_toStartOf="@+id/mcPeriodTimeEditText"
+        />
+
+    <EditText
+        android:id="@+id/mcPeriodTimeEditText"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:textSize="12sp"
+        android:textAlignment="textEnd"
+        android:inputType="number"
+        android:paddingVertical="4dp"
+        android:paddingHorizontal="8dp"
+        android:background="@drawable/light_gray_rounded_corner"
+        app:layout_constraintBottom_toBottomOf="@+id/mcPeriodeLabel"
+        app:layout_constraintEnd_toStartOf="@id/periodMinLabel"
+        app:layout_constraintTop_toTopOf="@+id/mcPeriodeLabel"
+        tools:text="45" />
+
+    <TextView
+        android:id="@+id/periodMinLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="min"
+        android:textColor="@color/anthracite"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/mcPeriodeLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+         />
+
+    <TextView
+        android:id="@+id/mcdirectFiredLAbel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/mcdirect_fired_label"
+        android:textColor="@color/anthracite"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/mcPeriodeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/mcPeriodeLabel" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/firedSwitchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="@+id/mcdirectFiredLAbel"
+        app:layout_constraintEnd_toEndOf="@+id/mcPeriodTimeEditText"
+        app:layout_constraintTop_toTopOf="@+id/mcdirectFiredLAbel" />
+
+    <TextView
+        android:id="@+id/mcProlongationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/mc_prolongation_label"
+        android:textColor="@color/anthracite"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/mcPeriodeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/mcdirectFiredLAbel" />
+
+    <EditText
+        android:id="@+id/prologLengthEditText"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textAlignment="textEnd"
+        android:inputType="number"
+        android:paddingVertical="4dp"
+        android:paddingHorizontal="8dp"
+        android:layout_marginEnd="4dp"
+        android:enabled="false"
+        android:background="@drawable/light_gray_rounded_corner"
+        app:layout_constraintTop_toTopOf="@+id/mcProlongationLabel"
+        app:layout_constraintEnd_toStartOf="@+id/prologMinLabel"
+        app:layout_constraintBottom_toBottomOf="@+id/mcProlongationLabel"
+        tools:text="15" />
+
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/mcPrologSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintTop_toTopOf="@+id/mcProlongationLabel"
+        app:layout_constraintEnd_toStartOf="@+id/mcProlodMultipliedLabel"
+        app:layout_constraintBottom_toBottomOf="@+id/mcProlongationLabel" />
+
+    <TextView
+        android:id="@+id/mcProlodMultipliedLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="2 ×"
+        android:textColor="@color/anthracite"
+        app:layout_constraintBaseline_toBaselineOf="@+id/mcProlongationLabel"
+        app:layout_constraintEnd_toStartOf="@+id/prologLengthEditText" />
+
+    <TextView
+        android:id="@+id/prologMinLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="min"
+        android:textColor="@color/anthracite"
+        app:layout_constraintBaseline_toBaselineOf="@+id/mcProlongationLabel"
+        app:layout_constraintEnd_toEndOf="@+id/periodMinLabel" />
+
+    <TextView
+        android:id="@+id/mcNbPlayersLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/mc_nb_player_label"
+        android:textColor="@color/anthracite"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/mcPeriodeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/mcProlongationLabel" />
+
+    <EditText
+        android:id="@+id/mcNbPlayersEditText"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textAlignment="textEnd"
+        android:paddingVertical="4dp"
+        android:paddingHorizontal="8dp"
+        android:inputType="number"
+        android:background="@drawable/light_gray_rounded_corner"
+        app:layout_constraintTop_toTopOf="@+id/mcNbPlayersLabel"
+        app:layout_constraintBottom_toBottomOf="@+id/mcNbPlayersLabel"
+        app:layout_constraintEnd_toEndOf="@+id/prologLengthEditText" />
+
+    <TextView
+        android:id="@+id/mcNbChangeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/mc_nb_change_label"
+        android:textColor="@color/anthracite"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/mcPeriodeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/mcNbPlayersLabel" />
+
+    <EditText
+        android:id="@+id/mcNbChangesEditText"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/light_gray_rounded_corner"
+        android:textSize="12sp"
+        android:inputType="number"
+        android:textAlignment="textEnd"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mcNbChangeLabel"
+        app:layout_constraintEnd_toEndOf="@+id/mcNbPlayersEditText"
+        app:layout_constraintTop_toTopOf="@+id/mcNbChangeLabel" />
+
+    <TextView
+        android:id="@+id/mcPersonalAlertLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/mc_personal_alert_label"
+        android:textColor="@color/anthracite"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/mcMatchDataLabel"
+        app:layout_constraintTop_toBottomOf="@+id/mcNbChangeLabel" />
+
+    <TextView
+        android:id="@+id/mcNewAlertLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/mc_new_activity_label"
+        android:textColor="@color/anthracite"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/mcPeriodeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/mcPersonalAlertLabel" />
+
+    <TextView
+        android:id="@+id/mcTimeFormatLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/mc_time_format_label"
+        android:textColor="@color/gold"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/mcNewAlertLabel"
+        app:layout_constraintTop_toTopOf="@+id/mcNewAlertLabel" />
+
+    <ImageButton
+        android:id="@+id/mcAddAlertButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/add_circle_outline_24px"
+        app:layout_constraintBottom_toBottomOf="@+id/mcNewAlertLabel"
+        app:layout_constraintEnd_toEndOf="@+id/prologMinLabel"
+        app:layout_constraintTop_toTopOf="@+id/mcNewAlertLabel" />
+
+    <EditText
+        android:id="@+id/mcNbSecAlertEditText"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/light_gray_rounded_corner"
+        android:inputType="number"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="4dp"
+        android:textAlignment="textEnd"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/mcNewAlertLabel"
+        app:layout_constraintEnd_toEndOf="@+id/mcNbChangesEditText"
+        app:layout_constraintTop_toTopOf="@+id/mcNewAlertLabel" />
+
+    <TextView
+        android:id="@+id/mcDividerLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=":"
+        android:textColor="@color/anthracite"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/mcNewAlertLabel"
+        app:layout_constraintEnd_toStartOf="@+id/mcNbSecAlertEditText"
+        app:layout_constraintStart_toEndOf="@+id/nbMinAlertEditText"
+        app:layout_constraintTop_toTopOf="@+id/mcNewAlertLabel" />
+
+    <EditText
+        android:id="@+id/nbMinAlertEditText"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/light_gray_rounded_corner"
+        android:inputType="number"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="4dp"
+        android:textAlignment="textEnd"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/mcNewAlertLabel"
+        app:layout_constraintEnd_toEndOf="@+id/mcNbPeriodEditText"
+        app:layout_constraintTop_toTopOf="@+id/mcNewAlertLabel" />
+
+
+   <View
+       android:id="@+id/mcGoldView"
+       android:layout_width="match_parent"
+       android:layout_height="30dp"
+       android:background="@color/gold"
+       android:layout_marginTop="12dp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/mcTimeFormatLabel" />
+
+    <TextView
+        android:id="@+id/mcGoldAlertLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/mc_gold_alert_label"
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mcGoldView"
+        app:layout_constraintBottom_toBottomOf="@+id/mcGoldView"/>
+
+    <TextView
+        android:id="@+id/mcAlertModeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mc_alert_mode_label"
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+        android:textColor="@android:color/white"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintTop_toTopOf="@+id/mcGoldView"
+        app:layout_constraintBottom_toBottomOf="@id/mcGoldView"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mcAletRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="match config frag"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/mcGoldView"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

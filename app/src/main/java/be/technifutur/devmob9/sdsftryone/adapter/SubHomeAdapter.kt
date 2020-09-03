@@ -85,53 +85,49 @@ class SubHomeAdapter(val data: List<MatchData>, val listener: HomeMatchCellClick
             val day = match.day?.firstOrNull()
             val champ = day?.champ?.firstOrNull()
 
-            if (match.isInWeek()) {
-                champName.text = champ?.name
-                champDay.text = day?.getName(Locale.getDefault())
+            champName.text = champ?.name
+            champDay.text = day?.getName(Locale.getDefault())
 
-                if (null != match.getTeam(TeamSide.HOME).logo) {
-                    Glide.with(team_A_Logo)
-                        .load(match.getTeam(TeamSide.HOME).getLogoURL())
-                        .into(team_A_Logo)
-                } else {
-                    team_A_Logo.setImageResource(R.drawable.default_logo)
+            if (null != match.getTeam(TeamSide.HOME).logo) {
+                Glide.with(team_A_Logo)
+                    .load(match.getTeam(TeamSide.HOME).getLogoURL())
+                    .into(team_A_Logo)
+            }
+            else {
+                team_A_Logo.setImageResource(R.drawable.default_logo)
+            }
+
+            team_A_Name.text = match.getTeam(TeamSide.HOME).fullName
+
+            if (null != match.getTeam(TeamSide.AWAY).logo) {
+                Glide.with(team_B_Logo)
+                    .load(match.getTeam(TeamSide.AWAY).getLogoURL())
+                    .into(team_B_Logo)
+            }
+            else {
+                team_B_Logo.setImageResource(R.drawable.default_logo)
+            }
+            team_B_Name.text = match.getTeam(TeamSide.AWAY).fullName
+
+            matchDate.text = dateFormat.format(match.getMatchDate())
+            valmatchHour.text = match.hour
+
+            when (match.getLockStatus()) {
+                LockStatus.OWNED -> {
+                    locker.setImageResource(R.drawable.lock_24px)
+                    locker.setColorFilter(R.color.dark_red)
                 }
-
-                team_A_Name.text = match.getTeam(TeamSide.HOME).fullName
-
-                if (null != match.getTeam(TeamSide.AWAY).logo) {
-                    Glide.with(team_B_Logo)
-                        .load(match.getTeam(TeamSide.AWAY).getLogoURL())
-                        .into(team_B_Logo)
-                } else {
-                    team_B_Logo.setImageResource(R.drawable.default_logo)
+                LockStatus.CLOSED -> {
+                    locker.setImageResource(R.drawable.lock_24px)
                 }
-                team_B_Name.text = match.getTeam(TeamSide.AWAY).fullName
-
-                matchDate.text = dateFormat.format(match.getMatchDate())
-                valmatchHour.text = match.hour
-
-                when (match.getLockStatus()) {
-                    LockStatus.OWNED -> {
-                        locker.setImageResource(R.drawable.lock_24px)
-                        locker.setColorFilter(R.color.dark_red)
-                    }
-                    LockStatus.CLOSED -> {
-                        locker.setImageResource(R.drawable.lock_24px)
-                    }
-                    LockStatus.OPEN -> {
-                        locker.setImageResource(R.drawable.lock_open_24px)
-                    }
-                    else -> {
-                        locker.visibility = View.INVISIBLE
-                    }
+                LockStatus.OPEN -> {
+                    locker.setImageResource(R.drawable.lock_open_24px)
                 }
-                clickView.setOnClickListener{
-                    if (day != null && champ != null) {
-                        listener.matchCellLongClicked(match.id, day.id, champ.id)
-                    }
+                else -> {
+                    locker.visibility = View.INVISIBLE
                 }
             }
+            clickView.setOnClickListener{ listener.matchCellLongClicked(match.id) }
         }
     }
 
@@ -195,12 +191,7 @@ class SubHomeAdapter(val data: List<MatchData>, val listener: HomeMatchCellClick
                 }
             }
 
-            clickView.setOnClickListener {
-                if (day != null && champ != null) {
-                    listener.matchCellLongClicked(match.id, day.id , champ.id)
-                }
-
-            }
+            clickView.setOnClickListener { listener.matchCellLongClicked(match.id) }
 
             // ToDO: !!!! AffichageLive !!!!
         }
@@ -225,56 +216,50 @@ class SubHomeAdapter(val data: List<MatchData>, val listener: HomeMatchCellClick
             val day = match.day?.firstOrNull()
             val champ = day?.champ?.firstOrNull()
 
-            if (match.isInWeek()) {
-                champName.text = champ?.name
-                champDay.text = day?.getName(Locale.getDefault())
+            champName.text = champ?.name
+            champDay.text = day?.getName(Locale.getDefault())
 
-                date.text = dateFormat.format(match.getMatchDate())
+            date.text = dateFormat.format(match.getMatchDate())
 
 
-                if (null != match.getTeam(TeamSide.HOME).logo) {
-                    Glide.with(homeLogo)
-                        .load(match.getTeam(TeamSide.HOME).getLogoURL())
-                        .into(homeLogo)
-                } else {
-                    homeLogo.setImageResource(R.drawable.default_logo)
+            if (null != match.getTeam(TeamSide.HOME).logo) {
+                Glide.with(homeLogo)
+                    .load(match.getTeam(TeamSide.HOME).getLogoURL())
+                    .into(homeLogo)
+            } else {
+                homeLogo.setImageResource(R.drawable.default_logo)
+            }
+
+            homeName.text = match.getTeam(TeamSide.HOME).fullName
+
+            if (null != match.getTeam(TeamSide.AWAY).logo) {
+                Glide.with(awayLogo)
+                    .load(match.getTeam(TeamSide.AWAY).getLogoURL())
+                    .into(awayLogo)
+            } else {
+                awayLogo.setImageResource(R.drawable.default_logo)
+            }
+            awayName.text = match.getTeam(TeamSide.AWAY).fullName
+
+            homeScore.text = match.homeScore.toString()
+            awayScore.text = match.awayScore.toString()
+
+            when (match.getLockStatus()) {
+                LockStatus.OWNED -> {
+                    locker.setImageResource(R.drawable.lock_24px)
+                    locker.setColorFilter(R.color.dark_red)
                 }
-
-                homeName.text = match.getTeam(TeamSide.HOME).fullName
-
-                if (null != match.getTeam(TeamSide.AWAY).logo) {
-                    Glide.with(awayLogo)
-                        .load(match.getTeam(TeamSide.AWAY).getLogoURL())
-                        .into(awayLogo)
-                } else {
-                    awayLogo.setImageResource(R.drawable.default_logo)
+                LockStatus.CLOSED -> {
+                    locker.setImageResource(R.drawable.lock_24px)
                 }
-                awayName.text = match.getTeam(TeamSide.AWAY).fullName
-
-                homeScore.text = match.homeScore.toString()
-                awayScore.text = match.awayScore.toString()
-
-                when (match.getLockStatus()) {
-                    LockStatus.OWNED -> {
-                        locker.setImageResource(R.drawable.lock_24px)
-                        locker.setColorFilter(R.color.dark_red)
-                    }
-                    LockStatus.CLOSED -> {
-                        locker.setImageResource(R.drawable.lock_24px)
-                    }
-                    LockStatus.OPEN -> {
-                        locker.setImageResource(R.drawable.lock_open_24px)
-                    }
-                    else -> {
-                        locker.visibility = View.INVISIBLE
-                    }
+                LockStatus.OPEN -> {
+                    locker.setImageResource(R.drawable.lock_open_24px)
                 }
-                clickView.setOnClickListener {
-                    if (day != null && champ != null) {
-                        listener.matchCellLongClicked(match.id, day.id, champ.id)
-                    }
+                else -> {
+                    locker.visibility = View.INVISIBLE
                 }
             }
+            clickView.setOnClickListener { listener.matchCellLongClicked(match.id) }
         }
     }
 }

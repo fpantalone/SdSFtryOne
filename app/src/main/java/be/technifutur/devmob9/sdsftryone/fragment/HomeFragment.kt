@@ -45,6 +45,7 @@ class HomeFragment : Fragment(), HomeMatchCellClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        activity?.title = "Live Score"
 
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -57,7 +58,7 @@ class HomeFragment : Fragment(), HomeMatchCellClickListener {
 
         setupWithNavController(homeToolbar, navController, appBarConfiguration)
 
-        // récupérer la liste des équipe sélectionée dans les préférences
+        // TODO récupérer la liste des équipe sélectionée dans les préférences
 
         getPreferedTeam()
 

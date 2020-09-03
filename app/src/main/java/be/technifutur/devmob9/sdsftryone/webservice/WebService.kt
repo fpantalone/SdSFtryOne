@@ -139,7 +139,8 @@ class WebService() {
                 }
                 currentCall = interfaceInstance.readAll(uuid, since)
                     .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    //.observeOn(AndroidSchedulers.mainThread())
+                    .observeOn(Schedulers.computation())
                     .subscribe(dispose(onSuccess), dispose(onError))
             }
             // si on a pas de réseau

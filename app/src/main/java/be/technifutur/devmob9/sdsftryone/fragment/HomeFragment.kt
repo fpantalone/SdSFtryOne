@@ -1,9 +1,7 @@
 package be.technifutur.devmob9.sdsftryone.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -90,6 +88,10 @@ class HomeFragment : Fragment(), HomeMatchCellClickListener {
 
     override fun matchCellClicked(match: MatchData) {
         // TODO("Not yet implemented")
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }
 

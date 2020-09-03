@@ -61,7 +61,8 @@
     <string name="mc_time_format_label">(min:sec)</string>
     <string name="mc_gold_alert_label">Alertes</string>
     <string name="mc_alert_mode_label">Mode</string>
-
+    <string name="live_menu_item_label">Préférences</string>
+    <string name="mm_lock_menu_item">lock</string>
 
     <string-array name="match_tab_txt">
         <item>Sélection</item>
